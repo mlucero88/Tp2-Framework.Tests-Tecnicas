@@ -4,3 +4,20 @@
 *.jar
 *.war
 *.ear
+
+# ignore all bin directories
+# matches "bin" in any subfolder
+bin/
+
+# ignore all target directories
+target/
+
+# ignore all .settings directories
+.settings/
+
+# ignore all files ending with ~
+*~
+
+# ignore all .project .classpath
+.project
+.classpath
