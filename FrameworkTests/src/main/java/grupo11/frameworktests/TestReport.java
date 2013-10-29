@@ -1,4 +1,4 @@
-package Grupo11.FrameworkTests;
+package grupo11.frameworktests;
 
 /* Clase que guarda el resultado de:
  * TODO un UnitTest o el reporte completo de TestCollection? */

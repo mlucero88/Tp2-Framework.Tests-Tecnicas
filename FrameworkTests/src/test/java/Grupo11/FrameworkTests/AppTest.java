@@ -1,5 +1,6 @@
 package Grupo11.FrameworkTests;
 
+import grupo11.pruebaframework.DummyClass;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
@@ -33,6 +34,8 @@ public class AppTest
      */
     public void testApp()
     {
-        assertTrue( true );
+    	DummyClass expected = new DummyClass("string", 25, 'M');
+		DummyClass actual = new DummyClass("string", 25, 'M');
+        assertEquals(expected, actual);
     }
 }

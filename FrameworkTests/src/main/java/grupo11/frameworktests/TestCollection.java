@@ -1,14 +1,14 @@
-package Grupo11.FrameworkTests;
+package grupo11.frameworktests;
 
 import java.util.ArrayList;
 import java.util.Collection;
 
-/* Clase contenedora de UnitTest, encargada de ejecutar cada test unitario
- * y generar el reporte con el resultado de la corrida */
+/* Clase contenedora de UnitTest, encargada de ejecutar cada test unitario y
+ * generar el reporte con el resultado de la corrida */
 
 public class TestCollection {
 	private Collection<UnitTest> tests;
-//	private TestReport report;
+	// private TestReport report;
 
 	public TestCollection() {
 		tests = new ArrayList<UnitTest>();
@@ -16,12 +16,10 @@ public class TestCollection {
 
 	public void runAll() {
 		for (UnitTest test : tests) {
-			if (test.run()) {
-				
-			}
+			test.run();
 			/* TODO se puede hacer que luego de correr un test, se agregue su
-			 * resultado en el informe, en lugar de guardar en un collection
-			 * de booleanos */
+			 * resultado en el informe, en lugar de guardar en un collection de
+			 * booleanos */
 		}
 	}
 
@@ -29,6 +27,5 @@ public class TestCollection {
 		tests.add(test);
 	}
 
-	public void showTestCase() {
-	}
+	public void showTestResults() {}
 }
