@@ -1,4 +1,4 @@
-package Grupo11.FrameworkTests;
+package Grupo11.PruebaFramework;
 
 public class App 
 {
