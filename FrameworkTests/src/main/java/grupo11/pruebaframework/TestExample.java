@@ -33,7 +33,7 @@ public class TestExample extends UnitTest {
 //		boolean expected = true;
 //		boolean actual = false;
 		
-		// byte
+ 		// byte
 //		byte expected = 10;
 //		byte actual = 9;
 

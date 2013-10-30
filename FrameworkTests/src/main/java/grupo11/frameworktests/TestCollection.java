@@ -7,6 +7,7 @@ import java.util.Collection;
  * generar el reporte con el resultado de la corrida */
 
 public class TestCollection {
+
 	private Collection<UnitTest> tests;
 	private TestReport report;
 
@@ -28,4 +29,12 @@ public class TestCollection {
 	public void showTestResults() {
 		report.showAll();
 	}
+	public Collection<UnitTest> getTests() {
+		return tests;
+	}
+
+	public TestReport getReport() {
+		return report;
+	}
+
 }
