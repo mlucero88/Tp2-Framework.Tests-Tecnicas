@@ -2,7 +2,7 @@ package grupo11.frameworktests;
 
 /* Clase proveedora de metodos static que validan condiciones */
 
-public class Validation {
+public abstract class Validation {
 
 	public static void validateTrue(boolean condition) {
 		if (!condition) {
