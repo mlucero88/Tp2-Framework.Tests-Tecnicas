@@ -18,21 +18,13 @@ public abstract class UnitTest {
 	/* Metodo que tiene el comportamiento a testear. Es llamado por "run" */
 	public abstract void test();
 
-	boolean run() {
+	TestResult run() {
 		try {
 			test();
 		}
-		catch(AssertionError error) {
-			logError(error);
-			return false;
+		catch (AssertionError error) {
+			return TestResult.createFailedResult(name, error.getMessage());
 		}
-		return true;
-	}
-	
-	private void logError(AssertionError error) {
-		String errorMessage = name + ": " + error.getMessage(); 
-		// TODO loguear el mensaje de error en el TestReport o algo en lugar de
-		// mostrarlo por pantalla
-		System.out.println(errorMessage);
+		return TestResult.createSuccessfulResult(name);
 	}
 }

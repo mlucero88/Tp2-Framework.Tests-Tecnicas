@@ -61,8 +61,6 @@ public class TestExample extends UnitTest {
 //		char expected = 'a';
 //		char actual = 'A';
 
-		/* TODO hay alguna forma de sacar Validation. ? */
-
 		Validation.validateEquals(expected, actual);
 		
 //		Validation.validateTrue(false);

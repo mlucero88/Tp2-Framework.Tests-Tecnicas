@@ -8,18 +8,16 @@ import java.util.Collection;
 
 public class TestCollection {
 	private Collection<UnitTest> tests;
-	// private TestReport report;
+	private TestReport report;
 
 	public TestCollection() {
 		tests = new ArrayList<UnitTest>();
+		report = new TestReport();
 	};
 
 	public void runAll() {
 		for (UnitTest test : tests) {
-			test.run();
-			/* TODO se puede hacer que luego de correr un test, se agregue su
-			 * resultado en el informe, en lugar de guardar en un collection de
-			 * booleanos */
+			report.addTestResult(test.run());
 		}
 	}
 
@@ -27,5 +25,7 @@ public class TestCollection {
 		tests.add(test);
 	}
 
-	public void showTestResults() {}
+	public void showTestResults() {
+		report.showAll();
+	}
 }
