@@ -29,6 +29,7 @@ public class TestCollection {
 	public void showTestResults() {
 		report.showAll();
 	}
+	
 	public Collection<UnitTest> getTests() {
 		return tests;
 	}
