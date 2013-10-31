@@ -7,10 +7,14 @@ public class PruebaCola {
 		TestCollection tests = new TestCollection();
 		/* TODO aca huele a un patron builder para no hacer esto por cada
 		 * test que quiera hacer */
-			UnitTest unTest = new TestColaVacia("TestColaVacia");
-		    tests.addUnitTest(unTest);
-		    tests.runAll();
-		    tests.showTestResults();
+			
+		UnitTest test1 = new TestColaVacia("TestColaVacia");
+		tests.addUnitTest(test1);
+		UnitTest test2 = new TestColaLlena("TestColaLlena");
+		tests.addUnitTest(test2);
+		 
+		tests.runAll();
+		tests.showTestResults();
 		    
 	}
 
