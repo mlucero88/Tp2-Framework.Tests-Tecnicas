@@ -1,7 +1,8 @@
-package grupo11.pruebaColaTP0;
+package grupo11.pruebaColaTP0.Tests;
 
 import grupo11.frameworktests.UnitTest;
 import grupo11.frameworktests.Validation;
+import grupo11.pruebaColaTP0.Cola;
 
 public class TestColaLlena extends UnitTest {
 	private Cola colaDePrueba;

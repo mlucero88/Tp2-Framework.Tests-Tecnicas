@@ -1,12 +1,13 @@
-package grupo11.pruebaColaTP0;
+package grupo11.pruebaColaTP0.Tests;
 
 import grupo11.frameworktests.UnitTest;
 import grupo11.frameworktests.Validation;
+import grupo11.pruebaColaTP0.Cola;
 
-public class TestLlenarYVaciarCola extends UnitTest {
+public class TestTopConColaLlena extends UnitTest {
 	private Cola colaDePrueba;
 
-	public TestLlenarYVaciarCola(String testName) {
+	public TestTopConColaLlena(String testName) {
 		super(testName);
 		colaDePrueba = new Cola();
 	}
@@ -15,14 +16,6 @@ public class TestLlenarYVaciarCola extends UnitTest {
 		agregarElementos(3);
 		int tope = (Integer) colaDePrueba.top();
 		Validation.validateEquals(tope, 1);
-		colaDePrueba.remove();
-		tope = (Integer) colaDePrueba.top();
-		Validation.validateEquals(tope, 2);
-		colaDePrueba.remove();
-		tope = (Integer) colaDePrueba.top();
-		Validation.validateEquals(tope, 3);
-		colaDePrueba.remove();
-		Validation.validateTrue(colaDePrueba.isEmpty());
 	}
 
 	private void agregarElementos(int cantidad) {
