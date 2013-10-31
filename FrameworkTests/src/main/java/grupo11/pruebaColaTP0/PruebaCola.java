@@ -1,13 +1,13 @@
 package grupo11.pruebaColaTP0;
-import grupo11.frameworktests.*;
+
+import grupo11.frameworktests.TestCollection;
+import grupo11.frameworktests.UnitTest;
 
 public class PruebaCola {
-	
+
 	public static void main(String[] args) {
 		TestCollection tests = new TestCollection();
-		/* TODO aca huele a un patron builder para no hacer esto por cada
-		 * test que quiera hacer */
-			
+
 		UnitTest test1 = new TestColaVacia("TestColaVacia");
 		tests.addUnitTest(test1);
 		UnitTest test2 = new TestColaLlena("TestColaLlena");
@@ -24,10 +24,8 @@ public class PruebaCola {
 		tests.addUnitTest(test7);
 		UnitTest test8 = new TestLlenarYVaciarCola("TestLlenarYVaciarCola");
 		tests.addUnitTest(test8);
-		 
+
 		tests.runAll();
 		tests.showTestResults();
-		    
 	}
-
 }
