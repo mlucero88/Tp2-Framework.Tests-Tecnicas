@@ -5,6 +5,7 @@ import java.util.Collection;
 
 /* Clase que almacena una coleccion de TestResult para ser informada al cliente
  * por salida estandar */
+
 public class TestReport {
 
 	private Collection<TestResult> results;
@@ -28,9 +29,8 @@ public class TestReport {
 			System.out.println(result.getMessage());
 		}
 	}
-	
+
 	public Collection<TestResult> getResults() {
 		return results;
 	}
-
 }

@@ -29,7 +29,7 @@ public class TestCollection {
 	public void showTestResults() {
 		report.showAll();
 	}
-	
+
 	public Collection<UnitTest> getTests() {
 		return tests;
 	}
@@ -37,5 +37,4 @@ public class TestCollection {
 	public TestReport getReport() {
 		return report;
 	}
-
 }

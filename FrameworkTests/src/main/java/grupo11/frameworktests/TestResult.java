@@ -1,7 +1,8 @@
 package grupo11.frameworktests;
 
 /* Clase que almacena el resultado de un UnitTest */
-public class TestResult {
+
+class TestResult {
 	private final static String MESSAGE_SUCCESSFUL = "Succeeded";
 	private final static String MESSAGE_FAILURE = "Failed";
 	private String result;

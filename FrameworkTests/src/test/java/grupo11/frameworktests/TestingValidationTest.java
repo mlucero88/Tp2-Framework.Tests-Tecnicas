@@ -1,20 +1,15 @@
-package Grupo11.FrameworkTests;
+package grupo11.frameworktests;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
-import javax.management.MalformedObjectNameException;
-import javax.management.ObjectName;
-
-import grupo11.frameworktests.UnitTest;
-import grupo11.frameworktests.Validation;
-
-import org.junit.Before;
 import org.junit.Test;
 
-//Clase Test que prueba los metodos de la clase ValidationTest
+// Clase Test que prueba los metodos de la clase ValidationTest
 
 public class TestingValidationTest {
-
 	@Test
 	public void testValidateTrue() {
 		Boolean condicion = true;
@@ -30,11 +25,10 @@ public class TestingValidationTest {
 	}
 
 	@Test
-	public void testValidateEqualsObjectObject(){
+	public void testValidateEqualsObjectObject() {
 		Object obj1 = new Object();
 		Object obj2 = new Object();
 		obj2 = obj1;
-		
 		Validation.validateEquals(obj1, obj2);
 		assertEquals(obj1, obj2);
 	}
@@ -53,7 +47,6 @@ public class TestingValidationTest {
 		int condicion2 = 1;
 		Validation.validateEquals(condicion1, condicion2);
 		assertEquals(condicion1, condicion2);
-
 	}
 
 	@Test
@@ -62,7 +55,6 @@ public class TestingValidationTest {
 		short condicion2 = 1;
 		Validation.validateEquals(condicion1, condicion2);
 		assertEquals(condicion1, condicion2);
-
 	}
 
 	@Test
@@ -71,7 +63,6 @@ public class TestingValidationTest {
 		long condicion2 = 1;
 		Validation.validateEquals(condicion1, condicion2);
 		assertEquals(condicion1, condicion2);
-
 	}
 
 	@Test
@@ -80,7 +71,6 @@ public class TestingValidationTest {
 		float condicion2 = (float) 1.8;
 		Validation.validateEquals(condicion1, condicion2);
 		assertEquals(condicion1, condicion2, 0);
-
 	}
 
 	@Test
@@ -89,7 +79,6 @@ public class TestingValidationTest {
 		double condicion2 = 1.3;
 		Validation.validateEquals(condicion1, condicion2);
 		assertEquals(condicion1, condicion2, 0);
-
 	}
 
 	@Test
@@ -98,7 +87,6 @@ public class TestingValidationTest {
 		byte condicion2 = 1;
 		Validation.validateEquals(condicion1, condicion2);
 		assertEquals(condicion1, condicion2);
-
 	}
 
 	@Test
@@ -107,7 +95,6 @@ public class TestingValidationTest {
 		char condicion2 = 'a';
 		Validation.validateEquals(condicion1, condicion2);
 		assertEquals(condicion1, condicion2);
-
 	}
 
 	@Test
@@ -116,6 +103,4 @@ public class TestingValidationTest {
 		Validation.validateNull(soyNull);
 		assertNull(soyNull);
 	}
-	
-
 }
