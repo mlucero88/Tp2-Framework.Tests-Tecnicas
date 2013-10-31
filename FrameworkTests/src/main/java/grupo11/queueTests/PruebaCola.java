@@ -1,4 +1,4 @@
-package grupo11.pruebaColaTP0.Tests;
+package grupo11.queueTests;
 
 import grupo11.frameworktests.TestCollection;
 import grupo11.frameworktests.UnitTest;

@@ -1,4 +1,4 @@
-package grupo11.pruebaColaTP0;
+package grupo11.ColaTp0;
 
 public class NodoCola {
 	private Object elemento;
