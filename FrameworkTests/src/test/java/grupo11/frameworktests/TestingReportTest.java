@@ -15,7 +15,7 @@ public class TestingReportTest {
 
 	@Before
 	public void setUp() {
-		unosTests = new TestCollection();
+		unosTests = new TestCollection("SoyUnSuite");
 		unTest = new UnitTest("soyUnTest") {
 			@Override
 			public void test() {

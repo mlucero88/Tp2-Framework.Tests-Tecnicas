@@ -6,7 +6,7 @@ import grupo11.frameworktests.UnitTest;
 public class PruebaCola {
 
 	public static void main(String[] args) {
-		TestCollection tests = new TestCollection();
+		TestCollection tests = new TestCollection("TestDeCola");
 
 		UnitTest test1 = new TestColaVacia("TestColaVacia");
 		tests.addUnitTest(test1);

@@ -17,7 +17,7 @@ public class TestingTestCollection {
 	public void setUp() {
 		// Seteo un test y la Collection que alberga todos los test que
 		// utilizare para probar los metodos de la clase
-		someTests = new TestCollection();
+		someTests = new TestCollection("soyUnSuite");
 		unTest = new UnitTest("soyUnTest") {
 			@Override
 			public void test() {
@@ -59,5 +59,9 @@ public class TestingTestCollection {
 		String esperado = "TEST: soyUnTest - RESULT: Succeeded";
 		String actual = resultados.get(0).getMessage();
 		assertEquals(actual, esperado);
+	}
+	
+	public void probarSetUp(){
+		
 	}
 }
