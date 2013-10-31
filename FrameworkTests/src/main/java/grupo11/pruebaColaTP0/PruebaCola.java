@@ -22,6 +22,8 @@ public class PruebaCola {
 		tests.addUnitTest(test6);
 		UnitTest test7 = new TestRemoveConColaLlena("TestRemoveConColaLlena");
 		tests.addUnitTest(test7);
+		UnitTest test8 = new TestLlenarYVaciarCola("TestLlenarYVaciarCola");
+		tests.addUnitTest(test8);
 		 
 		tests.runAll();
 		tests.showTestResults();
