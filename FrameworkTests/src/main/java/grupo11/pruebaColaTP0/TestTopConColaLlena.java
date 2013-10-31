@@ -2,11 +2,11 @@ package grupo11.pruebaColaTP0;
 
 import grupo11.frameworktests.*;
 
-public class TestTop extends UnitTest {
+public class TestTopConColaLlena extends UnitTest {
 	
 	private Cola colaDePrueba;
 	
-	public TestTop (String testName) {
+	public TestTopConColaLlena (String testName) {
         super(testName);	
         colaDePrueba = new Cola();
 	}

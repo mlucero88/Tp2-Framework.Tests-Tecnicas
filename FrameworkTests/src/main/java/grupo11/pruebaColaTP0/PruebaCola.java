@@ -14,12 +14,14 @@ public class PruebaCola {
 		tests.addUnitTest(test2);
 		UnitTest test3 = new TestSize("TestSize");
 		tests.addUnitTest(test3);
-		UnitTest test4 = new TestSize("TestTop");
+		UnitTest test4 = new TestTopConColaLlena("TestTopConColaLlena");
 		tests.addUnitTest(test4);
-		UnitTest test5 = new TestSize("TestTopConColaVacia");
+		UnitTest test5 = new TestTopConColaVacia("TestTopConColaVacia");
 		tests.addUnitTest(test5);
-		UnitTest test6 = new TestSize("TestRemoveConColaVacia");
+		UnitTest test6 = new TestRemoveConColaVacia("TestRemoveConColaVacia");
 		tests.addUnitTest(test6);
+		UnitTest test7 = new TestRemoveConColaLlena("TestRemoveConColaLlena");
+		tests.addUnitTest(test7);
 		 
 		tests.runAll();
 		tests.showTestResults();
