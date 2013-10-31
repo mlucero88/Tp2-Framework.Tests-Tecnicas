@@ -11,6 +11,8 @@ import grupo11.frameworktests.Validation;
 import org.junit.Before;
 import org.junit.Test;
 
+//Clase Test que prueba los metodos de la clase ValidationTest
+
 public class TestingValidationTest {
 
 	@Test

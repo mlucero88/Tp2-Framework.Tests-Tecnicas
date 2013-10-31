@@ -7,11 +7,14 @@ import grupo11.frameworktests.Validation;
 import org.junit.Before;
 import org.junit.Test;
 
+//Clase Test que prueba los metodos de la clase UnitTest
+
 public class TestingUnitTest {
 	private UnitTest unTest;
 	
 	@Before
-	public void setUp() throws Exception {
+	public void setUp() {
+		//Seteo un test que utilizare para probar los metodos de la case.
 		unTest = new UnitTest("soyUnTest") {
 			
 			@Override

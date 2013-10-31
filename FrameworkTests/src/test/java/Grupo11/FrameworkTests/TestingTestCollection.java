@@ -13,6 +13,8 @@ import java.util.Collection;
 import org.junit.Before;
 import org.junit.Test;
 
+//Clase Test que prueba los metodos de la clase TestCollection
+
 public class TestingTestCollection{
 
 	private TestCollection someTests;
@@ -20,6 +22,7 @@ public class TestingTestCollection{
 	
 	@Before
 	public void setUp(){
+		//Seteo un test y la Collection que alberga todos los test que utilizare para probar los metodos de la case.
 		someTests = new TestCollection();
 		unTest = new UnitTest("soyUnTest") {
 			
