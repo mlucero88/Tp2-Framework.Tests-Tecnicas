@@ -18,6 +18,8 @@ public class PruebaCola {
 		tests.addUnitTest(test4);
 		UnitTest test5 = new TestSize("TestTopConColaVacia");
 		tests.addUnitTest(test5);
+		UnitTest test6 = new TestSize("TestRemoveConColaVacia");
+		tests.addUnitTest(test6);
 		 
 		tests.runAll();
 		tests.showTestResults();
