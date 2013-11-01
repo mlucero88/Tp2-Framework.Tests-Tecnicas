@@ -49,13 +49,22 @@ public class TestCollection {
 	
 	//Metodo vacio que el usuario podra redefinir en caso que lo requiera
 	public void setUp(){
-		
+
 	}
 
 	//Metodo vacio que el usuario podra redefinir en caso que lo requiera
 	public void tearDown(){
 		
 	}
-
+	
+	public void runSelection(String regexp){
+		setUp();
+		for(UnitTest test:tests){
+			if(test.getName().matches(regexp)){
+				report.addTestResult(test.run());
+			}
+		}
+		tearDown();
+	}
 
 }

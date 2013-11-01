@@ -1,9 +1,7 @@
 package grupo11.frameworktests;
 
 import static org.junit.Assert.assertEquals;
-
 import java.util.ArrayList;
-
 import org.junit.Before;
 import org.junit.Test;
 
@@ -26,6 +24,7 @@ public class TestingTestCollection {
 				Validation.validateEquals(expected, actual);
 			}
 		};
+		
 	}
 
 	@Test
@@ -59,9 +58,5 @@ public class TestingTestCollection {
 		String esperado = "TEST: soyUnTest - RESULT: Succeeded";
 		String actual = resultados.get(0).getMessage();
 		assertEquals(actual, esperado);
-	}
-	
-	public void probarSetUp(){
-		
 	}
 }
