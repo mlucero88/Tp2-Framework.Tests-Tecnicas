@@ -25,9 +25,12 @@ public class TestReport {
 	/* Imprime por salida estandar el resultado de cada test */
 	/* TODO Como variacion, se puede hacer que lo escriba en un log */
 	public void showAll() {
+		ReportWriter reportWriter = new ReportWriter("TestsReport.txt");
 		for (TestResult result : results) {
 			System.out.println(result.getMessage());
+			reportWriter.writeResult(result.getMessage());
 		}
+		reportWriter.closeSaveReport();
 	}
 
 	public Collection<TestResult> getResults() {
