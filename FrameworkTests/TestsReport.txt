@@ -1,0 +1,2 @@
+TEST: soyUnTest - RESULT: Succeeded
+TEST: soyUnTest - RESULT: Succeeded
