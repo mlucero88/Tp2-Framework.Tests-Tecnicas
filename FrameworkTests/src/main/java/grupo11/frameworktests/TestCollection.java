@@ -28,7 +28,12 @@ public class TestCollection {
 	}
 
 	public void addUnitTest(UnitTest test) {
-		tests.add(test);
+		if (!validarNombre(test.getName())){
+			tests.add(test);
+		}else{
+			String mensaje = "The name is used in another";
+			report.addTestResult(TestResult.createFailedResult(test.getName(), mensaje));
+		}
 	}
 
 	public void showTestResults() {
@@ -47,6 +52,10 @@ public class TestCollection {
 		return nombreSuite;
 	}
 	
+	public void setNombreSuite(String nombreSuite) {
+		this.nombreSuite = nombreSuite;
+	}
+
 	//Metodo vacio que el usuario podra redefinir en caso que lo requiera
 	public void setUp(){
 
@@ -67,4 +76,13 @@ public class TestCollection {
 		tearDown();
 	}
 
+	public boolean validarNombre(String nombreUnitTest){
+		boolean repetido = false;
+		for (UnitTest test:tests){
+			if(test.getName().equals(nombreUnitTest)){
+				repetido = true;
+			}
+		}
+		return repetido;
+	}
 }

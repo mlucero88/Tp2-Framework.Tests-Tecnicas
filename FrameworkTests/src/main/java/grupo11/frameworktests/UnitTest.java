@@ -16,6 +16,10 @@ public abstract class UnitTest {
 	public String getName() {
 		return name;
 	}
+	
+	public void setName(String name) {
+		this.name = name;
+	}
 
 	/* Metodo que tiene el comportamiento a testear. Es llamado por "run" */
 	public abstract void test();

@@ -29,4 +29,26 @@ public class TestingUnitTest {
 		String esperado = "soyUnTest";
 		assertEquals(esperado, actual);
 	}
+	
+	@Test
+	public void ValidarSetUpDeLosUnitCase(){
+		UnitTest tesito = new UnitTest("unTesito") {
+			
+			@Override
+			public void test() {
+				String actual = getName();
+				String esperado = "SoyUnTest";
+				assertEquals(esperado, actual);
+
+			}
+
+			@Override
+			public void setUp(){
+				setName("SoyUnTest");
+			}
+		};
+		tesito.run();
+		assertEquals("SoyUnTest", tesito.getName());
+	}
+
 }
