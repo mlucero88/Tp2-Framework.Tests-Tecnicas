@@ -21,7 +21,7 @@ class TestResult {
 		return result;
 	}
 
-	private TestResult(String resultMessage) {
+	protected TestResult(String resultMessage) {
 		result = resultMessage;
 	}
 }

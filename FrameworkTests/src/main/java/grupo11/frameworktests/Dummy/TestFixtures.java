@@ -13,7 +13,7 @@ public class TestFixtures {
 		TestCollection tests = new TestCollectionHijitus("HijitusCollection");
 		UnitTest unTest = new UnitTestHijitus("HijitusTest");
 		
-		tests.addUnitTest(unTest);
+		tests.add(unTest);
 		tests.runSelection("H.*");
 		tests.showTestResults();
 		

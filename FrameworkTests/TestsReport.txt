@@ -1,2 +1,10 @@
 TEST: soyUnTest - RESULT: Succeeded
 TEST: soyUnTest - RESULT: Succeeded
+TEST: TestColaVacia - RESULT: Succeeded
+TEST: TestColaLlena - RESULT: Succeeded
+TEST: TestSize - RESULT: Succeeded
+TEST: TestTopConColaLlena - RESULT: Succeeded
+TEST: TestTopConColaVacia - RESULT: Succeeded
+TEST: TestRemoveConColaVacia - RESULT: Succeeded
+TEST: TestRemoveConColaLlena - RESULT: Succeeded
+TEST: TestLlenarYVaciarCola - RESULT: Succeeded

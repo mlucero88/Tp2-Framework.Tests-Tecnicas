@@ -6,45 +6,42 @@ import junit.framework.AssertionFailedError;
  * cliente debe implementar el metodo "test" con el comportamiento que desea
  * testear */
 
-public abstract class UnitTest {
-	private String name;
+public abstract class UnitTest extends GenericTest{
 
 	public UnitTest(String testName) {
-		name = testName;
-	}
-
-	public String getName() {
-		return name;
-	}
-	
-	public void setName(String name) {
-		this.name = name;
+		super(testName);
 	}
 
 	/* Metodo que tiene el comportamiento a testear. Es llamado por "run" */
 	public abstract void test();
 
-	//Metodo vacio que el usuario podra redefinir en caso que lo requiera
+	@Override
 	public void setUp(){
 		
 	}
 
-	//Metodo vacio que el usuario podra redefinir en caso que lo requiera
+	@Override
 	public void tearDown(){
 		
 	}
 	
-	TestResult run() {
+	@Override
+	public void add(GenericTest test){
+		
+	}
+	
+	@Override
+	public TestResult run() {
 		try {
 			setUp();
 			test();
 			tearDown();
 		}
 		catch (AssertionError error) {
-			return TestResult.createFailedResult(name, error.getMessage());
+			return TestResult.createFailedResult(nombre, error.getMessage());
 		}
 		//TODO: Buscar jerarquia de error de excepciones para capturarlas.
 		
-		return TestResult.createSuccessfulResult(name);
+		return TestResult.createSuccessfulResult(nombre);
 	}
 }

@@ -7,32 +7,36 @@ import java.util.regex.*;
 /* Clase contenedora de UnitTest, encargada de ejecutar cada test unitario y
  * generar el reporte con el resultado de la corrida */
 
-public class TestCollection {
+public class TestCollection extends GenericTest{
 
-	private Collection<UnitTest> tests;
+	private Collection<GenericTest> tests;
 	private TestReport report;
-	private String nombreSuite;
-
+	private TestResult resultado;
+	
 	public TestCollection(String nombre) {
-		tests = new ArrayList<UnitTest>();
+		super(nombre);
+		tests = new ArrayList<GenericTest>();
 		report = new TestReport();
-		nombreSuite = nombre;
+		resultado = new TestCollectionResult(null);
 	};
 
-	public void runAll() {
+	@Override
+	public TestResult run() {
 		setUp();
-		for (UnitTest test : tests) {
+		for (GenericTest test : tests) {
 			report.addTestResult(test.run());
 		}
 		tearDown();
+		return resultado;
 	}
 
-	public void addUnitTest(UnitTest test) {
-		if (!validarNombre(test.getName())){
+	@Override
+	public void add(GenericTest test) {
+		if (!validarNombre(test.getNombre())){
 			tests.add(test);
 		}else{
 			String mensaje = "The name is used in another";
-			report.addTestResult(TestResult.createFailedResult(test.getName(), mensaje));
+			report.addTestResult(TestResult.createFailedResult(test.getNombre(), mensaje));
 		}
 	}
 
@@ -40,7 +44,7 @@ public class TestCollection {
 		report.showAll();
 	}
 
-	public Collection<UnitTest> getTests() {
+	public Collection<GenericTest> getTests() {
 		return tests;
 	}
 
@@ -48,38 +52,30 @@ public class TestCollection {
 		return report;
 	}
 
-	public String getNombre() {
-		return nombreSuite;
-	}
-	
-	public void setNombreSuite(String nombreSuite) {
-		this.nombreSuite = nombreSuite;
-	}
-
-	//Metodo vacio que el usuario podra redefinir en caso que lo requiera
+	@Override
 	public void setUp(){
 
 	}
 
-	//Metodo vacio que el usuario podra redefinir en caso que lo requiera
+	@Override
 	public void tearDown(){
 		
 	}
 	
 	public void runSelection(String regexp){
 		setUp();
-		for(UnitTest test:tests){
-			if(test.getName().matches(regexp)){
+		for(GenericTest test:tests){
+			if(test.getNombre().matches(regexp)){
 				report.addTestResult(test.run());
 			}
 		}
 		tearDown();
 	}
 
-	public boolean validarNombre(String nombreUnitTest){
+	public boolean validarNombre(String nombreGenericTest){
 		boolean repetido = false;
-		for (UnitTest test:tests){
-			if(test.getName().equals(nombreUnitTest)){
+		for (GenericTest test:tests){
+			if(test.getNombre().equals(nombreGenericTest)){
 				repetido = true;
 			}
 		}

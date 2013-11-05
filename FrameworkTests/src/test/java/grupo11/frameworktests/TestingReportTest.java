@@ -24,12 +24,12 @@ public class TestingReportTest {
 				Validation.validateEquals(expected, actual);
 			}
 		};
-		unosTests.addUnitTest(unTest);
+		unosTests.add(unTest);
 	}
 
 	@Test
 	public void testAddTestResult() {
-		unosTests.runAll();
+		unosTests.run();
 		int esperado = unosTests.getReport().getResults().size();
 		int actual = 1;
 		assertEquals(actual, esperado);
@@ -37,7 +37,7 @@ public class TestingReportTest {
 
 	@Test
 	public void testClear() {
-		unosTests.runAll();
+		unosTests.run();
 		unosTests.getReport().clear();
 		int esperado = unosTests.getReport().getResults().size();
 		int actual = 0;
@@ -46,7 +46,7 @@ public class TestingReportTest {
 
 	@Test
 	public void testShowAll() {
-		unosTests.runAll();
+		unosTests.run();
 		unosTests.getReport().showAll();
 
 		// Me traigo el arrayList de resultados mostrados por pantalla

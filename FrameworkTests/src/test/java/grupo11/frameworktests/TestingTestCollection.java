@@ -38,7 +38,7 @@ public class TestingTestCollection {
 
 	@Test
 	public void agregarUnTestaLaCollection() {
-		unSuiteTests.addUnitTest(unTest);
+		unSuiteTests.add(unTest);
 		int esperado = 1;
 		int actual = unSuiteTests.getTests().size();
 		assertEquals(actual, esperado);
@@ -46,8 +46,8 @@ public class TestingTestCollection {
 
 	@Test
 	public void correrLosTestdeLaCollectionTest() {
-		unSuiteTests.addUnitTest(unTest);
-		unSuiteTests.runAll();
+		unSuiteTests.add(unTest);
+		unSuiteTests.run();
 		int esperado = 1;
 		int actual = unSuiteTests.getReport().getResults().size();
 		assertEquals(actual, esperado);
@@ -55,8 +55,8 @@ public class TestingTestCollection {
 
 	@Test
 	public void mostrarResultadoDeUnTestDeLaCollection() {
-		unSuiteTests.addUnitTest(unTest);
-		unSuiteTests.runAll();
+		unSuiteTests.add(unTest);
+		unSuiteTests.run();
 		unSuiteTests.showTestResults();
 
 		// Me traigo el arrayList de resultados mostrados por pantalla
@@ -71,12 +71,12 @@ public class TestingTestCollection {
 	
 	@Test
 	public void UnicidadNombreUnitCase() {
-		unSuiteTests.addUnitTest(unTest);
-		unSuiteTests.addUnitTest(dosTest);
+		unSuiteTests.add(unTest);
+		unSuiteTests.add(dosTest);
 		
 		boolean esperado = true;
 		
-		assertEquals(esperado, unSuiteTests.validarNombre(dosTest.getName()));
+		assertEquals(esperado, unSuiteTests.validarNombre(dosTest.getNombre()));
 	}
 
 	@Test
