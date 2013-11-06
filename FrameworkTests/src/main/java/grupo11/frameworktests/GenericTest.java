@@ -11,6 +11,10 @@ public abstract class GenericTest {
 		return name;
 	}
 
+	public void setName(String newName) {
+		name = newName;
+	}
+
 	/* Metodo redefinible por TestCollection */
 	protected abstract boolean add(GenericTest test);
 

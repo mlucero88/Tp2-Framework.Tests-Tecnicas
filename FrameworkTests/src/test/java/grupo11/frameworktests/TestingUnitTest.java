@@ -37,17 +37,18 @@ public class TestingUnitTest {
 			@Override
 			public void test() {
 				String actual = getName();
-				String esperado = "SoyUnTest";
-				assertEquals(esperado, actual);
+				assertEquals("SoyUnTest", actual);
 
 			}
 
 			@Override
 			public void setUp() {
-				// setName("SoyUnTest");
+				setName("SoyUnTest");
 			}
 		};
+		tesito.setUp();
 		tesito.run();
+
 		assertEquals("SoyUnTest", tesito.getName());
 	}
 }

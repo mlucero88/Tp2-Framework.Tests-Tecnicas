@@ -47,6 +47,16 @@ public class TestingTestCollection {
 	}
 
 	@Test
+	public void agregarUnTestCollectionaLaCollection() {
+		TestCollection dosSuiteTests = new TestCollection("SoyOtroTestCollection");
+		
+		unSuiteTests.add(dosSuiteTests);
+		int esperado = 1;
+		int actual = unSuiteTests.getTestsCount();
+		assertEquals(actual, esperado);
+	}
+
+	@Test
 	public void correrLosTestdeLaCollectionTest() {
 		unSuiteTests.add(unTest);
 		unSuiteTests.run();
