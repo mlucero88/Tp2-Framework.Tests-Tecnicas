@@ -1,8 +1,8 @@
-package grupo11.queueTests;
+package grupo11.queue.tests;
 
 import grupo11.frameworktests.UnitTest;
 import grupo11.frameworktests.Validation;
-import grupo11.ColaTp0.Cola;
+import grupo11.queue.Cola;
 
 public class TestColaLlena extends UnitTest {
 	private Cola colaDePrueba;

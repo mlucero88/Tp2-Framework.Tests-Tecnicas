@@ -1,4 +1,4 @@
-package grupo11.ColaTp0;
+package grupo11.queue;
 
 public class Cola implements Queue {
 	private NodoCola primerNodo;

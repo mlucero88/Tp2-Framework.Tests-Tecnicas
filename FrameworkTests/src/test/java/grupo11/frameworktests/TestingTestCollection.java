@@ -75,10 +75,6 @@ public class TestingTestCollection {
 	public void UnicidadNombreUnitCase() {
 		unSuiteTests.add(unTest);
 		unSuiteTests.add(dosTest);
-
-		boolean esperado = true;
-
-//		assertEquals(esperado, unSuiteTests.validarNombre(dosTest.getName()));
 	}
 
 	@Test

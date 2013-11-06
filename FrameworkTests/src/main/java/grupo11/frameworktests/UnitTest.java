@@ -22,7 +22,9 @@ public abstract class UnitTest extends GenericTest {
 
 	/* Sin comportamiento. Falencia de diseño en el patron Composite */
 	@Override
-	final protected void add(GenericTest test) {}
+	final protected boolean add(GenericTest test) {
+		return false;
+	}
 
 	@Override
 	final public TestResult run() {

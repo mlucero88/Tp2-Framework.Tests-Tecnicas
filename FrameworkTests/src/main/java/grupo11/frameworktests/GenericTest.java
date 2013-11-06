@@ -12,7 +12,7 @@ public abstract class GenericTest {
 	}
 
 	/* Metodo redefinible por TestCollection */
-	protected abstract void add(GenericTest test);
+	protected abstract boolean add(GenericTest test);
 
 	/* Metodo redefinible cuyo comportamiento depende de si se trata de un
 	 * UnitTest o TestCollection, no accedibles por el usuario */

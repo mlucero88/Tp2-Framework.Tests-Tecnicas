@@ -1,20 +1,20 @@
-package grupo11.queueTests;
+package grupo11.queue.tests;
 
 import grupo11.frameworktests.UnitTest;
 import grupo11.frameworktests.Validation;
-import grupo11.ColaTp0.Cola;
+import grupo11.queue.Cola;
 
-public class TestRemoveConColaVacia extends UnitTest {
+public class TestTopConColaVacia extends UnitTest {
 	private Cola colaDePrueba;
 
-	public TestRemoveConColaVacia(String testName) {
+	public TestTopConColaVacia(String testName) {
 		super(testName);
 		colaDePrueba = new Cola();
 	}
 
 	public void test() {
 		try {
-			this.colaDePrueba.remove();
+			colaDePrueba.top();
 		}
 		catch (AssertionError e) {
 			Validation.validateTrue(true);

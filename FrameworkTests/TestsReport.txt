@@ -8,3 +8,17 @@ TEST: TestTopConColaVacia - RESULT: Succeeded
 TEST: TestRemoveConColaVacia - RESULT: Succeeded
 TEST: TestRemoveConColaLlena - RESULT: Succeeded
 TEST: TestLlenarYVaciarCola - RESULT: Succeeded
+TEST: UnitNivel1 - RESULT: Failed - REASON: expected:<tearDownUnitTestNivel1> - actual:<null>
+null
+TEST: UnitNivel1 - RESULT: Failed - REASON: expected:<tearDownUnitTestNivel1> - actual:<null>
+null
+TEST: UnitNivel1 - RESULT: Failed - REASON: expected:<tearDownUnitTestNivel1> - actual:<null>
+null
+TEST: UnitNivel1 - RESULT: Failed - REASON: expected:<tearDownUnitTestNivel1> - actual:<null>
+null
+TEST: UnitNivel1 - RESULT: Succeeded
+null
+TEST: UnitNivel1 - RESULT: Succeeded
+null
+TEST: UnitNivel1 - RESULT: Succeeded
+null

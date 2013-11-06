@@ -19,16 +19,12 @@ public class TestCollection extends GenericTest {
 	};
 
 	@Override
-	final public void add(GenericTest test) {
+	final public boolean add(GenericTest test) {
 		if (NameRegister.getInstance().registerName(test.getName())) {
 			tests.add(test);
+			return true;
 		}
-		else {
-			/* TODO manejar caso el nombre ya existe */
-			String mensaje = "The name is used in another";
-			report.addTestResult(TestResult.createFailedResult(
-					test.getName(), mensaje));
-		}
+		return false;
 	}
 
 	@Override
@@ -54,7 +50,7 @@ public class TestCollection extends GenericTest {
 		}
 		tearDown();
 	}
-	
+
 	/* Retorna la cantidad de tests. Tanto un UnitTest como una test collection
 	 * cuenta como un solo test */
 	public int getTestsCount() {

@@ -1,4 +1,4 @@
-package grupo11.queueTests;
+package grupo11.queue.tests;
 
 import grupo11.frameworktests.TestCollection;
 import grupo11.frameworktests.UnitTest;
