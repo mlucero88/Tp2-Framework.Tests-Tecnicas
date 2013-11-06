@@ -25,30 +25,29 @@ public class TestingUnitTest {
 
 	@Test
 	public void testUnitTest() {
-		String actual = unTest.getNombre();
+		String actual = unTest.getName();
 		String esperado = "soyUnTest";
 		assertEquals(esperado, actual);
 	}
-	
+
 	@Test
-	public void ValidarSetUpDeLosUnitCase(){
+	public void ValidarSetUpDeLosUnitCase() {
 		UnitTest tesito = new UnitTest("unTesito") {
-			
+
 			@Override
 			public void test() {
-				String actual = getNombre();
+				String actual = getName();
 				String esperado = "SoyUnTest";
 				assertEquals(esperado, actual);
 
 			}
 
 			@Override
-			public void setUp(){
-				setNombre("SoyUnTest");
+			public void setUp() {
+				// setName("SoyUnTest");
 			}
 		};
 		tesito.run();
-		assertEquals("SoyUnTest", tesito.getNombre());
+		assertEquals("SoyUnTest", tesito.getName());
 	}
-
 }

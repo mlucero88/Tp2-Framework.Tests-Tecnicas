@@ -64,7 +64,7 @@ public abstract class Validation {
 	}
 
 	private static void informFail(String message) {
-		throw new AssertionError(message);
+		throw new ValidationFailure(message);
 	}
 
 	private static boolean areEqual(Object expected, Object actual) {

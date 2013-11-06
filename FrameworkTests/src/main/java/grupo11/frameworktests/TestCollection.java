@@ -2,83 +2,79 @@ package grupo11.frameworktests;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.regex.*;
 
 /* Clase contenedora de UnitTest, encargada de ejecutar cada test unitario y
  * generar el reporte con el resultado de la corrida */
 
-public class TestCollection extends GenericTest{
-
+public class TestCollection extends GenericTest {
 	private Collection<GenericTest> tests;
 	private TestReport report;
-	private TestResult resultado;
-	
-	public TestCollection(String nombre) {
-		super(nombre);
+	private TestResult result;
+
+	public TestCollection(String name) {
+		super(name);
 		tests = new ArrayList<GenericTest>();
 		report = new TestReport();
-		resultado = new TestCollectionResult(null);
+		result = new TestCollectionResult(null);
 	};
 
 	@Override
-	public TestResult run() {
-		setUp();
-		for (GenericTest test : tests) {
-			report.addTestResult(test.run());
+	final public void add(GenericTest test) {
+		if (NameRegister.getInstance().registerName(test.getName())) {
+			tests.add(test);
 		}
-		tearDown();
-		return resultado;
+		else {
+			/* TODO manejar caso el nombre ya existe */
+			String mensaje = "The name is used in another";
+			report.addTestResult(TestResult.createFailedResult(
+					test.getName(), mensaje));
+		}
 	}
 
 	@Override
-	public void add(GenericTest test) {
-		if (!validarNombre(test.getNombre())){
-			tests.add(test);
-		}else{
-			String mensaje = "The name is used in another";
-			report.addTestResult(TestResult.createFailedResult(test.getNombre(), mensaje));
+	final public TestResult run() {
+		setUp();
+		for (GenericTest test : tests) {
+			/* TODO manejar como se guardan los resultados */
+			report.addTestResult(test.run());
 		}
+		tearDown();
+		return result;
+	}
+
+	final public void runSelection(String regexp) {
+		setUp();
+		for (GenericTest test : tests) {
+			if (test.getName().matches(regexp)) {
+				/* TODO manejar como se guardan los resultados */
+				/* TODO parece codigo duplicado con el run, ver si puedo hacer
+				 * algo */
+				report.addTestResult(test.run());
+			}
+		}
+		tearDown();
+	}
+	
+	/* Retorna la cantidad de tests. Tanto un UnitTest como una test collection
+	 * cuenta como un solo test */
+	public int getTestsCount() {
+		return tests.size();
 	}
 
 	public void showTestResults() {
 		report.showAll();
 	}
 
-	public Collection<GenericTest> getTests() {
-		return tests;
-	}
-
+	// TODO este get no me gusta, si solo se usa para los tests de junit ver
+	// si se puede sacar
 	public TestReport getReport() {
 		return report;
 	}
 
+	/* Metodos redefinibles por el usuario */
 	@Override
-	public void setUp(){
-
-	}
+	protected void setUp() {}
 
 	@Override
-	public void tearDown(){
-		
-	}
-	
-	public void runSelection(String regexp){
-		setUp();
-		for(GenericTest test:tests){
-			if(test.getNombre().matches(regexp)){
-				report.addTestResult(test.run());
-			}
-		}
-		tearDown();
-	}
-
-	public boolean validarNombre(String nombreGenericTest){
-		boolean repetido = false;
-		for (GenericTest test:tests){
-			if(test.getNombre().equals(nombreGenericTest)){
-				repetido = true;
-			}
-		}
-		return repetido;
-	}
+	protected void tearDown() {}
 }

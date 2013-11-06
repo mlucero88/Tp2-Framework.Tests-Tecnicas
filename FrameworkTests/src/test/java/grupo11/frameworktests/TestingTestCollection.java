@@ -1,7 +1,9 @@
 package grupo11.frameworktests;
 
 import static org.junit.Assert.assertEquals;
+
 import java.util.ArrayList;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -33,14 +35,14 @@ public class TestingTestCollection {
 				Validation.validateEquals(expected, actual);
 			}
 		};
-		
+
 	}
 
 	@Test
 	public void agregarUnTestaLaCollection() {
 		unSuiteTests.add(unTest);
 		int esperado = 1;
-		int actual = unSuiteTests.getTests().size();
+		int actual = unSuiteTests.getTestsCount();
 		assertEquals(actual, esperado);
 	}
 
@@ -68,23 +70,21 @@ public class TestingTestCollection {
 		String actual = resultados.get(0).getMessage();
 		assertEquals(actual, esperado);
 	}
-	
+
 	@Test
 	public void UnicidadNombreUnitCase() {
 		unSuiteTests.add(unTest);
 		unSuiteTests.add(dosTest);
-		
+
 		boolean esperado = true;
-		
-		assertEquals(esperado, unSuiteTests.validarNombre(dosTest.getNombre()));
+
+//		assertEquals(esperado, unSuiteTests.validarNombre(dosTest.getName()));
 	}
 
 	@Test
 	public void UnicidadNombreTestCollection() {
-		//TODO: Debe haber una estructura superior que almacene 
-		//todos los CollectionTest y/o los UnitTest
-		
-	}
-	
+		// TODO: Debe haber una estructura superior que almacene
+		// todos los CollectionTest y/o los UnitTest
 
+	}
 }

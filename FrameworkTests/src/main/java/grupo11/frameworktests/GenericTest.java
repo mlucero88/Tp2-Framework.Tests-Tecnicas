@@ -1,27 +1,25 @@
 package grupo11.frameworktests;
 
-import java.util.Collection;
-
 public abstract class GenericTest {
-	protected String nombre;
-	
-	protected GenericTest(String unNombre){
-		nombre = unNombre;
-	}
-	
-	
-	public String getNombre() {
-		return nombre;
+	private String name;
+
+	protected GenericTest(String name) {
+		this.name = name;
 	}
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+	public String getName() {
+		return name;
 	}
 
+	/* Metodo redefinible por TestCollection */
+	protected abstract void add(GenericTest test);
+
+	/* Metodo redefinible cuyo comportamiento depende de si se trata de un
+	 * UnitTest o TestCollection, no accedibles por el usuario */
 	protected abstract TestResult run();
-	protected void add(GenericTest test){
-		NameRegister.getInstancia().registerName(test.getNombre());
-	}
+
+	/* Metodos redefinibles por el usuario */
 	protected abstract void setUp();
+
 	protected abstract void tearDown();
 }

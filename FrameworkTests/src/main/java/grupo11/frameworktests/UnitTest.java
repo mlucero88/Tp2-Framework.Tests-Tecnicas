@@ -1,47 +1,44 @@
 package grupo11.frameworktests;
 
-import junit.framework.AssertionFailedError;
-
 /* Clase abstracta de la cual el cliente hereda para crear su test unitario. El
  * cliente debe implementar el metodo "test" con el comportamiento que desea
  * testear */
 
-public abstract class UnitTest extends GenericTest{
+public abstract class UnitTest extends GenericTest {
 
 	public UnitTest(String testName) {
 		super(testName);
 	}
 
 	/* Metodo que tiene el comportamiento a testear. Es llamado por "run" */
-	public abstract void test();
+	protected abstract void test();
+
+	/* Redefinibles por el usuario si se le desea dar comportamiento */
+	@Override
+	protected void setUp() {}
 
 	@Override
-	public void setUp(){
-		
-	}
+	protected void tearDown() {}
+
+	/* Sin comportamiento. Falencia de diseño en el patron Composite */
+	@Override
+	final protected void add(GenericTest test) {}
 
 	@Override
-	public void tearDown(){
-		
-	}
-	
-	@Override
-	public void add(GenericTest test){
-		
-	}
-	
-	@Override
-	public TestResult run() {
+	final public TestResult run() {
 		try {
 			setUp();
 			test();
 			tearDown();
 		}
-		catch (AssertionError error) {
-			return TestResult.createFailedResult(nombre, error.getMessage());
+		catch (ValidationFailure failure) {
+			// TODO manejar
+			return TestResult.createFailedResult(getName(), failure.getMessage());
 		}
-		//TODO: Buscar jerarquia de error de excepciones para capturarlas.
-		
-		return TestResult.createSuccessfulResult(nombre);
+		catch (RuntimeException exception) {
+			// TODO manejar
+		}
+		// TODO adapatar a los cambios
+		return TestResult.createSuccessfulResult(getName());
 	}
 }
