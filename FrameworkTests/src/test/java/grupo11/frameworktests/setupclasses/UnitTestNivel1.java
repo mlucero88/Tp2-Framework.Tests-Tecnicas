@@ -1,36 +1,31 @@
 package grupo11.frameworktests.setupclasses;
 
+import grupo11.frameworktests.Fixture;
 import grupo11.frameworktests.UnitTest;
 
 // Padre: TestCollectionNivel0
 // Hijos: -
 
 public class UnitTestNivel1 extends UnitTest {
-	/* Strings de prueba de acceso al fixture */
-	protected String setUpUnitTestNivel1;
-	protected String tearDownUnitTestNivel1;
-
-	private static final String SETUP_STRING = "setUpUnitTestNivel1";
-	private static final String TEARDOWN_STRING = "tearDownUnitTestNivel1";
-
 	public UnitTestNivel1(String testName) {
 		super(testName);
 	}
 
 	@Override
 	protected void test() {
-		System.out.println("Testing UnitTestNivel1...");
+		String str = "testUnitTestNivel1";
+		Fixture.getInstance().addVariable("VarTestUT1", str);
 	}
 
 	@Override
 	protected void setUp() {
-		System.out.println(SETUP_STRING);
-		setUpUnitTestNivel1 = SETUP_STRING;
+		String str = "setupUnitTestNivel1";
+		Fixture.getInstance().addVariable("VarSetupUT1", str);
 	}
 
 	@Override
 	protected void tearDown() {
-		System.out.println(TEARDOWN_STRING);
-		tearDownUnitTestNivel1 = TEARDOWN_STRING;
+		String str = "teardownUnitTestNivel1";
+		Fixture.getInstance().addVariable("VarTeardownUT1", str);
 	}
 }
