@@ -9,13 +9,16 @@ public class ReportWriter {
 	
 	File fileReport = null; 
 	FileWriter writer= null;
-	BufferedWriter buffer = null;
 	PrintWriter printWriter = null;
+	private final static String SUBRAYADO_TESTSUITE = "---------------------------------------";
+	private final static String SUBRAYADO_SUMMARY = "=======================================";
+	private final static String ENCABEZADO_SUMMARY = "[failure] Summary";
+	
 	
 	public ReportWriter(String filePath){
 		fileReport =  new File(filePath);
 		try{
-			writer = new FileWriter(fileReport,true);
+			writer = new FileWriter(fileReport);
 			printWriter = new PrintWriter(writer);
 		} catch (Exception e) {
 			System.out.println("Error al crear archivo");
@@ -32,6 +35,16 @@ public class ReportWriter {
 		} catch (Exception e2) {
 			e2.printStackTrace();
 		}
+	}
+	
+	public void writeEncabezadoSummary (){
+		printWriter.println(ENCABEZADO_SUMMARY);
+		printWriter.println(SUBRAYADO_SUMMARY);
+	}
+	
+	public void writeEncabezadoTestSuite (String nombreTestSuite){
+		printWriter.println(nombreTestSuite);
+		printWriter.println(SUBRAYADO_TESTSUITE);
 	}
 	
 	
