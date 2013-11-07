@@ -1,10 +1,10 @@
 package grupo11.frameworktests;
 
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 
+/* Clase utilitaria para escribir en un archivo el reporte de los tests */
 public class ReportWriter {
 	
 	File fileReport = null; 
@@ -38,15 +38,18 @@ public class ReportWriter {
 	}
 	
 	public void writeEncabezadoSummary (){
+		printWriter.println(" ");
 		printWriter.println(ENCABEZADO_SUMMARY);
 		printWriter.println(SUBRAYADO_SUMMARY);
+	}
+	
+	public void writeLineaEnBlanco (){
+		printWriter.println (" ");
 	}
 	
 	public void writeEncabezadoTestSuite (String nombreTestSuite){
 		printWriter.println(nombreTestSuite);
 		printWriter.println(SUBRAYADO_TESTSUITE);
 	}
-	
-	
 
 }

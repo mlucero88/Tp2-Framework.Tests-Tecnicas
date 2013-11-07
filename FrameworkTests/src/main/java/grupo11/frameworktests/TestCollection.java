@@ -14,7 +14,7 @@ public class TestCollection extends GenericTest {
 	public TestCollection(String name) {
 		super(name);
 		tests = new ArrayList<GenericTest>();
-		report = new TestReport();
+		report = TestReport.getInstance();
 		result = new TestCollectionResult(null);
 	};
 
@@ -30,24 +30,30 @@ public class TestCollection extends GenericTest {
 	@Override
 	final public TestResult run() {
 		setUp();
+		report.escribirLineaEnBlanco();
+		report.escribirNombreTestSuite(getName());
 		for (GenericTest test : tests) {
 			/* TODO manejar como se guardan los resultados */
-			report.addTestResult(test.run());
+			report.registrarTestResult(test.run());
 		}
+		report.escribirLineaEnBlanco();
 		tearDown();
 		return result;
 	}
 
 	final public void runSelection(String regexp) {
 		setUp();
+		report.escribirLineaEnBlanco();
+		report.escribirNombreTestSuite(getName());
 		for (GenericTest test : tests) {
 			if (test.getName().matches(regexp)) {
 				/* TODO manejar como se guardan los resultados */
 				/* TODO parece codigo duplicado con el run, ver si puedo hacer
 				 * algo */
-				report.addTestResult(test.run());
+				report.registrarTestResult(test.run());
 			}
 		}
+		report.escribirLineaEnBlanco();
 		tearDown();
 	}
 
@@ -57,7 +63,9 @@ public class TestCollection extends GenericTest {
 		return tests.size();
 	}
 
-	public void showTestResults() {
+	/*Guarda los resultados de los tests en un archivo y los muestra por pantalla*/
+	public void saveAndShowTestResults() {
+		report.guardarReporte();
 		report.showAll();
 	}
 

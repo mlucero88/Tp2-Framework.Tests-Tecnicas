@@ -17,12 +17,12 @@ class TestResult {
 
 	static TestResult createFailedResult(String testName, String failureMessage) {
 		resultType = (ResultType.Fail);
-		return new TestResult("[" + resultType + "] " + testName);
+		return new TestResult("[" + resultType + "] " + testName + ": " + failureMessage);
 	}
 
 	static TestResult createErrorResult(String testName, String errorMessage) {
 		resultType = (ResultType.Error);
-		return new TestResult("[" + resultType + "] " + testName);
+		return new TestResult("[" + resultType + "] " + testName + ": " + errorMessage);
 	}
 
 	public String getMessage() {

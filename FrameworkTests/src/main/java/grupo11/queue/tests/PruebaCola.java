@@ -6,7 +6,7 @@ import grupo11.frameworktests.UnitTest;
 public class PruebaCola {
 
 	public static void main(String[] args) {
-		TestCollection tests = new TestCollection("TestDeCola");
+		TestCollection tests = new TestCollection("TestDeCola1");
 
 		UnitTest test1 = new TestColaVacia("TestColaVacia");
 		tests.add(test1);
@@ -24,8 +24,27 @@ public class PruebaCola {
 		tests.add(test7);
 		UnitTest test8 = new TestLlenarYVaciarCola("TestLlenarYVaciarCola");
 		tests.add(test8);
-
+		
+		TestCollection tests2 = new TestCollection("TestDeCola2");
+		UnitTest test21 = new TestColaVacia("TestColaVacia2");
+		tests2.add(test21);
+		UnitTest test22 = new TestColaLlena("TestColaLlena2");
+		tests2.add(test22);
+		UnitTest test23 = new TestSize("TestSize2");
+		tests2.add(test23);
+		UnitTest test24 = new TestTopConColaLlena("TestTopConColaLlena2");
+		tests2.add(test24);
+		UnitTest test25 = new TestTopConColaVacia("TestTopConColaVacia2");
+		tests2.add(test25);
+		UnitTest test26 = new TestRemoveConColaVacia("TestRemoveConColaVacia2");
+		tests2.add(test26);
+		UnitTest test27 = new TestRemoveConColaLlena("TestRemoveConColaLlena2");
+		tests2.add(test27);
+		UnitTest test28 = new TestLlenarYVaciarCola("TestLlenarYVaciarCola2");
+		tests2.add(test28);
+		
+		tests.add(tests2);
 		tests.run();
-		tests.showTestResults();
+		tests.saveAndShowTestResults();
 	}
 }

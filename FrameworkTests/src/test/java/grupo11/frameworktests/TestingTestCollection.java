@@ -65,11 +65,12 @@ public class TestingTestCollection {
 		assertEquals(actual, esperado);
 	}
 
+	
 	@Test
 	public void mostrarResultadoDeUnTestDeLaCollection() {
 		unSuiteTests.add(unTest);
 		unSuiteTests.run();
-		unSuiteTests.showTestResults();
+		unSuiteTests.saveAndShowTestResults();
 
 		// Me traigo el arrayList de resultados mostrados por pantalla
 		ArrayList<TestResult> resultados =

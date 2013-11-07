@@ -39,6 +39,7 @@ public abstract class UnitTest extends GenericTest {
 		}
 		catch (RuntimeException exception) {
 			// TODO manejar
+			return TestResult.createErrorResult(getName(), "RuntimeException");
 		}
 		// TODO adapatar a los cambios
 		return TestResult.createSuccessfulResult(getName());
