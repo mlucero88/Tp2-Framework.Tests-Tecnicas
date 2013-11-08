@@ -10,7 +10,7 @@ import org.junit.Test;
 // Clase Test que prueba los metodos de la clase TestCollection
 
 public class TestingTestCollection {
-	private TestCollection unSuiteTests;
+	private TestCollection unTestCollection;
 	private UnitTest unTest;
 	private UnitTest dosTest;
 
@@ -18,7 +18,7 @@ public class TestingTestCollection {
 	public void setUp() {
 		// Seteo un test y la Collection que alberga todos los test que
 		// utilizare para probar los metodos de la clase
-		unSuiteTests = new TestCollection("soyUnSuite");
+		unTestCollection = new TestCollection("soyUnSuite");
 		unTest = new UnitTest("soyUnTest") {
 			@Override
 			public void test() {
@@ -27,7 +27,7 @@ public class TestingTestCollection {
 				Validation.validateEquals(expected, actual);
 			}
 		};
-		dosTest = new UnitTest("soyUnTest") {
+		dosTest = new UnitTest("soyOtroTest") {
 			@Override
 			public void test() {
 				String expected = "pruebo dos test";
@@ -40,58 +40,61 @@ public class TestingTestCollection {
 
 	@Test
 	public void agregarUnTestaLaCollection() {
-		unSuiteTests.add(unTest);
-		int esperado = 1;
-		int actual = unSuiteTests.getTestsCount();
-		assertEquals(actual, esperado);
+		unTestCollection.add(unTest);
+		unTestCollection.add(dosTest);
+		
+		int esperado = 2;
+		int actual = unTestCollection.getTestsCount();
+
+		assertEquals(esperado, actual);
 	}
 
 	@Test
 	public void agregarUnTestCollectionaLaCollection() {
 		TestCollection dosSuiteTests = new TestCollection("SoyOtroTestCollection");
 		
-		unSuiteTests.add(dosSuiteTests);
-		int esperado = 1;
-		int actual = unSuiteTests.getTestsCount();
-		assertEquals(actual, esperado);
+		unTestCollection.add(dosSuiteTests);
+		int esperado = 2;
+		int actual = unTestCollection.getTestsCount();
+		assertEquals(esperado, actual);
 	}
 
 	@Test
 	public void correrLosTestdeLaCollectionTest() {
-		unSuiteTests.add(unTest);
-		unSuiteTests.run();
+		unTestCollection.add(unTest);
+		unTestCollection.run();
 		int esperado = 1;
-		int actual = unSuiteTests.getReport().getResults().size();
+		int actual = unTestCollection.getReport().getResults().size();
 		assertEquals(actual, esperado);
 	}
 
 	
 	@Test
 	public void mostrarResultadoDeUnTestDeLaCollection() {
-		unSuiteTests.add(unTest);
-		unSuiteTests.run();
-		unSuiteTests.saveAndShowTestResults();
+		unTestCollection.add(unTest);
+		unTestCollection.run();
+		unTestCollection.saveAndShowTestResults();
 
 		// Me traigo el arrayList de resultados mostrados por pantalla
-		ArrayList<TestResult> resultados =
-				(ArrayList<TestResult>) unSuiteTests.getReport().getResults();
-
+		ArrayList<TestResult> arrayResultado = (ArrayList<TestResult>) unTestCollection.getReport().getResults();
+		
 		// Me guardo el mensaje arrojado por el run que se muestra por pantalla
-		String esperado = "TEST: soyUnTest - RESULT: Succeeded";
-		String actual = resultados.get(0).getMessage();
+		String actual = arrayResultado.get(0).getMessage();
+		
+		
+		assertEquals("[Ok] " + unTest.getName(), actual);
+	}
+
+	@Test
+	public void UnicidadNombreDeTest() {
+		unTestCollection.add(dosTest);
+		//Pongo el mismo nombre a los Test y trato de agregarlos
+		unTest.setName("soyOtroTest");
+		
+		boolean actual = false;
+		boolean esperado = unTestCollection.add(dosTest);
+
 		assertEquals(actual, esperado);
 	}
 
-	@Test
-	public void UnicidadNombreUnitCase() {
-		unSuiteTests.add(unTest);
-		unSuiteTests.add(dosTest);
-	}
-
-	@Test
-	public void UnicidadNombreTestCollection() {
-		// TODO: Debe haber una estructura superior que almacene
-		// todos los CollectionTest y/o los UnitTest
-
-	}
 }
