@@ -18,7 +18,20 @@ public class TestingTestCollection {
 	public void setUp() {
 		// Seteo un test y la Collection que alberga todos los test que
 		// utilizare para probar los metodos de la clase
-		unTestCollection = new TestCollection("soyUnSuite");
+		unTestCollection = new TestCollection("soyUnSuite"){
+			public void setUp(){
+				UnitTest tercerTest = new UnitTest("SoyUltimoTest"){
+
+					@Override
+					protected void test() {
+						Validation.validateTrue(true);
+					}
+					
+				};
+				
+				add(tercerTest);
+			}
+		};
 		unTest = new UnitTest("soyUnTest") {
 			@Override
 			public void test() {
@@ -34,16 +47,16 @@ public class TestingTestCollection {
 				String actual = "pruebo dos test";
 				Validation.validateEquals(expected, actual);
 			}
+
 		};
 
 	}
 
 	@Test
 	public void agregarUnTestaLaCollection() {
-		unTestCollection.add(unTest);
-		unTestCollection.add(dosTest);
+		unTestCollection.setUp();
 		
-		int esperado = 2;
+		int esperado = 1;
 		int actual = unTestCollection.getTestsCount();
 
 		assertEquals(esperado, actual);
@@ -54,7 +67,7 @@ public class TestingTestCollection {
 		TestCollection dosSuiteTests = new TestCollection("SoyOtroTestCollection");
 		
 		unTestCollection.add(dosSuiteTests);
-		int esperado = 2;
+		int esperado = 1;
 		int actual = unTestCollection.getTestsCount();
 		assertEquals(esperado, actual);
 	}
@@ -63,9 +76,9 @@ public class TestingTestCollection {
 	public void correrLosTestdeLaCollectionTest() {
 		unTestCollection.add(unTest);
 		unTestCollection.run();
-		int esperado = 1;
+		int esperado = 2;
 		int actual = unTestCollection.getReport().getResults().size();
-		assertEquals(actual, esperado);
+		assertEquals(esperado, actual);
 	}
 
 	
@@ -97,4 +110,16 @@ public class TestingTestCollection {
 		assertEquals(actual, esperado);
 	}
 
+	@Test
+	public void ValidarUnSetUpDeCollectionConDosUnitCase() {
+		unTestCollection.setUp();
+		unTestCollection.add(unTest);
+		unTestCollection.add(dosTest);
+		unTestCollection.run();
+		
+		int esperado = 3;
+		int actual = unTestCollection.getTestsCount();
+		
+		assertEquals(esperado, actual);
+	}
 }
