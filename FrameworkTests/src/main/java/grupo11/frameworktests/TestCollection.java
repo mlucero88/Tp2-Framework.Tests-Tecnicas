@@ -30,21 +30,17 @@ public class TestCollection extends GenericTest {
 	@Override
 	final public TestResult run() {
 		setUp();
-		report.escribirLineaEnBlanco();
-		report.escribirNombreTestSuite(getName());
+		report.registrarNombreTestSuite(getName());
 		for (GenericTest test : tests) {
 			/* TODO manejar como se guardan los resultados */
 			report.registrarTestResult(test.run());
 		}
-		report.escribirLineaEnBlanco();
 		tearDown();
 		return result;
 	}
 
 	final public void runSelection(String regexp) {
 		setUp();
-		report.escribirLineaEnBlanco();
-		report.escribirNombreTestSuite(getName());
 		for (GenericTest test : tests) {
 			if (test.getName().matches(regexp)) {
 				/* TODO manejar como se guardan los resultados */
@@ -53,7 +49,6 @@ public class TestCollection extends GenericTest {
 				report.registrarTestResult(test.run());
 			}
 		}
-		report.escribirLineaEnBlanco();
 		tearDown();
 	}
 

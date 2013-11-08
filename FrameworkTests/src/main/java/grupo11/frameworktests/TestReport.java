@@ -1,5 +1,7 @@
 package grupo11.frameworktests;
 
+import grupo11.frameworktests.TestResult.ResultType;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -14,7 +16,9 @@ public class TestReport {
 	private static TestReport instance = null;
 	private Collection<TestResult> results;
 	private ReportWriter reportWriter= null; 
-	
+	private int cantidadTotalTests = 0;
+	private int cantidadTotalFailed = 0;
+	private int cantidadTotalError = 0;
 	private TestReport() {
 		results = new ArrayList<TestResult>();
 		reportWriter = new ReportWriter("TestsReport.txt");
@@ -69,24 +73,39 @@ public class TestReport {
 		return results;
 	}
 	
-	public void escribirNombreTestSuite(String nombre){
+	public void registrarNombreTestSuite(String nombre){
+		reportWriter.writeLineaEnBlanco();
 		reportWriter.writeEncabezadoTestSuite(nombre);
 	}
 	
 	public void registrarTestResult (TestResult result){
 		addTestResult(result);
 		reportWriter.writeResult(result.getMessage());
-		registrarEstadistica();
+		registrarEstadistica(result.getResultType());
 	}
 	
 	public void escribirLineaEnBlanco(){
-		reportWriter.writeLineaEnBlanco();
+		
 	}
 	
 	public void guardarReporte (){
 		reportWriter.writeEncabezadoSummary();
+		reportWriter.writeResult("Run: " + cantidadTotalTests);
+		reportWriter.writeResult("Errors: " + cantidadTotalError);
+		reportWriter.writeResult("Failures: " + cantidadTotalFailed);
 		reportWriter.closeSaveReport();
 	}
 	
-	private void registrarEstadistica (){}
+	private void registrarEstadistica (ResultType type){
+		cantidadTotalTests++;
+		switch (type) {
+		case Fail:
+			cantidadTotalFailed++;
+			break;
+		case Error:
+			cantidadTotalError++;
+		default:
+			break;
+		}
+	}
 }
