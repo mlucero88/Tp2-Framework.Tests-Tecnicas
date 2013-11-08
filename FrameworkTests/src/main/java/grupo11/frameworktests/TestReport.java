@@ -84,8 +84,9 @@ public class TestReport {
 		registrarEstadistica(result.getResultType());
 	}
 	
-	public void escribirLineaEnBlanco(){
 		
+	public void finalizarRegistroTestSuite(String nombreTestSuite){
+		reportWriter.writeDivisionTestSuite();
 	}
 	
 	public void guardarReporte (){

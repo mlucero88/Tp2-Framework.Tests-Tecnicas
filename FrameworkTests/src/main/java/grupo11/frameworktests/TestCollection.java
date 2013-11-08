@@ -35,12 +35,14 @@ public class TestCollection extends GenericTest {
 			/* TODO manejar como se guardan los resultados */
 			report.registrarTestResult(test.run());
 		}
+		report.finalizarRegistroTestSuite(getName());
 		tearDown();
 		return result;
 	}
 
 	final public void runSelection(String regexp) {
 		setUp();
+		report.registrarNombreTestSuite(getName());
 		for (GenericTest test : tests) {
 			if (test.getName().matches(regexp)) {
 				/* TODO manejar como se guardan los resultados */
@@ -49,6 +51,7 @@ public class TestCollection extends GenericTest {
 				report.registrarTestResult(test.run());
 			}
 		}
+		report.finalizarRegistroTestSuite(getName());
 		tearDown();
 	}
 

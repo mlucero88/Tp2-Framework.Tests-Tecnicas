@@ -51,5 +51,10 @@ public class ReportWriter {
 		printWriter.println(nombreTestSuite);
 		printWriter.println(SUBRAYADO_TESTSUITE);
 	}
+	
+	public void writeDivisionTestSuite (){
+		printWriter.println(SUBRAYADO_TESTSUITE);
+		printWriter.println(" ");
+	}
 
 }
