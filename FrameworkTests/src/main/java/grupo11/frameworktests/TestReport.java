@@ -73,20 +73,22 @@ public class TestReport {
 		return results;
 	}
 	
-	public void registrarNombreTestSuite(String nombre){
+	public void registrarInicioTestSuite(String nombre){
 		reportWriter.writeLineaEnBlanco();
 		reportWriter.writeEncabezadoTestSuite(nombre);
 	}
 	
 	public void registrarTestResult (TestResult result){
-		addTestResult(result);
-		reportWriter.writeResult(result.getMessage());
-		registrarEstadistica(result.getResultType());
+		if (result.getMessage() != null){
+			addTestResult(result);
+			reportWriter.writeResult(result.getMessage());
+			registrarEstadistica(result.getResultType());	
+		}
 	}
 	
 		
 	public void finalizarRegistroTestSuite(String nombreTestSuite){
-		reportWriter.writeDivisionTestSuite();
+		reportWriter.writeMarcaFinTestSuite(nombreTestSuite);
 	}
 	
 	public void guardarReporte (){

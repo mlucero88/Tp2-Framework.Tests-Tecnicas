@@ -48,7 +48,12 @@ public class ReportWriter {
 	}
 	
 	public void writeEncabezadoTestSuite (String nombreTestSuite){
-		printWriter.println(nombreTestSuite);
+		printWriter.println("Inicio: " + nombreTestSuite);
+		printWriter.println(SUBRAYADO_TESTSUITE);
+	}
+	
+	public void writeMarcaFinTestSuite (String nombreTestSuite){
+		printWriter.println("Fin: " + nombreTestSuite);
 		printWriter.println(SUBRAYADO_TESTSUITE);
 	}
 	

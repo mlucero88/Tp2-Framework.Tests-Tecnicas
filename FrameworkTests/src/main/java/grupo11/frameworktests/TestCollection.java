@@ -30,7 +30,7 @@ public class TestCollection extends GenericTest {
 	@Override
 	final public TestResult run() {
 		setUp();
-		report.registrarNombreTestSuite(getName());
+		report.registrarInicioTestSuite(getName());
 		for (GenericTest test : tests) {
 			/* TODO manejar como se guardan los resultados */
 			report.registrarTestResult(test.run());
@@ -42,7 +42,7 @@ public class TestCollection extends GenericTest {
 
 	final public void runSelection(String regexp) {
 		setUp();
-		report.registrarNombreTestSuite(getName());
+		report.registrarInicioTestSuite(getName());
 		for (GenericTest test : tests) {
 			if (test.getName().matches(regexp)) {
 				/* TODO manejar como se guardan los resultados */
