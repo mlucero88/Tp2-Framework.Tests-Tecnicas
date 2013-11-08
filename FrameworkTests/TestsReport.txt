@@ -1,0 +1,10 @@
+ 
+SoyUnSuiteRenombrado
+---------------------------------------
+[Ok] soyUnTest
+ 
+[failure] Summary
+=======================================
+Run: 1
+Errors: 0
+Failures: 0

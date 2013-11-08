@@ -20,16 +20,7 @@ public class TestingTestCollection {
 		// utilizare para probar los metodos de la clase
 		unTestCollection = new TestCollection("soyUnSuite"){
 			public void setUp(){
-				UnitTest tercerTest = new UnitTest("SoyUltimoTest"){
-
-					@Override
-					protected void test() {
-						Validation.validateTrue(true);
-					}
-					
-				};
-				
-				add(tercerTest);
+				setName("SoyUnSuiteRenombrado");
 			}
 		};
 		unTest = new UnitTest("soyUnTest") {
@@ -54,8 +45,16 @@ public class TestingTestCollection {
 
 	@Test
 	public void agregarUnTestaLaCollection() {
-		unTestCollection.setUp();
+		UnitTest unaPrueba = new UnitTest("SoyUnaPrueba") {
+			
+			@Override
+			protected void test() {
+				
+			}
+		};
 		
+		unTestCollection.add(unaPrueba);
+
 		int esperado = 1;
 		int actual = unTestCollection.getTestsCount();
 
@@ -67,6 +66,7 @@ public class TestingTestCollection {
 		TestCollection dosSuiteTests = new TestCollection("SoyOtroTestCollection");
 		
 		unTestCollection.add(dosSuiteTests);
+
 		int esperado = 1;
 		int actual = unTestCollection.getTestsCount();
 		assertEquals(esperado, actual);
@@ -76,11 +76,37 @@ public class TestingTestCollection {
 	public void correrLosTestdeLaCollectionTest() {
 		unTestCollection.add(unTest);
 		unTestCollection.run();
-		int esperado = 2;
+		int esperado = 1;
 		int actual = unTestCollection.getReport().getResults().size();
 		assertEquals(esperado, actual);
 	}
 
+	@Test
+	public void ValidarUnSetUpDeCollectionConDosUnitCase() {
+		
+		UnitTest priPrueba = new UnitTest("1era Prueba") {
+			
+			@Override
+			protected void test() {
+				Validation.validateTrue(true);
+			}
+		};
+		UnitTest secPrueba = new UnitTest("2da Prueba") {
+			
+			@Override
+			protected void test() {
+				Validation.validateTrue(true);				
+			}
+		};
+		unTestCollection.add(priPrueba);
+		unTestCollection.add(secPrueba);
+		unTestCollection.run();
+		
+		int esperado = 2;
+		int actual = unTestCollection.getTestsCount();
+		
+		assertEquals(esperado, actual);
+	}
 	
 	@Test
 	public void mostrarResultadoDeUnTestDeLaCollection() {
@@ -108,18 +134,5 @@ public class TestingTestCollection {
 		boolean esperado = unTestCollection.add(dosTest);
 
 		assertEquals(actual, esperado);
-	}
-
-	@Test
-	public void ValidarUnSetUpDeCollectionConDosUnitCase() {
-		unTestCollection.setUp();
-		unTestCollection.add(unTest);
-		unTestCollection.add(dosTest);
-		unTestCollection.run();
-		
-		int esperado = 3;
-		int actual = unTestCollection.getTestsCount();
-		
-		assertEquals(esperado, actual);
 	}
 }

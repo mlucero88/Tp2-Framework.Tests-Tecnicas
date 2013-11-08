@@ -69,7 +69,7 @@ public class TestCollection extends GenericTest {
 	public TestReport getReport() {
 		return report;
 	}
-
+	
 	/* Metodos redefinibles por el usuario */
 	@Override
 	protected void setUp() {}
