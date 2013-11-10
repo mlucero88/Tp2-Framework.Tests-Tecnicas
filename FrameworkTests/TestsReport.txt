@@ -1,0 +1,29 @@
+ 
+Inicio: SoyUnSuite
+---------------------------------------
+[Ok] soyUnTest
+Fin: SoyUnSuite
+---------------------------------------
+ 
+Inicio: SoyUnSuite
+---------------------------------------
+[Ok] VuelvoARenombrar
+Fin: SoyUnSuite
+---------------------------------------
+ 
+Inicio: SoyUnSuite
+---------------------------------------
+Fin: SoyUnSuite
+---------------------------------------
+ 
+Inicio: SoyUnSuiteRenombrado
+---------------------------------------
+[Ok] SoyUnTest
+Fin: SoyUnSuiteRenombrado
+---------------------------------------
+ 
+[failure] Summary
+=======================================
+Run: 3
+Errors: 0
+Failures: 0

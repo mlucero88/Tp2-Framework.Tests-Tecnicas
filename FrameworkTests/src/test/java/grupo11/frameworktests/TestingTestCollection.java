@@ -76,7 +76,7 @@ public class TestingTestCollection {
 	public void correrLosTestdeLaCollectionTest() {
 		unTestCollection.add(unTest);
 		unTestCollection.run();
-		int esperado = 1;
+		int esperado = 2;
 		int actual = unTestCollection.getReport().getResults().size();
 		assertEquals(esperado, actual);
 	}
@@ -110,6 +110,7 @@ public class TestingTestCollection {
 	
 	@Test
 	public void mostrarResultadoDeUnTestDeLaCollection() {
+		unTest.setName("SoyUnTest");
 		unTestCollection.add(unTest);
 		unTestCollection.run();
 		unTestCollection.saveAndShowTestResults();
@@ -121,7 +122,7 @@ public class TestingTestCollection {
 		String actual = arrayResultado.get(0).getMessage();
 		
 		
-		assertEquals("[Ok] " + unTest.getName(), actual);
+		assertEquals("[Ok] VuelvoARenombrar", actual);
 	}
 
 	@Test
