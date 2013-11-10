@@ -29,6 +29,7 @@ public class TestingReportTest {
 
 	@Test
 	public void testAddTestResult() {
+		unosTests.add(unTest);
 		unosTests.run();
 		int esperado = unosTests.getReport().getResults().size();
 		int actual = 1;
@@ -54,7 +55,7 @@ public class TestingReportTest {
 				(ArrayList<TestResult>) unosTests.getReport().getResults();
 
 		// Me guardo el mensaje arrojado por el run que se muestra por pantalla
-		String esperado = "TEST: soyUnTest - RESULT: Succeeded";
+		String esperado = "[Ok] " + unTest.getName();
 		String actual = resultados.get(0).getMessage();
 		assertEquals(actual, esperado);
 	}
