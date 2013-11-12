@@ -33,7 +33,9 @@ public class TestCollection extends GenericTest {
 		report.registrarInicioTestSuite(getName());
 		for (GenericTest test : tests) {
 			/* TODO manejar como se guardan los resultados */
-			report.registrarTestResult(test.run());
+			if(!test.isSkip()){
+				report.registrarTestResult(test.run());
+			}
 		}
 		report.finalizarRegistroTestSuite(getName());
 		tearDown();

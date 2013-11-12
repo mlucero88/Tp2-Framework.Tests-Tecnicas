@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -42,6 +43,12 @@ public class TestingTestCollection {
 		};
 
 	}
+	
+	@After
+	public void TearDown(){
+		NameRegister.getInstance().clear();
+		
+	}
 
 	@Test
 	public void agregarUnTestaLaCollection() {
@@ -76,7 +83,7 @@ public class TestingTestCollection {
 	public void correrLosTestdeLaCollectionTest() {
 		unTestCollection.add(unTest);
 		unTestCollection.run();
-		int esperado = 2;
+		int esperado = 1;
 		int actual = unTestCollection.getReport().getResults().size();
 		assertEquals(esperado, actual);
 	}
@@ -122,18 +129,30 @@ public class TestingTestCollection {
 		String actual = arrayResultado.get(0).getMessage();
 		
 		
-		assertEquals("[Ok] VuelvoARenombrar", actual);
+		assertEquals("[Ok] SoyUnTest", actual);
 	}
 
 	@Test
 	public void UnicidadNombreDeTest() {
 		unTestCollection.add(dosTest);
 		//Pongo el mismo nombre a los Test y trato de agregarlos
-		unTest.setName("soyOtroTest");
 		
 		boolean actual = false;
 		boolean esperado = unTestCollection.add(dosTest);
 
 		assertEquals(actual, esperado);
+	}
+	
+	@Test
+	public void SaltearUnTest(){
+		unTest.setSkip(true);
+		
+		unTestCollection.add(unTest);
+		unTestCollection.add(dosTest);
+		
+		unTestCollection.run();
+		int esperado = unTestCollection.getReport().getResults().size();
+			
+		assertEquals(esperado, 1);
 	}
 }
