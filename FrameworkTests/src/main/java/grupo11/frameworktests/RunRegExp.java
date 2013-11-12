@@ -8,7 +8,6 @@ public class RunRegExp implements RunStrategy {
 
 	public RunRegExp() {}
 
-	@Override
 	public TestCollectionResult run(Collection<GenericTest> tests,
 			String testName, String regExp, Collection<TagType> tagTypes) {
 		TestCollectionResult results = new TestCollectionResult(testName);
