@@ -2,6 +2,10 @@ package grupo11.frameworktests;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.ArrayList;
+
+import grupo11.frameworktests.GenericTest.TagType;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -50,5 +54,27 @@ public class TestingUnitTest {
 		tesito.run();
 
 		assertEquals("SoyUnTest", tesito.getName());
+	}
+	
+	@Test
+	public void AgregarUnTagAlUnitTest(){
+		unTest.addTagType((TagType.SLOW));
+		TagType actual = (TagType.SLOW);
+		
+		ArrayList<TagType> esperados = (ArrayList<TagType>) unTest.getTagType();
+		
+		assertEquals(esperados.get(0), actual);
+	}
+
+	@Test
+	public void AgregarMasTagAlUnitTest(){
+		
+		unTest.addTagType(TagType.SLOW);
+		unTest.addTagType(TagType.INTERNET);
+		
+		int actual = 2;
+		int esperado = unTest.getTagType().size();
+				
+		assertEquals(esperado, actual);
 	}
 }
