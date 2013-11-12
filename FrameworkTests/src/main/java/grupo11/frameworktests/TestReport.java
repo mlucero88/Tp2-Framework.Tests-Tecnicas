@@ -1,6 +1,6 @@
 package grupo11.frameworktests;
 
-import grupo11.frameworktests.TestResult.ResultType;
+import grupo11.frameworktests.UnitTestResult.ResultType;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -80,9 +80,10 @@ public class TestReport {
 	
 	public void registrarTestResult (TestResult result){
 		if (result.getMessage() != null){
-			addTestResult(result);
-			reportWriter.writeResult(result.getMessage());
-			registrarEstadistica(result.getResultType());	
+			UnitTestResult unitTestResult = (UnitTestResult)result;
+			addTestResult(unitTestResult);
+			reportWriter.writeResult(unitTestResult.getMessage());
+			registrarEstadistica(unitTestResult.getResultType());	
 		}
 	}
 	

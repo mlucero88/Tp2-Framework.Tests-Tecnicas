@@ -15,7 +15,7 @@ public class TestCollection extends GenericTest {
 		super(name);
 		tests = new ArrayList<GenericTest>();
 		report = TestReport.getInstance();
-		result = new TestCollectionResult(null);
+		
 	};
 
 	@Override
@@ -28,31 +28,38 @@ public class TestCollection extends GenericTest {
 	}
 
 	@Override
-	final public TestResult run() {
+	final public TestCollectionResult run() {
 		setUp();
 		report.registrarInicioTestSuite(getName());
+		TestCollectionResult results = new TestCollectionResult(getName());
 		for (GenericTest test : tests) {
 			/* TODO manejar como se guardan los resultados */
-			report.registrarTestResult(test.run());
+			TestResult result = test.run();
+			report.registrarTestResult(result);
+			results.add(result);
 		}
 		report.finalizarRegistroTestSuite(getName());
 		tearDown();
-		return result;
+		return results;
 	}
 
-	final public void runSelection(String regexp) {
+	final public TestResult runSelection(String regexp) {
 		setUp();
 		report.registrarInicioTestSuite(getName());
+		result = new TestCollectionResult(getName());
 		for (GenericTest test : tests) {
 			if (test.getName().matches(regexp)) {
 				/* TODO manejar como se guardan los resultados */
 				/* TODO parece codigo duplicado con el run, ver si puedo hacer
 				 * algo */
-				report.registrarTestResult(test.run());
+				TestResult result = test.run();
+				report.registrarTestResult(result);
+				result.add(result);
 			}
 		}
 		report.finalizarRegistroTestSuite(getName());
 		tearDown();
+		return result;
 	}
 
 	/* Retorna la cantidad de tests. Tanto un UnitTest como una test collection

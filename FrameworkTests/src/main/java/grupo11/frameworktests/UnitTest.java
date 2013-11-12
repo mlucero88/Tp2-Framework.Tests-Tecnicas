@@ -27,7 +27,7 @@ public abstract class UnitTest extends GenericTest {
 	}
 
 	@Override
-	final public TestResult run() {
+	final public UnitTestResult run() {
 			try {
 				setUp();
 				test();
@@ -35,13 +35,13 @@ public abstract class UnitTest extends GenericTest {
 			}
 			catch (ValidationFailure failure) {
 				// TODO manejar
-				return TestResult.createFailedResult(getName(), failure.getMessage());
+				return UnitTestResult.createFailedResult(getName(), failure.getMessage());
 			}
 			catch (RuntimeException exception) {
 				// TODO manejar
-				return TestResult.createErrorResult(getName(), "RuntimeException");
+				return UnitTestResult.createErrorResult(getName(), "RuntimeException");
 			}
 			// TODO adapatar a los cambios
-			return TestResult.createSuccessfulResult(getName());
+			return UnitTestResult.createSuccessfulResult(getName());
 		}
 }

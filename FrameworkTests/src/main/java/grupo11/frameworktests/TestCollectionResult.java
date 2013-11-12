@@ -1,9 +1,21 @@
 package grupo11.frameworktests;
 
-public class TestCollectionResult extends TestResult {
+import java.util.ArrayList;
+import java.util.Collection;
 
-	public TestCollectionResult(String resultMessage){
-		super(resultMessage);
+public class TestCollectionResult extends TestResult {
+	private Collection<TestResult> testsResults;
+	
+
+	public TestCollectionResult(String testName){
+		super(testName);
+		testsResults = new ArrayList<TestResult>();
 	}
 
+	@Override
+	protected boolean add(TestResult testResult) {
+		testsResults.add(testResult);
+		return false;
+	}
+	
 }
