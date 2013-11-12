@@ -60,7 +60,7 @@ public class TestingFixtures {
 	@Test
 	public void testExistsTrue() {
 		/* Prueba del agregado de variables al fixture */
-		testsNivel0.run();
+		testsNivel0.run(null, null);
 
 		assertTrue(Fixture.getInstance().existsVariable("VarMain"));
 		assertTrue(Fixture.getInstance().existsVariable("VarSetupTC0"));
@@ -78,7 +78,7 @@ public class TestingFixtures {
 	@Test
 	public void testValues() {
 		/* Prueba algunos valores del fixture */
-		testsNivel0.run();
+		testsNivel0.run(null, null);
 		
 		assertEquals("VAR_MAIN", Fixture.getInstance().getVariable("VarMain"));
 		assertEquals("setupUnitTestNivel2",

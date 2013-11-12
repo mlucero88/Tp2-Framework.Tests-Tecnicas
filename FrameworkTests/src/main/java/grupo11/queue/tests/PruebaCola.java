@@ -26,7 +26,7 @@ public class PruebaCola {
 		tests.add(test7);
 		UnitTest test8 = new TestLlenarYVaciarCola("TestLlenarYVaciarCola");
 		tests.add(test8);
-		
+
 		TestCollection tests2 = new TestCollection("TestDeCola2");
 		UnitTest test21 = new TestColaVacia("TestColaVacia2");
 		tests2.add(test21);
@@ -44,12 +44,13 @@ public class PruebaCola {
 		tests2.add(test27);
 		UnitTest test28 = new TestLlenarYVaciarCola("TestLlenarYVaciarCola2");
 		tests2.add(test28);
-		
+
 		tests.add(tests2);
-		TestCollectionResult results = (TestCollectionResult) tests.run();
+		TestCollectionResult results =
+				(TestCollectionResult) tests.run(null, null);
 		TestReport report = new TestReport(results);
 		report.generarReporteEnArchivo();
 		report.showAll();
-		//tests.saveAndShowTestResults();
+		// tests.saveAndShowTestResults();
 	}
 }

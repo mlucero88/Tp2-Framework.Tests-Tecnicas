@@ -8,10 +8,13 @@ import java.util.Collection;
 
 public class TestCollection extends GenericTest {
 	private Collection<GenericTest> tests;
+	private RunStrategy runStrategy;
 
 	public TestCollection(String name) {
 		super(name);
-		tests = new ArrayList<GenericTest>();		
+		tests = new ArrayList<GenericTest>();
+		// Construye con una estrategia "RunAll" por defecto
+		runStrategy = new RunAll();
 	};
 
 	@Override
@@ -24,34 +27,17 @@ public class TestCollection extends GenericTest {
 	}
 
 	@Override
-	final public TestCollectionResult run() {
+	final public TestCollectionResult run(String regExp,
+			Collection<TagType> tagTypes) {
 		setUp();
-		TestCollectionResult results = new TestCollectionResult(getName());
-		for (GenericTest test : tests) {
-			/* TODO manejar como se guardan los resultados */
-			if(!test.isSkip()){
-				TestResult result = test.run();
-				results.add(result);
-			}
-		}
+		TestCollectionResult results =
+				runStrategy.run(tests, getName(), null, null);
 		tearDown();
 		return results;
 	}
 
-	final public TestCollectionResult runSelection(String regexp) {
-		setUp();
-		TestCollectionResult results = new TestCollectionResult(getName());
-		for (GenericTest test : tests) {
-			if (test.getName().matches(regexp)) {
-				/* TODO manejar como se guardan los resultados */
-				/* TODO parece codigo duplicado con el run, ver si puedo hacer
-				 * algo */
-				TestResult result = test.run();
-				results.add(result);
-			}
-		}
-		tearDown();
-		return results;
+	public void setRunStrategy(RunStrategy runStrategy) {
+		this.runStrategy = runStrategy;
 	}
 
 	/* Retorna la cantidad de tests. Tanto un UnitTest como una test collection
@@ -60,18 +46,19 @@ public class TestCollection extends GenericTest {
 		return tests.size();
 	}
 
-	/*Guarda los resultados de los tests en un archivo y los muestra por pantalla*/
-	//public void saveAndShowTestResults() {
-		//report.guardarReporte();
-		//report.showAll();
-	//}
+	/* Guarda los resultados de los tests en un archivo y los muestra por
+	 * pantalla */
+	// public void saveAndShowTestResults() {
+	// report.guardarReporte();
+	// report.showAll();
+	// }
 
 	// TODO este get no me gusta, si solo se usa para los tests de junit ver
 	// si se puede sacar
-	//public TestReport getReport() {
-		//return report;
-	//}
-	
+	// public TestReport getReport() {
+	// return report;
+	// }
+
 	/* Metodos redefinibles por el usuario */
 	@Override
 	protected void setUp() {}

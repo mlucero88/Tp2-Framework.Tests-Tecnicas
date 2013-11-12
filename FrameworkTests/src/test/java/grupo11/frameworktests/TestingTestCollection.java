@@ -77,7 +77,7 @@ public class TestingTestCollection {
 	@Test
 	public void correrLosTestdeLaCollectionTest() {
 		unTestCollection.add(unTest);
-		TestCollectionResult results = unTestCollection.run();
+		TestCollectionResult results = unTestCollection.run(null, null);
 		int esperado = 1;
 		int actual = results.getTestsResults().size();
 		assertEquals(esperado, actual);
@@ -99,7 +99,7 @@ public class TestingTestCollection {
 		};
 		unTestCollection.add(priPrueba);
 		unTestCollection.add(secPrueba);
-		unTestCollection.run();
+		unTestCollection.run(null, null);
 
 		int esperado = 2;
 		int actual = unTestCollection.getTestsCount();
@@ -110,7 +110,7 @@ public class TestingTestCollection {
 	@Test
 	public void mostrarResultadoDeUnTestDeLaCollection() {
 		unTestCollection.add(unTest);
-		TestCollectionResult resultados = unTestCollection.run();
+		TestCollectionResult resultados = unTestCollection.run(null, null);
 
 		// Me traigo el arrayList de resultados mostrados por pantalla
 		ArrayList<TestResult> arrayResultado =

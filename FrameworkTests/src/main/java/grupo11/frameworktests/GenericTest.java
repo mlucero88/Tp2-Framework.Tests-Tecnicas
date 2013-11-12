@@ -3,10 +3,13 @@ package grupo11.frameworktests;
 import java.util.ArrayList;
 import java.util.Collection;
 
-
 public abstract class GenericTest {
 	private String name;
-	protected enum TagType {DEFAULT, FAST, SLOW, DB, INTERNET};
+
+	public enum TagType {
+		DEFAULT, FAST, SLOW, DB, INTERNET
+	};
+
 	private Collection<TagType> tagTypes;
 	private boolean skip;
 
@@ -39,13 +42,11 @@ public abstract class GenericTest {
 	/* Metodo redefinible por TestCollection */
 	protected abstract boolean add(GenericTest test);
 
-	/* Metodo redefinible cuyo comportamiento depende de si se trata de un
-	 * UnitTest o TestCollection, no accedibles por el usuario */
-	protected abstract TestResult run();
+	protected abstract TestResult run(String regExp,
+			Collection<TagType> tagTypes);
 
 	/* Metodos redefinibles por el usuario */
 	protected abstract void setUp();
 
 	protected abstract void tearDown();
-
 }
