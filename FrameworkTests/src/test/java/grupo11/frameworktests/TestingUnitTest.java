@@ -1,11 +1,11 @@
 package grupo11.frameworktests;
 
 import static org.junit.Assert.assertEquals;
+import grupo11.frameworktests.GenericTest.TagType;
 
 import java.util.ArrayList;
 
-import grupo11.frameworktests.GenericTest.TagType;
-
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -26,6 +26,12 @@ public class TestingUnitTest {
 			}
 		};
 	}
+	
+	@After
+	public void tearDown() {
+		NameRegister.getInstance().clear();
+		Fixture.getInstance().clear();
+	}
 
 	@Test
 	public void testUnitTest() {
@@ -35,46 +41,24 @@ public class TestingUnitTest {
 	}
 
 	@Test
-	public void ValidarSetUpDeLosUnitCase() {
-		UnitTest tesito = new UnitTest("unTesito") {
-
-			@Override
-			public void test() {
-				String actual = getName();
-				assertEquals("SoyUnTest", actual);
-
-			}
-
-			@Override
-			public void setUp() {
-				setName("SoyUnTest");
-			}
-		};
-		tesito.setUp();
-		tesito.run();
-
-		assertEquals("SoyUnTest", tesito.getName());
-	}
-	
-	@Test
-	public void AgregarUnTagAlUnitTest(){
+	public void AgregarUnTagAlUnitTest() {
 		unTest.addTagType((TagType.SLOW));
 		TagType actual = (TagType.SLOW);
-		
+
 		ArrayList<TagType> esperados = (ArrayList<TagType>) unTest.getTagType();
-		
+
 		assertEquals(esperados.get(0), actual);
 	}
 
 	@Test
-	public void AgregarMasTagAlUnitTest(){
-		
+	public void AgregarMasTagAlUnitTest() {
+
 		unTest.addTagType(TagType.SLOW);
 		unTest.addTagType(TagType.INTERNET);
-		
+
 		int actual = 2;
 		int esperado = unTest.getTagType().size();
-				
+
 		assertEquals(esperado, actual);
 	}
 }

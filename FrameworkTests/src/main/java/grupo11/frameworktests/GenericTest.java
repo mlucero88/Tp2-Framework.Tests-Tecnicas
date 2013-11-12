@@ -20,10 +20,6 @@ public abstract class GenericTest {
 		return name;
 	}
 
-	public void setName(String newName) {
-		name = newName;
-	}
-	
 	public Collection<TagType> getTagType() {
 		return tagTypes;
 	}

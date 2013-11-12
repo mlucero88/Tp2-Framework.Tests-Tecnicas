@@ -1,35 +1,7 @@
- 
-Inicio: SoyUnSuite
----------------------------------------
-[Ok] soyUnTest
-Fin: SoyUnSuite
----------------------------------------
- 
-Inicio: SoyUnSuite
----------------------------------------
-[Ok] VuelvoARenombrar
-Fin: SoyUnSuite
----------------------------------------
- 
-Inicio: SoyUnSuite
----------------------------------------
-Fin: SoyUnSuite
----------------------------------------
- 
-Inicio: SoyUnSuiteRenombrado
----------------------------------------
-[Ok] soyOtroTest
-Fin: SoyUnSuiteRenombrado
----------------------------------------
- 
-Inicio: SoyUnSuiteRenombrado
----------------------------------------
-[Ok] SoyUnTest
-Fin: SoyUnSuiteRenombrado
----------------------------------------
+[Ok] soyUnTest: 
  
 [failure] Summary
 =======================================
-Run: 4
+Run: 0
 Errors: 0
 Failures: 0

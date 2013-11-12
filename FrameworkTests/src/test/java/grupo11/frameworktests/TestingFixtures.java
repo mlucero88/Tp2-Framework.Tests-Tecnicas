@@ -39,6 +39,7 @@ public class TestingFixtures {
 
 	@After
 	public void tearDown() {
+		NameRegister.getInstance().clear();
 		Fixture.getInstance().clear();
 	}
 
@@ -100,24 +101,4 @@ public class TestingFixtures {
 		Fixture.getInstance().addVariable("VarMain", newStr);
 		assertEquals("NEW_MAIN", Fixture.getInstance().getVariable("VarMain"));
 	}
-
-//	@Test
-//	public void testSaveAndRestore() {
-//		assertTrue(Fixture.getInstance().existsVariable("VarMain"));
-//		Fixture.getInstance().save("Fixture1");
-//
-//		/* Cambio el fixture */
-//		Fixture.getInstance().clear();
-//		Fixture.getInstance().addVariable("Entero", new Integer(10));
-//		assertTrue(Fixture.getInstance().existsVariable("Entero"));
-//		Fixture.getInstance().save("Fixture2");
-//		
-//		/* Restauro el anterior */
-//		assertTrue(Fixture.getInstance().restore("Fixture1"));
-//		assertTrue(Fixture.getInstance().existsVariable("VarMain"));
-//
-//		/* Restauro el de enteros */
-//		assertTrue(Fixture.getInstance().restore("Fixture2"));
-//		assertTrue(Fixture.getInstance().existsVariable("Entero"));
-//	}
 }

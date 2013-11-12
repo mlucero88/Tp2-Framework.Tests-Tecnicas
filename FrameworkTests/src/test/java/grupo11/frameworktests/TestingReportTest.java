@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -27,9 +28,14 @@ public class TestingReportTest {
 		unosTests.add(unTest);
 	}
 
+	@After
+	public void tearDown() {
+		NameRegister.getInstance().clear();
+		Fixture.getInstance().clear();
+	}
+
 	@Test
 	public void testAddTestResult() {
-		unTest.setName("VuelvoARenombrar");
 		unosTests.add(unTest);
 		TestCollectionResult resultados = unosTests.run();
 		int esperado = resultados.getTestsResults().size();
@@ -45,11 +51,12 @@ public class TestingReportTest {
 		report.showAll();
 
 		// Me traigo el arrayList de resultados mostrados por pantalla
-		ArrayList<TestResult> results = (ArrayList<TestResult>)resultados.getTestsResults();
+		ArrayList<TestResult> results =
+				(ArrayList<TestResult>) resultados.getTestsResults();
 
 		// Me guardo el mensaje arrojado por el run que se muestra por pantalla
-		String esperado = "[Ok] VuelvoARenombrar";
+		String esperado = "[Ok] soyUnTest: ";
 		String actual = results.get(0).getMessage();
-		assertEquals(actual, esperado);
+		assertEquals(esperado, actual);
 	}
 }
