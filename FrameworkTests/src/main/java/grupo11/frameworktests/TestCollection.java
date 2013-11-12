@@ -37,16 +37,19 @@ public class TestCollection extends GenericTest {
 			TestResult result = test.run();
 			report.registrarTestResult(result);
 			results.add(result);
+			if(!test.isSkip()){
+				report.registrarTestResult(test.run());
+			}
 		}
 		report.finalizarRegistroTestSuite(getName());
 		tearDown();
 		return results;
 	}
 
-	final public TestResult runSelection(String regexp) {
+	final public TestCollectionResult runSelection(String regexp) {
 		setUp();
 		report.registrarInicioTestSuite(getName());
-		result = new TestCollectionResult(getName());
+		TestCollectionResult results = new TestCollectionResult(getName());
 		for (GenericTest test : tests) {
 			if (test.getName().matches(regexp)) {
 				/* TODO manejar como se guardan los resultados */
@@ -54,12 +57,12 @@ public class TestCollection extends GenericTest {
 				 * algo */
 				TestResult result = test.run();
 				report.registrarTestResult(result);
-				result.add(result);
+				results.add(result);
 			}
 		}
 		report.finalizarRegistroTestSuite(getName());
 		tearDown();
-		return result;
+		return results;
 	}
 
 	/* Retorna la cantidad de tests. Tanto un UnitTest como una test collection

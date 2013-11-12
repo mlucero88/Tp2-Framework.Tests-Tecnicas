@@ -18,12 +18,18 @@ Fin: SoyUnSuite
  
 Inicio: SoyUnSuiteRenombrado
 ---------------------------------------
+[Ok] soyOtroTest
+Fin: SoyUnSuiteRenombrado
+---------------------------------------
+ 
+Inicio: SoyUnSuiteRenombrado
+---------------------------------------
 [Ok] SoyUnTest
 Fin: SoyUnSuiteRenombrado
 ---------------------------------------
  
 [failure] Summary
 =======================================
-Run: 3
+Run: 4
 Errors: 0
 Failures: 0
