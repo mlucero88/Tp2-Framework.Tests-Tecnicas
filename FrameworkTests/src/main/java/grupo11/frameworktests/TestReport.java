@@ -13,32 +13,24 @@ import java.util.Collection;
 
 public class TestReport {
 
-	private static TestReport instance = null;
 	private Collection<TestResult> results;
 	private ReportWriter reportWriter= null; 
 	private int cantidadTotalTests = 0;
 	private int cantidadTotalFailed = 0;
 	private int cantidadTotalError = 0;
-	private TestReport() {
-		results = new ArrayList<TestResult>();
+
+	public TestReport(TestCollectionResult results) {
+		this.results = results.getTestsResults();
 		reportWriter = new ReportWriter("TestsReport.txt");
 	}
 
-	public static TestReport getInstance() {
-		if (instance == null) {
-			instance = new TestReport();
+	public void generarReporteEnArchivo(){
+		for (TestResult result : results) {
+			/* TODO manejar como se guardan los resultados */
+			registrarTestResult(result);
 		}
-		return instance;
+		guardarReporte();
 	}
-	
-	public void addTestResult(TestResult result) {
-		results.add(result);
-	}
-
-	public void clear() {
-		results.clear();
-	}
-	
 	
 	/* Imprime por salida estandar el resultado de cada test */
 	/* TODO Como variacion, se puede hacer que lo escriba en un log */
@@ -79,12 +71,9 @@ public class TestReport {
 	}
 	
 	public void registrarTestResult (TestResult result){
-		if (result.getMessage() != null){
-			UnitTestResult unitTestResult = (UnitTestResult)result;
-			addTestResult(unitTestResult);
-			reportWriter.writeResult(unitTestResult.getMessage());
-			registrarEstadistica(unitTestResult.getResultType());	
-		}
+		reportWriter.writeResult(result.getMessage());
+//		registrarEstadistica(unitTestResult.getResultType());	
+		
 	}
 	
 		

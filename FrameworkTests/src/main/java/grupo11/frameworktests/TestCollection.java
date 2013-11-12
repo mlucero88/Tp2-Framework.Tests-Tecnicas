@@ -8,14 +8,10 @@ import java.util.Collection;
 
 public class TestCollection extends GenericTest {
 	private Collection<GenericTest> tests;
-	private TestReport report;
-	private TestResult result;
 
 	public TestCollection(String name) {
 		super(name);
-		tests = new ArrayList<GenericTest>();
-		report = TestReport.getInstance();
-		
+		tests = new ArrayList<GenericTest>();		
 	};
 
 	@Override
@@ -30,25 +26,20 @@ public class TestCollection extends GenericTest {
 	@Override
 	final public TestCollectionResult run() {
 		setUp();
-		report.registrarInicioTestSuite(getName());
 		TestCollectionResult results = new TestCollectionResult(getName());
 		for (GenericTest test : tests) {
 			/* TODO manejar como se guardan los resultados */
-			TestResult result = test.run();
-			report.registrarTestResult(result);
-			results.add(result);
 			if(!test.isSkip()){
-				report.registrarTestResult(test.run());
+				TestResult result = test.run();
+				results.add(result);
 			}
 		}
-		report.finalizarRegistroTestSuite(getName());
 		tearDown();
 		return results;
 	}
 
 	final public TestCollectionResult runSelection(String regexp) {
 		setUp();
-		report.registrarInicioTestSuite(getName());
 		TestCollectionResult results = new TestCollectionResult(getName());
 		for (GenericTest test : tests) {
 			if (test.getName().matches(regexp)) {
@@ -56,11 +47,9 @@ public class TestCollection extends GenericTest {
 				/* TODO parece codigo duplicado con el run, ver si puedo hacer
 				 * algo */
 				TestResult result = test.run();
-				report.registrarTestResult(result);
 				results.add(result);
 			}
 		}
-		report.finalizarRegistroTestSuite(getName());
 		tearDown();
 		return results;
 	}
@@ -72,16 +61,16 @@ public class TestCollection extends GenericTest {
 	}
 
 	/*Guarda los resultados de los tests en un archivo y los muestra por pantalla*/
-	public void saveAndShowTestResults() {
-		report.guardarReporte();
-		report.showAll();
-	}
+	//public void saveAndShowTestResults() {
+		//report.guardarReporte();
+		//report.showAll();
+	//}
 
 	// TODO este get no me gusta, si solo se usa para los tests de junit ver
 	// si se puede sacar
-	public TestReport getReport() {
-		return report;
-	}
+	//public TestReport getReport() {
+		//return report;
+	//}
 	
 	/* Metodos redefinibles por el usuario */
 	@Override

@@ -31,33 +31,25 @@ public class TestingReportTest {
 	public void testAddTestResult() {
 		unTest.setName("VuelvoARenombrar");
 		unosTests.add(unTest);
-		unosTests.run();
-		int esperado = unosTests.getReport().getResults().size();
+		TestCollectionResult resultados = unosTests.run();
+		int esperado = resultados.getTestsResults().size();
 		int actual = 1;
 		assertEquals(actual, esperado);
 	}
 
 	@Test
-	public void testClear() {
-		unosTests.run();
-		unosTests.getReport().clear();
-		int esperado = unosTests.getReport().getResults().size();
-		int actual = 0;
-		assertEquals(actual, esperado);
-	}
-
-	@Test
 	public void testShowAll() {
-		unosTests.run();
-		unosTests.getReport().showAll();
+		TestCollectionResult resultados = unosTests.run();
+		TestReport report = new TestReport(resultados);
+		report.generarReporteEnArchivo();
+		report.showAll();
 
 		// Me traigo el arrayList de resultados mostrados por pantalla
-		ArrayList<TestResult> resultados =
-				(ArrayList<TestResult>) unosTests.getReport().getResults();
+		ArrayList<TestResult> results = (ArrayList<TestResult>)resultados.getTestsResults();
 
 		// Me guardo el mensaje arrojado por el run que se muestra por pantalla
 		String esperado = "[Ok] VuelvoARenombrar";
-		String actual = resultados.get(0).getMessage();
+		String actual = results.get(0).getMessage();
 		assertEquals(actual, esperado);
 	}
 }

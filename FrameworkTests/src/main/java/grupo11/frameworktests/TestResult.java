@@ -15,8 +15,6 @@ public abstract class TestResult {
 
 	protected abstract boolean add(TestResult test);
 
-	public String getMessage(){
-		return null;
-	}	
+	public abstract String getMessage();	
 	
 }

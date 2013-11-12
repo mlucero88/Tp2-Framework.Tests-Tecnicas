@@ -82,9 +82,9 @@ public class TestingTestCollection {
 	@Test
 	public void correrLosTestdeLaCollectionTest() {
 		unTestCollection.add(unTest);
-		unTestCollection.run();
+		TestCollectionResult results = unTestCollection.run();
 		int esperado = 1;
-		int actual = unTestCollection.getReport().getResults().size();
+		int actual = results.getTestsResults().size();
 		assertEquals(esperado, actual);
 	}
 
@@ -119,11 +119,10 @@ public class TestingTestCollection {
 	public void mostrarResultadoDeUnTestDeLaCollection() {
 		unTest.setName("SoyUnTest");
 		unTestCollection.add(unTest);
-		unTestCollection.run();
-		unTestCollection.saveAndShowTestResults();
-
+		TestCollectionResult resultados = unTestCollection.run();
+	
 		// Me traigo el arrayList de resultados mostrados por pantalla
-		ArrayList<TestResult> arrayResultado = (ArrayList<TestResult>) unTestCollection.getReport().getResults();
+		ArrayList<TestResult> arrayResultado = (ArrayList<TestResult>) resultados.getTestsResults();
 		
 		// Me guardo el mensaje arrojado por el run que se muestra por pantalla
 		String actual = arrayResultado.get(0).getMessage();
@@ -150,8 +149,8 @@ public class TestingTestCollection {
 		unTestCollection.add(unTest);
 		unTestCollection.add(dosTest);
 		
-		unTestCollection.run();
-		int esperado = unTestCollection.getReport().getResults().size();
+		TestCollectionResult resultados = unTestCollection.run();
+		int esperado = resultados.getTestsResults().size();
 			
 		assertEquals(esperado, 1);
 	}

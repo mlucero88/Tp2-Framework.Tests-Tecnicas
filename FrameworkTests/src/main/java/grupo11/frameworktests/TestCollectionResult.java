@@ -18,4 +18,12 @@ public class TestCollectionResult extends TestResult {
 		return false;
 	}
 	
+	public Collection<TestResult> getTestsResults (){
+		return testsResults;
+	}
+	
+	public String getMessage() {
+		return getTestName();
+	}
+	
 }

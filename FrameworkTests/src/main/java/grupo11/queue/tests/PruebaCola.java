@@ -2,6 +2,7 @@ package grupo11.queue.tests;
 
 import grupo11.frameworktests.TestCollection;
 import grupo11.frameworktests.TestCollectionResult;
+import grupo11.frameworktests.TestReport;
 import grupo11.frameworktests.UnitTest;
 
 public class PruebaCola {
@@ -46,6 +47,9 @@ public class PruebaCola {
 		
 		tests.add(tests2);
 		TestCollectionResult results = (TestCollectionResult) tests.run();
-		tests.saveAndShowTestResults();
+		TestReport report = new TestReport(results);
+		report.generarReporteEnArchivo();
+		report.showAll();
+		//tests.saveAndShowTestResults();
 	}
 }
