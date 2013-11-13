@@ -9,6 +9,7 @@ import java.util.Collection;
 public class TestCollection extends GenericTest {
 	private Collection<GenericTest> tests;
 	private RunTemplate runMethod;
+	private String nombreContenedora;
 
 	public TestCollection(String name) {
 		super(name);
@@ -62,4 +63,8 @@ public class TestCollection extends GenericTest {
 
 	@Override
 	protected void tearDown() {}
+	
+	public void setTestCollectionContenedora (String nombreContenedora){
+		this.nombreContenedora = nombreContenedora;
+	}
 }

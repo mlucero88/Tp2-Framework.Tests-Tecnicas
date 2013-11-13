@@ -25,6 +25,9 @@ public class TestCollectionResult extends TestResult {
 	}
 
 	public String getMessage() {
-		return getTestName();
+		String message = "Tiempo total de ejecucion de " + testName + ": " + tiempoEjecucion + " ms";
+		return message;
 	}
+	
+	
 }

@@ -3,7 +3,9 @@ package grupo11.frameworktests;
 /* Clase que almacena el resultado de un UnitTest */
 
 public abstract class TestResult {
-	private String testName;
+	protected String testName;
+	protected double tiempoEjecucion;
+
 	
 	protected TestResult (String testName){
 		this.testName = testName;
@@ -15,6 +17,10 @@ public abstract class TestResult {
 
 	protected abstract boolean add(TestResult test);
 
-	public abstract String getMessage();	
+	public abstract String getMessage();
+	
+	public void setTiempoEjecucion (double tiempo){
+		tiempoEjecucion = tiempo;
+	}
 	
 }

@@ -6,7 +6,7 @@ public class UnitTestResult extends TestResult {
 	private String result;
 	public enum ResultType {Ok, Fail, Error}
 	private static ResultType resultType;
-
+	
 	
 	static UnitTestResult createSuccessfulResult(String testName) {
 		resultType = (ResultType.Ok);
@@ -40,4 +40,6 @@ public class UnitTestResult extends TestResult {
 	public boolean add(TestResult test){
 		return false;
 	}
+	
+	
 }
