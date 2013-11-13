@@ -1,49 +1,51 @@
 package grupo11.frameworktests;
 
-import java.util.ArrayList;
 import java.util.Collection;
+import java.util.TreeSet;
 
 public abstract class GenericTest {
-	private String name;
-
 	public enum TagType {
 		DEFAULT, FAST, SLOW, DB, INTERNET
 	};
 
-	private Collection<TagType> tagTypes;
+	private String name;
+	private Collection<TagType> tags;
 	private boolean skip;
 
 	protected GenericTest(String name) {
 		this.name = name;
-		this.setSkip(false);
-		this.tagTypes = new ArrayList<TagType>();
+		skip = false;
+		tags = new TreeSet<TagType>();
 	}
 
 	public String getName() {
 		return name;
 	}
 
-	public Collection<TagType> getTagType() {
-		return tagTypes;
+	public Collection<TagType> getTags() {
+		return tags;
 	}
 
-	public void addTagType(TagType tagType) {
-		tagTypes.add(tagType);
+	public void addTag(TagType tag) {
+		tags.add(tag);
 	}
 
-	public boolean isSkip() {
+	public boolean isSkippable() {
 		return skip;
 	}
 
-	public void setSkip(boolean skip) {
-		this.skip = skip;
+	public void setSkippable() {
+		skip = true;
+	}
+
+	public void setNotSkippable() {
+		skip = false;
 	}
 
 	/* Metodo redefinible por TestCollection */
 	protected abstract boolean add(GenericTest test);
 
-	protected abstract TestResult run(String regExp,
-			Collection<TagType> tagTypes);
+	protected abstract TestResult run();
 
 	/* Metodos redefinibles por el usuario */
 	protected abstract void setUp();

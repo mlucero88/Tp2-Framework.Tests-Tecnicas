@@ -3,7 +3,7 @@ package grupo11.frameworktests;
 import static org.junit.Assert.assertEquals;
 import grupo11.frameworktests.GenericTest.TagType;
 
-import java.util.ArrayList;
+import java.util.Collection;
 
 import org.junit.After;
 import org.junit.Before;
@@ -26,7 +26,7 @@ public class TestingUnitTest {
 			}
 		};
 	}
-	
+
 	@After
 	public void tearDown() {
 		NameRegister.getInstance().clear();
@@ -42,23 +42,18 @@ public class TestingUnitTest {
 
 	@Test
 	public void AgregarUnTagAlUnitTest() {
-		unTest.addTagType((TagType.SLOW));
-		TagType actual = (TagType.SLOW);
-
-		ArrayList<TagType> esperados = (ArrayList<TagType>) unTest.getTagType();
-
-		assertEquals(esperados.get(0), actual);
+		unTest.addTag(TagType.SLOW);
+		TagType actual = TagType.SLOW;
+		Collection<TagType> esperados = unTest.getTags();
+		assertEquals(esperados.iterator().next(), actual);
 	}
 
 	@Test
 	public void AgregarMasTagAlUnitTest() {
-
-		unTest.addTagType(TagType.SLOW);
-		unTest.addTagType(TagType.INTERNET);
-
+		unTest.addTag(TagType.SLOW);
+		unTest.addTag(TagType.INTERNET);
 		int actual = 2;
-		int esperado = unTest.getTagType().size();
-
+		int esperado = unTest.getTags().size();
 		assertEquals(esperado, actual);
 	}
 }

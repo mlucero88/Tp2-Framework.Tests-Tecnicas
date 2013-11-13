@@ -37,7 +37,7 @@ public class TestingReportTest {
 	@Test
 	public void testAddTestResult() {
 		unosTests.add(unTest);
-		TestCollectionResult resultados = unosTests.run(null, null);
+		TestCollectionResult resultados = unosTests.run();
 		int esperado = resultados.getTestsResults().size();
 		int actual = 1;
 		assertEquals(actual, esperado);
@@ -45,7 +45,7 @@ public class TestingReportTest {
 
 	@Test
 	public void testShowAll() {
-		TestCollectionResult resultados = unosTests.run(null, null);
+		TestCollectionResult resultados = unosTests.run();
 		TestReport report = new TestReport(resultados);
 		report.generarReporteEnArchivo();
 		report.showAll();

@@ -30,7 +30,7 @@ public class TestingFixtures {
 		testsNivel1.add(unTestNivel2);
 		testsNivel1.add(unTestNivel2Bis);
 	}
-	
+
 	@Before
 	public void setUp() {
 		String varMain = "VAR_MAIN";
@@ -60,7 +60,7 @@ public class TestingFixtures {
 	@Test
 	public void testExistsTrue() {
 		/* Prueba del agregado de variables al fixture */
-		testsNivel0.run(null, null);
+		testsNivel0.run();
 
 		assertTrue(Fixture.getInstance().existsVariable("VarMain"));
 		assertTrue(Fixture.getInstance().existsVariable("VarSetupTC0"));
@@ -78,8 +78,8 @@ public class TestingFixtures {
 	@Test
 	public void testValues() {
 		/* Prueba algunos valores del fixture */
-		testsNivel0.run(null, null);
-		
+		testsNivel0.run();
+
 		assertEquals("VAR_MAIN", Fixture.getInstance().getVariable("VarMain"));
 		assertEquals("setupUnitTestNivel2",
 				Fixture.getInstance().getVariable("VarSetupUT2"));
@@ -93,7 +93,7 @@ public class TestingFixtures {
 		Fixture.getInstance().removeVariable("VarMain");
 		assertFalse(Fixture.getInstance().existsVariable("VarMain"));
 	}
-	
+
 	@Test
 	public void testAddDuplicate() {
 		assertTrue(Fixture.getInstance().existsVariable("VarMain"));

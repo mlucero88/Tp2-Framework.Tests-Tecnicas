@@ -5,25 +5,26 @@ import java.util.Collection;
 
 public class TestCollectionResult extends TestResult {
 	private Collection<TestResult> testsResults;
-	
 
-	public TestCollectionResult(String testName){
+	public TestCollectionResult(String testName) {
 		super(testName);
 		testsResults = new ArrayList<TestResult>();
 	}
 
 	@Override
 	protected boolean add(TestResult testResult) {
-		testsResults.add(testResult);
+		if (testResult != null) {
+			testsResults.add(testResult);
+			return true;
+		}
 		return false;
 	}
-	
-	public Collection<TestResult> getTestsResults (){
+
+	public Collection<TestResult> getTestsResults() {
 		return testsResults;
 	}
-	
+
 	public String getMessage() {
 		return getTestName();
 	}
-	
 }

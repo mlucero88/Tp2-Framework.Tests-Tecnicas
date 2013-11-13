@@ -1,7 +1,5 @@
 package grupo11.frameworktests;
 
-import java.util.Collection;
-
 /* Clase abstracta de la cual el cliente hereda para crear su test unitario. El
  * cliente debe implementar el metodo "test" con el comportamiento que desea
  * testear */
@@ -29,8 +27,7 @@ public abstract class UnitTest extends GenericTest {
 	}
 
 	@Override
-	final public UnitTestResult
-			run(String regExp, Collection<TagType> tagTypes) {
+	final public UnitTestResult run() {
 		try {
 			setUp();
 			test();

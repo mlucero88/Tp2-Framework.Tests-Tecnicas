@@ -38,7 +38,6 @@ public class TestingTestCollection {
 			}
 
 		};
-
 	}
 
 	@After
@@ -55,10 +54,8 @@ public class TestingTestCollection {
 		};
 
 		unTestCollection.add(unaPrueba);
-
 		int esperado = 1;
 		int actual = unTestCollection.getTestsCount();
-
 		assertEquals(esperado, actual);
 	}
 
@@ -68,7 +65,6 @@ public class TestingTestCollection {
 				new TestCollection("SoyOtroTestCollection");
 
 		unTestCollection.add(dosSuiteTests);
-
 		int esperado = 1;
 		int actual = unTestCollection.getTestsCount();
 		assertEquals(esperado, actual);
@@ -77,7 +73,7 @@ public class TestingTestCollection {
 	@Test
 	public void correrLosTestdeLaCollectionTest() {
 		unTestCollection.add(unTest);
-		TestCollectionResult results = unTestCollection.run(null, null);
+		TestCollectionResult results = unTestCollection.run();
 		int esperado = 1;
 		int actual = results.getTestsResults().size();
 		assertEquals(esperado, actual);
@@ -99,18 +95,16 @@ public class TestingTestCollection {
 		};
 		unTestCollection.add(priPrueba);
 		unTestCollection.add(secPrueba);
-		unTestCollection.run(null, null);
-
+		unTestCollection.run();
 		int esperado = 2;
 		int actual = unTestCollection.getTestsCount();
-
 		assertEquals(esperado, actual);
 	}
 
 	@Test
 	public void mostrarResultadoDeUnTestDeLaCollection() {
 		unTestCollection.add(unTest);
-		TestCollectionResult resultados = unTestCollection.run(null, null);
+		TestCollectionResult resultados = unTestCollection.run();
 
 		// Me traigo el arrayList de resultados mostrados por pantalla
 		ArrayList<TestResult> arrayResultado =

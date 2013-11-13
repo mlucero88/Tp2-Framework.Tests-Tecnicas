@@ -46,11 +46,9 @@ public class PruebaCola {
 		tests2.add(test28);
 
 		tests.add(tests2);
-		TestCollectionResult results =
-				(TestCollectionResult) tests.run(null, null);
+		TestCollectionResult results = (TestCollectionResult) tests.run();
 		TestReport report = new TestReport(results);
 		report.generarReporteEnArchivo();
 		report.showAll();
-		// tests.saveAndShowTestResults();
 	}
 }

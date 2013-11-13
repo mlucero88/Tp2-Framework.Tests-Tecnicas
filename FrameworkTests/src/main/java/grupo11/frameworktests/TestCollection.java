@@ -8,14 +8,18 @@ import java.util.Collection;
 
 public class TestCollection extends GenericTest {
 	private Collection<GenericTest> tests;
-	private RunStrategy runStrategy;
+	private RunTemplate runMethod;
 
 	public TestCollection(String name) {
 		super(name);
 		tests = new ArrayList<GenericTest>();
-		// Construye con una estrategia "RunAll" por defecto
-		runStrategy = new RunAll();
+		// Construye con un template "RunAll" por defecto
+		runMethod = new RunAll();
 	};
+
+	public void setRunMethod(RunTemplate runMethod) {
+		this.runMethod = runMethod;
+	}
 
 	@Override
 	final public boolean add(GenericTest test) {
@@ -27,17 +31,19 @@ public class TestCollection extends GenericTest {
 	}
 
 	@Override
-	final public TestCollectionResult run(String regExp,
-			Collection<TagType> tagTypes) {
+	/* Utiliza el patron Template Method para las distintas formas de correr
+	 * los tests */
+	final public TestCollectionResult run() {
 		setUp();
-		TestCollectionResult results =
-				runStrategy.run(tests, getName(), null, null);
+		TestCollectionResult results = new TestCollectionResult(getName());
+		for (GenericTest test : tests) {
+			if (!test.isSkippable()) {
+				TestResult result = runMethod.run(test);
+				results.add(result);
+			}
+		}
 		tearDown();
 		return results;
-	}
-
-	public void setRunStrategy(RunStrategy runStrategy) {
-		this.runStrategy = runStrategy;
 	}
 
 	/* Retorna la cantidad de tests. Tanto un UnitTest como una test collection
@@ -45,19 +51,6 @@ public class TestCollection extends GenericTest {
 	public int getTestsCount() {
 		return tests.size();
 	}
-
-	/* Guarda los resultados de los tests en un archivo y los muestra por
-	 * pantalla */
-	// public void saveAndShowTestResults() {
-	// report.guardarReporte();
-	// report.showAll();
-	// }
-
-	// TODO este get no me gusta, si solo se usa para los tests de junit ver
-	// si se puede sacar
-	// public TestReport getReport() {
-	// return report;
-	// }
 
 	/* Metodos redefinibles por el usuario */
 	@Override

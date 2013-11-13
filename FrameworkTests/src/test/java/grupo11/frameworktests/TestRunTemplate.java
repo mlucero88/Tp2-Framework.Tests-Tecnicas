@@ -1,5 +1,6 @@
 package grupo11.frameworktests;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import grupo11.frameworktests.setupclasses.TestCollectionNivel0;
 import grupo11.frameworktests.setupclasses.TestCollectionNivel1;
@@ -12,7 +13,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class TestRunStrategy {
+public class TestRunTemplate {
 	private static TestCollection testsNivel0;
 
 	@BeforeClass
@@ -40,41 +41,35 @@ public class TestRunStrategy {
 
 	@Test
 	public void testRunAll() {
-		RunStrategy strategy = new RunAll();
-		testsNivel0.setRunStrategy(strategy);
-		testsNivel0.run(null, null);
+		RunTemplate runMethod = new RunAll();
+		testsNivel0.setRunMethod(runMethod);
+		testsNivel0.run();
 
 		/* Si se guardan las variables en los fixtures es porque se ejecutaron
 		 * los tests */
 		assertTrue(Fixture.getInstance().existsVariable("VarSetupTC0"));
-		assertTrue(Fixture.getInstance().existsVariable("VarTeardownTC0"));
 		assertTrue(Fixture.getInstance().existsVariable("VarSetupTC1"));
-		assertTrue(Fixture.getInstance().existsVariable("VarTeardownTC1"));
 		assertTrue(Fixture.getInstance().existsVariable("VarSetupUT1"));
-		assertTrue(Fixture.getInstance().existsVariable("VarTeardownUT1"));
 		assertTrue(Fixture.getInstance().existsVariable("VarSetupUT2"));
-		assertTrue(Fixture.getInstance().existsVariable("VarTeardownUT2"));
 		assertTrue(Fixture.getInstance().existsVariable("VarSetupUT2Bis"));
-		assertTrue(Fixture.getInstance().existsVariable("VarTeardownUT2Bis"));
 	}
 
 	@Test
 	public void testRunRegEx() {
-		RunStrategy strategy = new RunAll();
-		testsNivel0.setRunStrategy(strategy);
-		testsNivel0.run(".*Nivel1.*", null);
+		RunTemplate runMethod = new RunRegularExpression(".*Nivel1");
+		testsNivel0.setRunMethod(runMethod);
+		testsNivel0.run();
 
 		/* Si se guardan las variables en los fixtures es porque se ejecutaron
 		 * los tests */
-//		assertTrue(Fixture.getInstance().existsVariable("VarSetupTC0"));
-//		assertTrue(Fixture.getInstance().existsVariable("VarTeardownTC0"));
-//		assertTrue(Fixture.getInstance().existsVariable("VarSetupTC1"));
-//		assertTrue(Fixture.getInstance().existsVariable("VarTeardownTC1"));
-//		assertTrue(Fixture.getInstance().existsVariable("VarSetupUT1"));
-//		assertTrue(Fixture.getInstance().existsVariable("VarTeardownUT1"));
-//		assertTrue(Fixture.getInstance().existsVariable("VarSetupUT2"));
-//		assertTrue(Fixture.getInstance().existsVariable("VarTeardownUT2"));
-//		assertTrue(Fixture.getInstance().existsVariable("VarSetupUT2Bis"));
-//		assertTrue(Fixture.getInstance().existsVariable("VarTeardownUT2Bis"));
+		assertTrue(Fixture.getInstance().existsVariable("VarSetupTC0"));
+		assertTrue(Fixture.getInstance().existsVariable("VarSetupTC1"));
+		assertTrue(Fixture.getInstance().existsVariable("VarSetupUT1"));
+		// TODO aca falla xq el test collection nivel 1 no "hereda" el template
+		// method de test Collection nivel 0 (o sea en el nivel 0 se filtra
+		// por la regexp pero en el nivel 1 se hace runall). Hay que "propagar"
+		// los filtros entre las tests collections o ver como se puede hacer
+		assertFalse(Fixture.getInstance().existsVariable("VarSetupUT2"));
+		assertFalse(Fixture.getInstance().existsVariable("VarSetupUT2Bis"));
 	}
 }

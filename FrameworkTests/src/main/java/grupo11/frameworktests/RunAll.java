@@ -1,22 +1,12 @@
 package grupo11.frameworktests;
 
-import grupo11.frameworktests.GenericTest.TagType;
+public class RunAll extends RunTemplate {
 
-import java.util.Collection;
+	public RunAll() {
+		super(null, null);
+	}
 
-public class RunAll implements RunStrategy {
-
-	public RunAll() {}
-
-	public TestCollectionResult run(Collection<GenericTest> tests,
-			String testName, String regExp, Collection<TagType> tagTypes) {
-		TestCollectionResult results = new TestCollectionResult(testName);
-		for (GenericTest test : tests) {
-			if (!test.isSkip()) {
-				TestResult result = test.run(null, null);
-				results.add(result);
-			}
-		}
-		return results;
+	public TestResult run(GenericTest test) {
+		return test.run();
 	}
 }
