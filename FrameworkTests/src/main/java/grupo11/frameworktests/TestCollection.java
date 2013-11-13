@@ -34,6 +34,7 @@ public class TestCollection extends GenericTest {
 	/* Utiliza el patron Template Method para las distintas formas de correr
 	 * los tests */
 	final public TestCollectionResult run() {
+		double timeStartTest = System.currentTimeMillis();
 		setUp();
 		TestCollectionResult results = new TestCollectionResult(getName());
 		for (GenericTest test : tests) {
@@ -43,6 +44,9 @@ public class TestCollection extends GenericTest {
 			}
 		}
 		tearDown();
+		double timeTotal = (System.currentTimeMillis() - timeStartTest)/1000;
+		/* TODO: Como agregarlo a resultado */
+		System.out.println("Tiempo Total de TestCollection: " + timeTotal + " seg");
 		return results;
 	}
 

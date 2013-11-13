@@ -29,9 +29,12 @@ public abstract class UnitTest extends GenericTest {
 	@Override
 	final public UnitTestResult run() {
 		try {
+			double timeStart = System.currentTimeMillis();
 			setUp();
 			test();
 			tearDown();
+			double timeTotal = (System.currentTimeMillis() - timeStart)/1000;
+			System.out.println("Este es el tiempo: " + timeTotal + " seg");
 		}
 		catch (ValidationFailure failure) {
 			return UnitTestResult.createFailedResult(getName(),

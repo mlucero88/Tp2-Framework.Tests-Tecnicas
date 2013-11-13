@@ -8,7 +8,7 @@ public class RunRegularExpression extends RunTemplate {
 
 	public TestResult run(GenericTest test) {
 		TestResult result = null;
-		if (test.getName().matches(regExp)) {
+		if ((!test.isSkippable()) && test.getName().matches(regExp)) {
 			result = test.run();
 		}
 		return result;

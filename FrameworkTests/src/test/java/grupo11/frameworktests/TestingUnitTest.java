@@ -1,6 +1,6 @@
 package grupo11.frameworktests;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 import grupo11.frameworktests.GenericTest.TagType;
 
 import java.util.Collection;
@@ -55,5 +55,11 @@ public class TestingUnitTest {
 		int actual = 2;
 		int esperado = unTest.getTags().size();
 		assertEquals(esperado, actual);
+	}
+	
+	@Test
+	public void TiempoDeUnTest() {
+		unTest.run();
+		assertFalse(false);	
 	}
 }
