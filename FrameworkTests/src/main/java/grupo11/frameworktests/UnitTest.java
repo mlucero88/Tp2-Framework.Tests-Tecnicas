@@ -37,23 +37,23 @@ public abstract class UnitTest extends GenericTest {
 				test();
 			}
 			tearDown();
-			timeTotal = (System.currentTimeMillis() - timeStart)/1000;
+			timeTotal = (System.currentTimeMillis() - timeStart);
 		}
 		catch (ValidationFailure failure) {
-			timeTotal = (System.currentTimeMillis() - timeStart)/1000;
+			timeTotal = (System.currentTimeMillis() - timeStart);
 			result = UnitTestResult.createFailedResult(getName(), failure.getMessage());
 			result.setTiempoEjecucion(timeTotal);
 			System.out.println(result.getMessage());
 			return result;
 		}
 		catch (RuntimeException exception) {
-			timeTotal = (System.currentTimeMillis() - timeStart)/1000;
+			timeTotal = (System.currentTimeMillis() - timeStart);
 			result = UnitTestResult.createErrorResult(getName(), "RuntimeException");
 			result.setTiempoEjecucion(timeTotal);
 			System.out.println(result.getMessage());
 			return result;
 		}
-		timeTotal = (System.currentTimeMillis() - timeStart)/1000;
+		timeTotal = (System.currentTimeMillis() - timeStart);
 		result = UnitTestResult.createSuccessfulResult(getName());
 		result.setTiempoEjecucion(timeTotal);
 		System.out.println(result.getMessage());

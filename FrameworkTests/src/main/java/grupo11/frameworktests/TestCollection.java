@@ -57,7 +57,7 @@ public class TestCollection extends GenericTest {
 			}
 		}
 		tearDown();
-		double timeTotal = (System.currentTimeMillis() - timeStartTest) / 1000;
+		double timeTotal = (System.currentTimeMillis() - timeStartTest);
 		/* TODO: Como agregarlo a resultado */
 		results.setTiempoEjecucion(timeTotal);
 		System.out

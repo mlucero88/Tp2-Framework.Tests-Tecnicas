@@ -18,7 +18,7 @@ public class RunTagsWithRegExp extends RunTemplate {
 	@Override
 	public TestResult run(GenericTest test) {
 		TestResult result = null;
-		if (test.getTags().containsAll(tags) && test.getName().matches(regExp)) {
+		if (test.getName().matches(regExp) && containsTag(test.getTags())) {
 			result = test.run();
 		}
 		return result;

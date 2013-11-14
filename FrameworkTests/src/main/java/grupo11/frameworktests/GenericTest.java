@@ -5,7 +5,7 @@ import java.util.TreeSet;
 
 public abstract class GenericTest {
 	public enum TagType {
-		DEFAULT, FAST, SLOW, DB, INTERNET
+		DEFAULT, FAST, SLOW, DB, INTERNET, SMOKE
 	};
 
 	private String name;

@@ -18,7 +18,7 @@ public class RunTags extends RunTemplate {
 	@Override
 	public TestResult run(GenericTest test) {
 		TestResult result = null;
-		if (test.getTags().containsAll(tags)) {
+		if (containsTag(test.getTags())) {
 			result = test.run();
 		}
 		return result;

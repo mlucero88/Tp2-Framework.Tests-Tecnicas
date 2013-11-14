@@ -19,6 +19,8 @@ public class T3 extends UnitTest {
 	protected void test() {
 		Object variable = FIXTURE_TEST_VAR_VALUE;
 		Fixture.getInstance().addVariable(FIXTURE_TEST_VAR_NAME, variable);
+		/* Ciclo para que el test arroje resultados de tiempo mas notorios */
+		for (int i = 0; i < 1000000; ++i) {}
 	}
 
 	@Override

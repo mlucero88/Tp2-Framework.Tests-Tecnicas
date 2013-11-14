@@ -14,8 +14,18 @@ public abstract class RunTemplate {
 	}
 
 	public RunTemplate(String regExp, Collection<TagType> tags) {
-		this.regExp = regExp;
-		this.tags = tags;
+		if (regExp == null) {
+			this.regExp = ".*";
+		}
+		else {
+			this.regExp = regExp;
+		}
+		if (tags == null) {
+			this.tags = new TreeSet<TagType>();
+		}
+		else {
+			this.tags = tags;
+		}
 	}
 
 	public void setRegularExpression(String regExp) {
@@ -24,6 +34,17 @@ public abstract class RunTemplate {
 
 	public void setTagsSelection(Collection<TagType> tags) {
 		this.tags = tags;
+	}
+
+	boolean containsTag(Collection<TagType> testTags) {
+		for (TagType runTag : tags) {
+			for (TagType testTag : testTags) {
+				if (runTag == testTag) {
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 
 	public abstract TestResult run(GenericTest test);
