@@ -24,5 +24,5 @@ public abstract class TestResult {
 	public abstract void setCollectionResultCadenaDeNombres(String cadena);
 	public abstract String getCollectionResultCadenaDeNombres();
 	public abstract void registrarResultadoEnReporte(TestReport report);
-		
+	public abstract void registrarResultadoEnXML(TestReportXML report);
 }

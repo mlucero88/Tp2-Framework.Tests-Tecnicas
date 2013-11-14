@@ -57,5 +57,9 @@ public class UnitTestResult extends TestResult {
 		report.registrarUnitTestResult(resultType, result);
 	}
 	
+	public void registrarResultadoEnXML(TestReportXML report){
+		report.registrarUnitTestEnXML(resultType, result);
+	}
+	
 	
 }

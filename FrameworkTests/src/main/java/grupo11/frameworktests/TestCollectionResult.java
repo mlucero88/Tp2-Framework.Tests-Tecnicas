@@ -47,4 +47,8 @@ public class TestCollectionResult extends TestResult {
 		}
 		report.registrarFinTestSuite(getMessage());
 	}
+	
+	public void registrarResultadoEnXML(TestReportXML report){
+		report.registrarTestCollectionEnXML(resultCollectionCadenaDeNombres, getMessage());
+	}
 }

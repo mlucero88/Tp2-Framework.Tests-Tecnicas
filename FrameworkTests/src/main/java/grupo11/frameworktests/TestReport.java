@@ -2,12 +2,6 @@ package grupo11.frameworktests;
 
 import grupo11.frameworktests.UnitTestResult.ResultType;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.util.ArrayList;
-import java.util.Collection;
-
 /* Clase para generar el reporte de los testsEjecutados para ser informado al cliente
  * por salida estandar y por archivo*/
 
