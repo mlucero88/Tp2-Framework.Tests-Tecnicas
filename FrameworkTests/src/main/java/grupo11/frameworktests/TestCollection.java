@@ -37,9 +37,12 @@ public class TestCollection extends GenericTest {
 	final public TestCollectionResult run() {
 		double timeStartTest = System.currentTimeMillis();
 		setUp();
+		System.out.println (nombreContenedora + "." + getName());
+		System.out.println("------------------------------------------------------------------------------------------------");
 		TestCollectionResult results = new TestCollectionResult(getName());
 		for (GenericTest test : tests) {
 			if (!test.isSkippable()) {
+				test.setTestCollectionContenedora(nombreContenedora + "." + getName());
 				TestResult result = runMethod.run(test);
 				results.add(result);
 			}
@@ -47,7 +50,9 @@ public class TestCollection extends GenericTest {
 		tearDown();
 		double timeTotal = (System.currentTimeMillis() - timeStartTest)/1000;
 		/* TODO: Como agregarlo a resultado */
-		System.out.println("Tiempo Total de TestCollection: " + timeTotal + " seg");
+		results.setTiempoEjecucion(timeTotal);
+		System.out.println("Tiempo total de ejecucion de " + getName() + ": " + timeTotal + " ms");
+		System.out.println(" ");
 		return results;
 	}
 
@@ -66,5 +71,9 @@ public class TestCollection extends GenericTest {
 	
 	public void setTestCollectionContenedora (String nombreContenedora){
 		this.nombreContenedora = nombreContenedora;
+	}
+	
+	public String getTestCollectionContenedora (){
+		return nombreContenedora;
 	}
 }

@@ -28,22 +28,41 @@ public abstract class UnitTest extends GenericTest {
 
 	@Override
 	final public UnitTestResult run() {
+		UnitTestResult result;
+		double timeTotal;
+		double timeStart = System.currentTimeMillis();
 		try {
-			double timeStart = System.currentTimeMillis();
 			setUp();
 			test();
 			tearDown();
-			double timeTotal = (System.currentTimeMillis() - timeStart)/1000;
-			System.out.println("Este es el tiempo: " + timeTotal + " seg");
+			timeTotal = (System.currentTimeMillis() - timeStart)/1000;
 		}
 		catch (ValidationFailure failure) {
-			return UnitTestResult.createFailedResult(getName(),
-					failure.getMessage());
+			timeTotal = (System.currentTimeMillis() - timeStart)/1000;
+			result = UnitTestResult.createFailedResult(getName(), failure.getMessage());
+			result.setTiempoEjecucion(timeTotal);
+			System.out.println(result.getMessage());
+			return result;
 		}
 		catch (RuntimeException exception) {
-			return UnitTestResult.createErrorResult(getName(),
-					"RuntimeException");
+			timeTotal = (System.currentTimeMillis() - timeStart)/1000;
+			result = UnitTestResult.createErrorResult(getName(), "RuntimeException");
+			result.setTiempoEjecucion(timeTotal);
+			System.out.println(result.getMessage());
+			return result;
 		}
-		return UnitTestResult.createSuccessfulResult(getName());
+		timeTotal = (System.currentTimeMillis() - timeStart)/1000;
+		result = UnitTestResult.createSuccessfulResult(getName());
+		result.setTiempoEjecucion(timeTotal);
+		System.out.println(result.getMessage());
+		return result;
+	}
+	
+	public void setTestCollectionContenedora (String nombreContenedora){
+		
+	}
+	
+	public String getTestCollectionContenedora (){
+		return "";
 	}
 }

@@ -41,5 +41,9 @@ public class UnitTestResult extends TestResult {
 		return false;
 	}
 	
-	
+	@Override
+	public void setTiempoEjecucion (double tiempo){
+		tiempoEjecucion = tiempo;
+		result = result + " (" + tiempoEjecucion + " ms)";
+	}
 }

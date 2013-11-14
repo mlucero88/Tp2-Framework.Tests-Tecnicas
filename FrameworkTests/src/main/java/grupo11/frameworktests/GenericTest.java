@@ -25,6 +25,10 @@ public abstract class GenericTest {
 	public Collection<TagType> getTags() {
 		return tags;
 	}
+	
+	public abstract void setTestCollectionContenedora (String nombreContenedora);
+
+	public abstract String getTestCollectionContenedora ();
 
 	public void addTag(TagType tag) {
 		tags.add(tag);
