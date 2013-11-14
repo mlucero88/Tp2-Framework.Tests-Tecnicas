@@ -10,9 +10,9 @@ public class ReportWriter {
 	File fileReport = null; 
 	FileWriter writer= null;
 	PrintWriter printWriter = null;
-	private final static String SUBRAYADO_TESTSUITE = "---------------------------------------";
-	private final static String SUBRAYADO_SUMMARY = "=======================================";
-	private final static String ENCABEZADO_SUMMARY = "[failure] Summary";
+	private final static String SUBRAYADO_TESTSUITE = "------------------------------------------------------------";
+	private final static String SUBRAYADO_SUMMARY = "============================================================";
+	private final static String ENCABEZADO_SUMMARY = "Summary";
 	
 	
 	public ReportWriter(String filePath){
@@ -48,18 +48,15 @@ public class ReportWriter {
 	}
 	
 	public void writeEncabezadoTestSuite (String nombreTestSuite){
-		printWriter.println("Inicio: " + nombreTestSuite);
+		printWriter.println("");
+		printWriter.println(nombreTestSuite);
 		printWriter.println(SUBRAYADO_TESTSUITE);
 	}
 	
-	public void writeMarcaFinTestSuite (String nombreTestSuite){
-		printWriter.println("Fin: " + nombreTestSuite);
+	public void writeMarcaFinTestSuite (String message){
 		printWriter.println(SUBRAYADO_TESTSUITE);
-	}
-	
-	public void writeDivisionTestSuite (){
-		printWriter.println(SUBRAYADO_TESTSUITE);
-		printWriter.println(" ");
+		printWriter.println(message);
+		printWriter.println("");
 	}
 
 }

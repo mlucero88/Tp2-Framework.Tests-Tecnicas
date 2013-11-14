@@ -5,6 +5,7 @@ import java.util.Collection;
 
 public class TestCollectionResult extends TestResult {
 	private Collection<TestResult> testsResults;
+	private String resultCollectionCadenaDeNombres;
 
 	public TestCollectionResult(String testName) {
 		super(testName);
@@ -29,5 +30,19 @@ public class TestCollectionResult extends TestResult {
 		return message;
 	}
 	
+	public void setCollectionResultCadenaDeNombres(String cadena){
+		resultCollectionCadenaDeNombres = cadena;
+	}
 	
+	public String getCollectionResultCadenaDeNombres(){
+		return resultCollectionCadenaDeNombres;
+	}
+	
+	public void registrarResultadoEnReporte(TestReport report){
+		report.registrarInicioTestSuite(resultCollectionCadenaDeNombres);
+		for (TestResult testResult : testsResults) {
+			testResult.registrarResultadoEnReporte(report);
+		}	
+		report.registrarFinTestSuite(getMessage());
+	}
 }
