@@ -61,6 +61,10 @@ public class TestCollection extends GenericTest {
 	public int getTestsCount() {
 		return tests.size();
 	}
+	
+	public Collection<GenericTest> getTests() {
+		return tests;
+	}
 
 	/* Metodos redefinibles por el usuario */
 	@Override
