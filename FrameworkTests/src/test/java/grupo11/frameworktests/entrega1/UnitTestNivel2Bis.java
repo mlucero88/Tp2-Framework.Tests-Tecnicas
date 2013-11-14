@@ -1,4 +1,4 @@
-package grupo11.frameworktests.TP2_2.setupclasses;
+package grupo11.frameworktests.entrega1;
 
 import grupo11.frameworktests.Fixture;
 import grupo11.frameworktests.UnitTest;
@@ -6,8 +6,8 @@ import grupo11.frameworktests.UnitTest;
 // Padre: TestCollectionNivel1
 // Hijos: -
 
-public class T9 extends UnitTest {
-	public T9(String testName) {
+public class UnitTestNivel2Bis extends UnitTest {
+	public UnitTestNivel2Bis(String testName) {
 		super(testName);
 	}
 

@@ -1,17 +1,25 @@
-package grupo11.frameworktests;
+package grupo11.frameworktests.entrega2;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import grupo11.frameworktests.Fixture;
+import grupo11.frameworktests.GenericTest;
+import grupo11.frameworktests.GenericTest.TagType;
+import grupo11.frameworktests.NameRegister;
+import grupo11.frameworktests.RunAll;
+import grupo11.frameworktests.RunRegularExpression;
+import grupo11.frameworktests.RunTags;
+import grupo11.frameworktests.RunTagsWithRegExp;
+import grupo11.frameworktests.RunTemplate;
+import grupo11.frameworktests.TestCollection;
+import grupo11.frameworktests.entrega1.TestCollectionNivel0;
+import grupo11.frameworktests.entrega1.TestCollectionNivel1;
+import grupo11.frameworktests.entrega1.UnitTestNivel1;
+import grupo11.frameworktests.entrega1.UnitTestNivel2;
+import grupo11.frameworktests.entrega1.UnitTestNivel2Bis;
 
 import java.util.ArrayList;
 import java.util.Collection;
-
-import grupo11.frameworktests.GenericTest.TagType;
-import grupo11.frameworktests.setupclasses.TestCollectionNivel0;
-import grupo11.frameworktests.setupclasses.TestCollectionNivel1;
-import grupo11.frameworktests.setupclasses.UnitTestNivel1;
-import grupo11.frameworktests.setupclasses.UnitTestNivel2;
-import grupo11.frameworktests.setupclasses.UnitTestNivel2Bis;
 
 import org.junit.After;
 import org.junit.Before;
@@ -25,7 +33,7 @@ public class TestRunTemplate {
 	public static void setUpClass() {
 		testsNivel0 = new TestCollectionNivel0("CollectionNivel0");
 		GenericTest unTestNivel1 = new UnitTestNivel1("UnitNivel1");
-		GenericTest testsNivel1 = new TestCollectionNivel1("CollectionNivel1");
+		TestCollection testsNivel1 = new TestCollectionNivel1("CollectionNivel1");
 		GenericTest unTestNivel2 = new UnitTestNivel2("UnitNivel2");
 		GenericTest unTestNivel2Bis = new UnitTestNivel2Bis("UnitNivel2Bis");
 		

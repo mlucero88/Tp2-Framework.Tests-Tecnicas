@@ -1,4 +1,4 @@
-package grupo11.frameworktests.setupclasses;
+package grupo11.frameworktests.entrega1;
 
 import grupo11.frameworktests.Fixture;
 import grupo11.frameworktests.TestCollection;

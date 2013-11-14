@@ -1,9 +1,10 @@
-package grupo11.frameworktests;
+package grupo11.frameworktests.entrega1;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
+import grupo11.frameworktests.Validation;
 
 import org.junit.Test;
 

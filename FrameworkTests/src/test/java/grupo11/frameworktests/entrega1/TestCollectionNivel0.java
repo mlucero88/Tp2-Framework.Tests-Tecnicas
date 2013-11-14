@@ -1,10 +1,13 @@
-package grupo11.frameworktests.TP2_2.setupclasses;
+package grupo11.frameworktests.entrega1;
 
 import grupo11.frameworktests.Fixture;
 import grupo11.frameworktests.TestCollection;
 
-public class TS1 extends TestCollection {
-	public TS1(String name) {
+// Padre: -
+// Hijos: UnitTestNivel1 y TestCollectionNivel1
+
+public class TestCollectionNivel0 extends TestCollection {
+	public TestCollectionNivel0(String name) {
 		super(name);
 	}
 

@@ -3,7 +3,7 @@ package grupo11.frameworktests;
 public class RunAll extends RunTemplate {
 
 	public RunAll() {
-		super(null, null);
+		super();
 	}
 
 	public TestResult run(GenericTest test) {

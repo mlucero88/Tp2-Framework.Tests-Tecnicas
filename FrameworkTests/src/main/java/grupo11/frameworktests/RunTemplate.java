@@ -3,10 +3,15 @@ package grupo11.frameworktests;
 import grupo11.frameworktests.GenericTest.TagType;
 
 import java.util.Collection;
+import java.util.TreeSet;
 
 public abstract class RunTemplate {
 	protected String regExp;
 	protected Collection<TagType> tags;
+
+	public RunTemplate() {
+		tags = new TreeSet<TagType>();
+	}
 
 	public RunTemplate(String regExp, Collection<TagType> tags) {
 		this.regExp = regExp;

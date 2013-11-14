@@ -4,19 +4,23 @@ import grupo11.frameworktests.GenericTest.TagType;
 
 import java.util.Collection;
 
-public class RunTags extends RunTemplate{
+public class RunTags extends RunTemplate {
 
 	public RunTags(Collection<TagType> tags) {
 		super(null, tags);
 	}
 
-	@Override
-	public TestResult run(GenericTest test) {
-		TestResult results = null;
-		if(!test.isSkippable() && test.getTags().containsAll(tags)){
-			results = test.run(); 
-		}
-		return results;
+	public RunTags(TagType tag) {
+		super();
+		tags.add(tag);
 	}
 
+	@Override
+	public TestResult run(GenericTest test) {
+		TestResult result = null;
+		if (test.getTags().containsAll(tags)) {
+			result = test.run();
+		}
+		return result;
+	}
 }

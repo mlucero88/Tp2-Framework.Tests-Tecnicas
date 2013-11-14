@@ -1,13 +1,12 @@
-package grupo11.frameworktests;
+package grupo11.frameworktests.entrega1;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import grupo11.frameworktests.setupclasses.TestCollectionNivel0;
-import grupo11.frameworktests.setupclasses.TestCollectionNivel1;
-import grupo11.frameworktests.setupclasses.UnitTestNivel1;
-import grupo11.frameworktests.setupclasses.UnitTestNivel2;
-import grupo11.frameworktests.setupclasses.UnitTestNivel2Bis;
+import grupo11.frameworktests.Fixture;
+import grupo11.frameworktests.GenericTest;
+import grupo11.frameworktests.NameRegister;
+import grupo11.frameworktests.TestCollection;
 
 import org.junit.After;
 import org.junit.Before;
@@ -21,7 +20,8 @@ public class TestingFixtures {
 	public static void setUpClass() {
 		testsNivel0 = new TestCollectionNivel0("CollectionNivel0");
 		GenericTest unTestNivel1 = new UnitTestNivel1("UnitNivel1");
-		GenericTest testsNivel1 = new TestCollectionNivel1("CollectionNivel1");
+		TestCollection testsNivel1 =
+				new TestCollectionNivel1("CollectionNivel1");
 		GenericTest unTestNivel2 = new UnitTestNivel2("UnitNivel2");
 		GenericTest unTestNivel2Bis = new UnitTestNivel2Bis("UnitNivel2Bis");
 

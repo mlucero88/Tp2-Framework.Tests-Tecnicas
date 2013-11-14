@@ -1,7 +1,14 @@
-package grupo11.frameworktests;
+package grupo11.frameworktests.entrega1;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import grupo11.frameworktests.Fixture;
+import grupo11.frameworktests.NameRegister;
+import grupo11.frameworktests.TestCollection;
+import grupo11.frameworktests.TestCollectionResult;
+import grupo11.frameworktests.TestResult;
+import grupo11.frameworktests.UnitTest;
+import grupo11.frameworktests.Validation;
 
 import java.util.ArrayList;
 

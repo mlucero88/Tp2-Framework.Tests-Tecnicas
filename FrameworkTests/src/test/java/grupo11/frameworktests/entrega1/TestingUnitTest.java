@@ -1,6 +1,10 @@
-package grupo11.frameworktests;
+package grupo11.frameworktests.entrega1;
 
 import static org.junit.Assert.*;
+import grupo11.frameworktests.Fixture;
+import grupo11.frameworktests.NameRegister;
+import grupo11.frameworktests.UnitTest;
+import grupo11.frameworktests.Validation;
 import grupo11.frameworktests.GenericTest.TagType;
 
 import java.util.Collection;

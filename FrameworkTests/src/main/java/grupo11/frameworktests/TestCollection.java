@@ -38,15 +38,16 @@ public class TestCollection extends GenericTest {
 		double timeStartTest = System.currentTimeMillis();
 		setUp();
 		String contenedoraYCollectionActual;
-		if (nombreContenedora == null){
+		if (nombreContenedora == null) {
 			contenedoraYCollectionActual = getName();
 		}
-		else{
+		else {
 			contenedoraYCollectionActual = nombreContenedora + "." + getName();
 		}
 		System.out.println(" ");
-		System.out.println (contenedoraYCollectionActual);
-		System.out.println("------------------------------------------------------------------------------------------------");
+		System.out.println(contenedoraYCollectionActual);
+		System.out
+				.println("------------------------------------------------------------------------------------------------");
 		TestCollectionResult results = new TestCollectionResult(getName());
 		for (GenericTest test : tests) {
 			if (!test.isSkippable()) {
@@ -56,10 +57,11 @@ public class TestCollection extends GenericTest {
 			}
 		}
 		tearDown();
-		double timeTotal = (System.currentTimeMillis() - timeStartTest)/1000;
+		double timeTotal = (System.currentTimeMillis() - timeStartTest) / 1000;
 		/* TODO: Como agregarlo a resultado */
 		results.setTiempoEjecucion(timeTotal);
-		System.out.println("------------------------------------------------------------------------------------------------");
+		System.out
+				.println("------------------------------------------------------------------------------------------------");
 		System.out.println(results.getMessage());
 		System.out.println(" ");
 		return results;
@@ -70,7 +72,7 @@ public class TestCollection extends GenericTest {
 	public int getTestsCount() {
 		return tests.size();
 	}
-	
+
 	public Collection<GenericTest> getTests() {
 		return tests;
 	}
@@ -81,12 +83,12 @@ public class TestCollection extends GenericTest {
 
 	@Override
 	protected void tearDown() {}
-	
-	public void setTestCollectionContenedora (String nombreContenedora){
+
+	public void setTestCollectionContenedora(String nombreContenedora) {
 		this.nombreContenedora = nombreContenedora;
 	}
-	
-	public String getTestCollectionContenedora (){
+
+	public String getTestCollectionContenedora() {
 		return nombreContenedora;
 	}
 }
