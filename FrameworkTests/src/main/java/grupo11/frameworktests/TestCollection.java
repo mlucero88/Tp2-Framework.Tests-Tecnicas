@@ -37,12 +37,20 @@ public class TestCollection extends GenericTest {
 	final public TestCollectionResult run() {
 		double timeStartTest = System.currentTimeMillis();
 		setUp();
-		System.out.println (nombreContenedora + "." + getName());
+		String contenedoraYCollectionActual;
+		if (nombreContenedora == null){
+			contenedoraYCollectionActual = getName();
+		}
+		else{
+			contenedoraYCollectionActual = nombreContenedora + "." + getName();
+		}
+		System.out.println(" ");
+		System.out.println (contenedoraYCollectionActual);
 		System.out.println("------------------------------------------------------------------------------------------------");
 		TestCollectionResult results = new TestCollectionResult(getName());
 		for (GenericTest test : tests) {
 			if (!test.isSkippable()) {
-				test.setTestCollectionContenedora(nombreContenedora + "." + getName());
+				test.setTestCollectionContenedora(contenedoraYCollectionActual);
 				TestResult result = runMethod.run(test);
 				results.add(result);
 			}
@@ -51,7 +59,8 @@ public class TestCollection extends GenericTest {
 		double timeTotal = (System.currentTimeMillis() - timeStartTest)/1000;
 		/* TODO: Como agregarlo a resultado */
 		results.setTiempoEjecucion(timeTotal);
-		System.out.println("Tiempo total de ejecucion de " + getName() + ": " + timeTotal + " ms");
+		System.out.println("------------------------------------------------------------------------------------------------");
+		System.out.println(results.getMessage());
 		System.out.println(" ");
 		return results;
 	}
