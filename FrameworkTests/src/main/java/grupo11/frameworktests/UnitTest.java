@@ -65,6 +65,6 @@ public abstract class UnitTest extends GenericTest {
 	}
 	
 	public String getTestCollectionContenedora (){
-		return "";
+		return null;
 	}
 }

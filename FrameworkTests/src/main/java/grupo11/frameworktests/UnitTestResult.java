@@ -46,4 +46,16 @@ public class UnitTestResult extends TestResult {
 		tiempoEjecucion = tiempo;
 		result = result + " (" + tiempoEjecucion + " ms)";
 	}
+	
+	public void setCollectionResultCadenaDeNombres(String contenedora){}
+	
+	public String getCollectionResultCadenaDeNombres(){ 
+		return null;
+	}
+	
+	public void registrarResultadoEnReporte(TestReport report){
+		report.registrarUnitTestResult(resultType, result);
+	}
+	
+	
 }

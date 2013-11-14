@@ -64,6 +64,7 @@ public class TestCollection extends GenericTest {
 				.println("------------------------------------------------------------------------------------------------");
 		System.out.println(results.getMessage());
 		System.out.println(" ");
+		results.setCollectionResultCadenaDeNombres(contenedoraYCollectionActual);
 		return results;
 	}
 

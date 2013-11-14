@@ -15,12 +15,14 @@ public abstract class TestResult {
 		return testName;
 	}
 
-	protected abstract boolean add(TestResult test);
-
-	public abstract String getMessage();
-	
 	public void setTiempoEjecucion (double tiempo){
 		tiempoEjecucion = tiempo;
 	}
 	
+	protected abstract boolean add(TestResult test);
+	public abstract String getMessage();
+	public abstract void setCollectionResultCadenaDeNombres(String cadena);
+	public abstract String getCollectionResultCadenaDeNombres();
+	public abstract void registrarResultadoEnReporte(TestReport report);
+		
 }

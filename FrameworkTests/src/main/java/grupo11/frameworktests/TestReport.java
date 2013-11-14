@@ -13,50 +13,48 @@ import java.util.Collection;
 
 public class TestReport {
 
-	private Collection<TestResult> results;
+	private TestCollectionResult results;
 	private ReportWriter reportWriter= null; 
 	private int cantidadTotalTests = 0;
 	private int cantidadTotalFailed = 0;
 	private int cantidadTotalError = 0;
+	private int cantidadTotalSuccesfull = 0;
+	private final static String SUBRAYADO_SUMMARY = "============================================================";
+
 
 	public TestReport(TestCollectionResult results) {
-		this.results = results.getTestsResults();
+		this.results = results;
 		reportWriter = new ReportWriter("TestsReport.txt");
 	}
 
 	public void generarReporteEnArchivo(){
-		for (TestResult result : results) {
-			/* TODO manejar como se guardan los resultados */
-			registrarTestResult(result);
-		}
+		results.registrarResultadoEnReporte(this);
 		guardarReporte();
 	}
 	
-	public Collection<TestResult> getResults() {
+	public TestCollectionResult getResults() {
 		return results;
 	}
 	
 	public void registrarInicioTestSuite(String nombre){
-		reportWriter.writeLineaEnBlanco();
 		reportWriter.writeEncabezadoTestSuite(nombre);
 	}
 	
-	public void registrarTestResult (TestResult result){
-		reportWriter.writeResult(result.getMessage());
-//		registrarEstadistica(unitTestResult.getResultType());	
-		
+	public void registrarFinTestSuite(String message){
+		reportWriter.writeMarcaFinTestSuite(message);
 	}
-	
 		
-	public void finalizarRegistroTestSuite(String nombreTestSuite){
-		reportWriter.writeMarcaFinTestSuite(nombreTestSuite);
+	public void registrarUnitTestResult(ResultType type, String resultMessage){
+		reportWriter.writeResult(resultMessage);
+		registrarEstadistica(type);
 	}
-	
+		
 	public void guardarReporte (){
 		reportWriter.writeEncabezadoSummary();
 		reportWriter.writeResult("Run: " + cantidadTotalTests);
 		reportWriter.writeResult("Errors: " + cantidadTotalError);
 		reportWriter.writeResult("Failures: " + cantidadTotalFailed);
+		reportWriter.writeResult("Succesfull: " + cantidadTotalSuccesfull);
 		reportWriter.closeSaveReport();
 	}
 	
@@ -68,8 +66,20 @@ public class TestReport {
 			break;
 		case Error:
 			cantidadTotalError++;
+		case Ok:
+			cantidadTotalSuccesfull++;
 		default:
 			break;
 		}
+	}
+	
+	public void mostrarEstadisticasPorPantalla (){
+		System.out.println("Summary");
+		System.out.println(SUBRAYADO_SUMMARY);
+		System.out.println("Run: " + cantidadTotalTests);
+		System.out.println("Errors: " + cantidadTotalError);
+		System.out.println("Failures: " + cantidadTotalFailed);
+		System.out.println("Succesfull: " + cantidadTotalSuccesfull);
+		
 	}
 }
