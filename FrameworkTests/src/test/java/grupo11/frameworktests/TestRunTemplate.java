@@ -113,11 +113,19 @@ public class TestRunTemplate {
 		testsNivel0.run();
 		
 		assertTrue(Fixture.getInstance().existsVariable("VarSetupTC0"));
-		assertTrue(Fixture.getInstance().existsVariable("VarSetupUT1"));
-		assertFalse(Fixture.getInstance().existsVariable("VarSetupUT1Bis"));
 		assertTrue(Fixture.getInstance().existsVariable("VarSetupTC1"));
-		assertTrue(Fixture.getInstance().existsVariable("VarSetupUT2"));
+//		assertFalse(Fixture.getInstance().existsVariable("VarSetupUT1"));
 		
 	}
 	
+	@Test
+	public void TestRunTagsWithRegExp(){
+		//Creamos la coleccion que contendra los Tags que deseo ejecutar el test
+		Collection<TagType> tags = new ArrayList<TagType>();
+		tags.add(TagType.SLOW);
+
+		RunTemplate runMethod = new RunTagsWithRegExp(".*Nivel1",tags);
+
+		testsNivel0.run();
+	}
 }
