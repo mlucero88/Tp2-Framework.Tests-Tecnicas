@@ -49,6 +49,5 @@ public class PruebaCola {
 		TestCollectionResult results = (TestCollectionResult) tests.run();
 		TestReport report = new TestReport(results);
 		report.generarReporteEnArchivo();
-		report.showAll();
 	}
 }

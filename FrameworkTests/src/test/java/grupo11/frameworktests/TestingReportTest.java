@@ -43,20 +43,4 @@ public class TestingReportTest {
 		assertEquals(actual, esperado);
 	}
 
-	@Test
-	public void testShowAll() {
-		TestCollectionResult resultados = unosTests.run();
-		TestReport report = new TestReport(resultados);
-		report.generarReporteEnArchivo();
-		report.showAll();
-
-		// Me traigo el arrayList de resultados mostrados por pantalla
-		ArrayList<TestResult> results =
-				(ArrayList<TestResult>) resultados.getTestsResults();
-
-		// Me guardo el mensaje arrojado por el run que se muestra por pantalla
-		String esperado = "[Ok] soyUnTest: ";
-		String actual = results.get(0).getMessage();
-		assertEquals(esperado, actual);
-	}
 }
