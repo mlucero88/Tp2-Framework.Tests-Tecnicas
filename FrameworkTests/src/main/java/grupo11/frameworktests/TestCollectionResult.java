@@ -26,30 +26,25 @@ public class TestCollectionResult extends TestResult {
 	}
 
 	public String getMessage() {
-		String message = "Tiempo total de ejecucion de " + testName + ": " + tiempoEjecucion + " ms";
+		String message =
+				"Tiempo total de ejecucion de " + testName + ": "
+						+ tiempoEjecucion + " ms";
 		return message;
 	}
-	
-	public void setCollectionResultCadenaDeNombres(String cadena){
+
+	public void setCollectionResultCadenaDeNombres(String cadena) {
 		resultCollectionCadenaDeNombres = cadena;
 	}
-	
-	public String getCollectionResultCadenaDeNombres(){
+
+	public String getCollectionResultCadenaDeNombres() {
 		return resultCollectionCadenaDeNombres;
 	}
-	
-	public void registrarResultadoEnReporte(TestReport report){
+
+	public void registrarResultadoEnReporte(TestReport report) {
 		report.registrarInicioTestSuite(resultCollectionCadenaDeNombres);
 		for (TestResult testResult : testsResults) {
 			testResult.registrarResultadoEnReporte(report);
-		}	
-		report.registrarFinTestSuite(getMessage());
-	}
-}onResultCadenaDeNombres(){
-		return resultCollectionCadenaDeNombres;
-	}: testsResults) {
-			testResult.registrarResultadoEnReporte(report);
-		}	
+		}
 		report.registrarFinTestSuite(getMessage());
 	}
 }
