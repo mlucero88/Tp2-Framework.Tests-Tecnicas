@@ -3,6 +3,7 @@ package grupo11.frameworktests;
 import java.util.Collection;
 import java.util.TreeSet;
 
+/* Test generico. Es el "componente" del patron Composite */
 public abstract class GenericTest {
 	public enum TagType {
 		DEFAULT, FAST, SLOW, DB, INTERNET, SMOKE
@@ -25,10 +26,6 @@ public abstract class GenericTest {
 	public Collection<TagType> getTags() {
 		return tags;
 	}
-	
-	public abstract void setTestCollectionContenedora (String nombreContenedora);
-
-	public abstract String getTestCollectionContenedora ();
 
 	public void addTag(TagType tag) {
 		tags.add(tag);
@@ -45,6 +42,10 @@ public abstract class GenericTest {
 	public void setNotSkippable() {
 		skip = false;
 	}
+
+	public abstract void setTestCollectionContenedora(String nombreContenedora);
+
+	public abstract String getTestCollectionContenedora();
 
 	/* Metodo redefinible por TestCollection */
 	protected abstract boolean add(GenericTest test);

@@ -6,11 +6,8 @@ import grupo11.frameworktests.Fixture;
 import grupo11.frameworktests.NameRegister;
 import grupo11.frameworktests.TestCollection;
 import grupo11.frameworktests.TestCollectionResult;
-import grupo11.frameworktests.TestResult;
 import grupo11.frameworktests.UnitTest;
 import grupo11.frameworktests.Validation;
-
-import java.util.ArrayList;
 
 import org.junit.After;
 import org.junit.Before;
@@ -109,21 +106,6 @@ public class TestingTestCollection {
 	}
 
 	@Test
-	public void mostrarResultadoDeUnTestDeLaCollection() {
-		unTestCollection.add(unTest);
-		TestCollectionResult resultados = unTestCollection.run();
-
-		// Me traigo el arrayList de resultados mostrados por pantalla
-		ArrayList<TestResult> arrayResultado =
-				(ArrayList<TestResult>) resultados.getTestsResults();
-
-		// Me guardo el mensaje arrojado por el run que se muestra por pantalla
-		String actual = arrayResultado.get(0).getMessage();
-
-		assertEquals("[Ok] soyUnTest: ", actual);
-	}
-
-	@Test
 	public void UnicidadNombreDeTest() {
 		unTestCollection.add(dosTest);
 		// Pongo el mismo nombre a los Test y trato de agregarlos
@@ -132,17 +114,4 @@ public class TestingTestCollection {
 
 		assertFalse(actual);
 	}
-
-	// @Test
-	// public void SaltearUnTest() {
-	// unTest.setSkip(true);
-	//
-	// unTestCollection.add(unTest);
-	// unTestCollection.add(dosTest);
-	//
-	// TestCollectionResult resultados = unTestCollection.run();
-	// int esperado = resultados.getTestsResults().size();
-	//
-	// assertEquals(esperado, 1);
-	// }
 }

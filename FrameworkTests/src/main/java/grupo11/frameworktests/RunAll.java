@@ -1,5 +1,6 @@
 package grupo11.frameworktests;
 
+/* Ejecucion de todos los tests */
 public class RunAll extends RunTemplate {
 
 	public RunAll() {

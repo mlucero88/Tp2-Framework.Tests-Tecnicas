@@ -5,6 +5,7 @@ import grupo11.frameworktests.GenericTest.TagType;
 import java.util.Collection;
 import java.util.TreeSet;
 
+/* Clase padre del patron Template Method para la funcionalidad del run */
 public abstract class RunTemplate {
 	protected String regExp;
 	protected Collection<TagType> tags;

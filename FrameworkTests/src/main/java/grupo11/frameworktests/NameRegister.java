@@ -2,6 +2,7 @@ package grupo11.frameworktests;
 
 import java.util.TreeSet;
 
+/* Clase que lleva el registro de los nombres de los tests creados */
 public class NameRegister {
 	private static NameRegister instance = null;
 	private TreeSet<String> registry;

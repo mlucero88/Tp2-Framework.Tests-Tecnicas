@@ -1,5 +1,7 @@
 package grupo11.frameworktests;
 
+/* Ejecucion de tests cumpliendo criterios de coincidencias de una regular
+ * expression */
 public class RunRegularExpression extends RunTemplate {
 
 	public RunRegularExpression(String regExp) {

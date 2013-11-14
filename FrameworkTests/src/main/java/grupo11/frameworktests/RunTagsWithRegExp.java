@@ -4,6 +4,8 @@ import grupo11.frameworktests.GenericTest.TagType;
 
 import java.util.Collection;
 
+/* Ejecucion de tests cumpliendo criterios de existencia de tags y coincidencias
+ * de una regular expression */
 public class RunTagsWithRegExp extends RunTemplate {
 
 	public RunTagsWithRegExp(String regExp, Collection<TagType> tags) {

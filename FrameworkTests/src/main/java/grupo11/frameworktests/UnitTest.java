@@ -33,7 +33,7 @@ public abstract class UnitTest extends GenericTest {
 		double timeStart = System.currentTimeMillis();
 		try {
 			setUp();
-			if(!isSkippable()){
+			if (!isSkippable()) {
 				test();
 			}
 			tearDown();
@@ -41,14 +41,18 @@ public abstract class UnitTest extends GenericTest {
 		}
 		catch (ValidationFailure failure) {
 			timeTotal = (System.currentTimeMillis() - timeStart);
-			result = UnitTestResult.createFailedResult(getName(), failure.getMessage());
+			result =
+					UnitTestResult.createFailedResult(getName(),
+							failure.getMessage());
 			result.setTiempoEjecucion(timeTotal);
 			System.out.println(result.getMessage());
 			return result;
 		}
 		catch (RuntimeException exception) {
 			timeTotal = (System.currentTimeMillis() - timeStart);
-			result = UnitTestResult.createErrorResult(getName(), "RuntimeException");
+			result =
+					UnitTestResult.createErrorResult(getName(),
+							"RuntimeException");
 			result.setTiempoEjecucion(timeTotal);
 			System.out.println(result.getMessage());
 			return result;
@@ -59,12 +63,12 @@ public abstract class UnitTest extends GenericTest {
 		System.out.println(result.getMessage());
 		return result;
 	}
-	
-	public void setTestCollectionContenedora (String nombreContenedora){
-		
+
+	public void setTestCollectionContenedora(String nombreContenedora) {
+
 	}
-	
-	public String getTestCollectionContenedora (){
+
+	public String getTestCollectionContenedora() {
 		return null;
 	}
 }

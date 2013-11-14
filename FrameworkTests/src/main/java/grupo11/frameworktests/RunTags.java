@@ -4,6 +4,7 @@ import grupo11.frameworktests.GenericTest.TagType;
 
 import java.util.Collection;
 
+/* Ejecucion de tests cumpliendo criterios de existencia de tags */
 public class RunTags extends RunTemplate {
 
 	public RunTags(Collection<TagType> tags) {

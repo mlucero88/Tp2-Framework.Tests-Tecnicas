@@ -11,7 +11,7 @@ class FixtureData {
 	public FixtureData() {
 		variables = new HashMap<String, Object>();
 	}
-	
+
 	public void addData(String variableName, Object variable) {
 		variables.put(variableName, variable);
 	}

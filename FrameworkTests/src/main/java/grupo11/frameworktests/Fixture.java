@@ -39,12 +39,12 @@ public class Fixture {
 	public Object getVariable(String variableName) {
 		return data.getData(variableName);
 	}
-	
+
 	/* Guarda el fixture con un nombre para ser recuperado posteriormente */
 	public void save(String fixtureName) {
 		storage.put(fixtureName, data);
 	}
-	
+
 	/* Recupera un fixture, es decir la instacia actual se configura con los
 	 * valores del fixture a recuperar. Retorna false si no existe un fixture
 	 * almacenado de nombre fixtureName */

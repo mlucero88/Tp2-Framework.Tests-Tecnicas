@@ -3,6 +3,8 @@ package grupo11.frameworktests;
 import java.util.ArrayList;
 import java.util.Collection;
 
+/* Clase que almacena el resultado de un test collection */
+
 public class TestCollectionResult extends TestResult {
 	private Collection<TestResult> testsResults;
 	private String resultCollectionCadenaDeNombres;
@@ -47,9 +49,10 @@ public class TestCollectionResult extends TestResult {
 		}
 		report.registrarFinTestSuite(getMessage());
 	}
-	
-	public void registrarResultadoEnXML(TestReportXML report){
-		report.registrarTestCollectionEnXML(resultCollectionCadenaDeNombres, getMessage());
+
+	public void registrarResultadoEnXML(TestReportXML report) {
+		report.registrarTestCollectionEnXML(resultCollectionCadenaDeNombres,
+				getMessage());
 		for (TestResult testResult : testsResults) {
 			testResult.registrarResultadoEnXML(report);
 		}
