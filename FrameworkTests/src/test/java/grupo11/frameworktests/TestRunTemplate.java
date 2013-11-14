@@ -2,6 +2,11 @@ package grupo11.frameworktests;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+
+import java.util.ArrayList;
+import java.util.Collection;
+
+import grupo11.frameworktests.GenericTest.TagType;
 import grupo11.frameworktests.setupclasses.TestCollectionNivel0;
 import grupo11.frameworktests.setupclasses.TestCollectionNivel1;
 import grupo11.frameworktests.setupclasses.UnitTestNivel1;
@@ -23,7 +28,11 @@ public class TestRunTemplate {
 		GenericTest testsNivel1 = new TestCollectionNivel1("CollectionNivel1");
 		GenericTest unTestNivel2 = new UnitTestNivel2("UnitNivel2");
 		GenericTest unTestNivel2Bis = new UnitTestNivel2Bis("UnitNivel2Bis");
-
+		
+		//Seteo un tag a un Test para las pruebas
+		testsNivel1.addTag(TagType.SLOW);
+		unTestNivel2.addTag(TagType.SLOW);
+		
 		testsNivel0.add(unTestNivel1);
 		testsNivel0.add(testsNivel1);
 		testsNivel1.add(unTestNivel2);
@@ -72,4 +81,43 @@ public class TestRunTemplate {
 		//assertFalse(Fixture.getInstance().existsVariable("VarSetupUT2"));
 		//assertFalse(Fixture.getInstance().existsVariable("VarSetupUT2Bis"));
 	}
+	
+	@Test
+	public void testRunTags(){
+		//Creamos la coleccion que contendra los Tags que deseo ejecutar el test
+		Collection<TagType> tags = new ArrayList<TagType>();
+		tags.add(TagType.SLOW);
+		
+		//Seteamos el runMethod
+		RunTemplate runMethod = new RunTags(tags);
+		testsNivel0.setRunMethod(runMethod);
+		/*Para que el run se ejecute todos los tags que el usuario desea correr deben
+		estar taggeados en el Test.*/
+		testsNivel0.run();
+
+		assertTrue(Fixture.getInstance().existsVariable("VarSetupTC0"));
+		assertTrue(Fixture.getInstance().existsVariable("VarSetupTC1"));
+		assertTrue(Fixture.getInstance().existsVariable("VarSetupUT2"));
+		assertFalse(Fixture.getInstance().existsVariable("VarSetupUT1"));
+	//	assertFalse(Fixture.getInstance().existsVariable("VarSetupUT2Bis"));		
+	}
+	
+	@Test
+	public void TestRunAllWithSkipped(){
+		/*Seteo true a unTestNivel1 para que no corra su test */
+		GenericTest unTestNivel1Bis = new UnitTestNivel2("UnitNivel1Bis");
+		unTestNivel1Bis.setSkippable();
+		testsNivel0.add(unTestNivel1Bis);
+		
+		//Corro todo los test donde unTestNivel1Bis no es ejecutado
+		testsNivel0.run();
+		
+		assertTrue(Fixture.getInstance().existsVariable("VarSetupTC0"));
+		assertTrue(Fixture.getInstance().existsVariable("VarSetupUT1"));
+		assertFalse(Fixture.getInstance().existsVariable("VarSetupUT1Bis"));
+		assertTrue(Fixture.getInstance().existsVariable("VarSetupTC1"));
+		assertTrue(Fixture.getInstance().existsVariable("VarSetupUT2"));
+		
+	}
+	
 }

@@ -31,7 +31,9 @@ public abstract class UnitTest extends GenericTest {
 		try {
 			double timeStart = System.currentTimeMillis();
 			setUp();
-			test();
+			if(!isSkippable()){
+				test();
+			}
 			tearDown();
 			double timeTotal = (System.currentTimeMillis() - timeStart)/1000;
 			System.out.println("Este es el tiempo: " + timeTotal + " seg");
