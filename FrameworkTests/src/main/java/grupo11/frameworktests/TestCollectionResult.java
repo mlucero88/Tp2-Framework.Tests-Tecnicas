@@ -50,5 +50,8 @@ public class TestCollectionResult extends TestResult {
 	
 	public void registrarResultadoEnXML(TestReportXML report){
 		report.registrarTestCollectionEnXML(resultCollectionCadenaDeNombres, getMessage());
+		for (TestResult testResult : testsResults) {
+			testResult.registrarResultadoEnXML(report);
+		}
 	}
 }
