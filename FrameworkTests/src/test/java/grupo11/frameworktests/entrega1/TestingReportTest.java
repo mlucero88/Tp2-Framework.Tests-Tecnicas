@@ -8,8 +8,6 @@ import grupo11.frameworktests.TestCollectionResult;
 import grupo11.frameworktests.UnitTest;
 import grupo11.frameworktests.Validation;
 
-import java.util.ArrayList;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

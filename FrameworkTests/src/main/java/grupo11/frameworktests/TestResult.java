@@ -1,5 +1,7 @@
 package grupo11.frameworktests;
 
+import org.jdom.Element;
+
 /* Clase que almacena el resultado de un test generico */
 
 public abstract class TestResult {
@@ -28,5 +30,11 @@ public abstract class TestResult {
 
 	public abstract void registrarResultadoEnReporte(TestReport report);
 
-	public abstract void registrarResultadoEnXML(TestReportXML report);
+	public abstract Element toXMLElement();
+	
+	public abstract Integer countTests();
+	
+	public abstract Integer countErrors();
+	
+	public abstract Integer countFailures();
 }

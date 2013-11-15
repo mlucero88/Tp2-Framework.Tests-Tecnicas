@@ -1,5 +1,8 @@
 package grupo11.frameworktests;
 
+import org.jdom.Attribute;
+import org.jdom.Element;
+
 /* Clase que almacena el resultado de un unit test */
 
 public class UnitTestResult extends TestResult {
@@ -63,7 +66,44 @@ public class UnitTestResult extends TestResult {
 		report.registrarUnitTestResult(resultType, result);
 	}
 
-	public void registrarResultadoEnXML(TestReportXML report) {
-		report.registrarUnitTestEnXML(resultType, result);
+	@Override
+	public Element toXMLElement() {
+		Element element = new Element("testcase");
+		element.setAttribute("name", testName);
+		element.setAttribute("status", status());
+		element.setAttribute("time", String.valueOf(tiempoEjecucion));
+		if (resultType == ResultType.Error) {
+			Element error = new Element("error");
+			error.setAttribute(new Attribute("message", getMessage()));
+			element.addContent(error);
+
+		} else if (resultType != ResultType.Ok) {
+			Element failure = new Element("failure");
+			failure.setAttribute(new Attribute("message", getMessage()));
+			element.addContent(failure);
+
+		}
+		
+		return element;
+	}
+
+	private String status() {
+		return (resultType == ResultType.Ok)?"OK":(resultType == ResultType.Fail)?"Fail":"Error";
+	}
+
+
+	@Override
+	public Integer countTests() {
+		return 1;
+	}
+
+	@Override
+	public Integer countErrors() {
+		return (resultType == ResultType.Error) ? 1 : 0;
+	}
+
+	@Override
+	public Integer countFailures() {
+		return (resultType == ResultType.Fail) ? 1 : 0;
 	}
 }

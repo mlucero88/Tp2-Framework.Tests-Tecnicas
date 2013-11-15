@@ -1,7 +1,0 @@
-[Ok] soyUnTest: 
- 
-[failure] Summary
-=======================================
-Run: 0
-Errors: 0
-Failures: 0

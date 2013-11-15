@@ -4,6 +4,7 @@ import grupo11.frameworktests.TestCollection;
 import grupo11.frameworktests.TestCollectionResult;
 import grupo11.frameworktests.TestReport;
 import grupo11.frameworktests.UnitTest;
+import grupo11.frameworktests.XMLWriter;
 
 public class PruebaCola {
 
@@ -49,6 +50,8 @@ public class PruebaCola {
 		tests.add(test8);
 
 		TestCollectionResult results = (TestCollectionResult) tests.run();
+		XMLWriter xmlWriter = new XMLWriter(results.toXMLElement());
+		xmlWriter.produceResult();
 		TestReport report = new TestReport(results);
 		report.generarReporteEnArchivo();
 		report.mostrarEstadisticasPorPantalla();

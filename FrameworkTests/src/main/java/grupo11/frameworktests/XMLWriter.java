@@ -1,32 +1,37 @@
 package grupo11.frameworktests;
 
-import java.io.File;
 import java.io.FileWriter;
-import java.io.PrintWriter;
+import java.io.IOException;
+
+import org.jdom.Document;
+import org.jdom.Element;
+import org.jdom.output.Format;
+import org.jdom.output.XMLOutputter;
 
 public class XMLWriter {
 
-	File fileReport = null;
-	FileWriter writer = null;
-	PrintWriter printWriter = null;
+	XMLOutputter xmlOutput;
+	String filePath;
+	Document doc;
 
-	public XMLWriter(String filePath) {
-		fileReport = new File(filePath);
-		try {
-			writer = new FileWriter(fileReport);
-			printWriter = new PrintWriter(writer);
-		}
-		catch (Exception e) {
-			System.out.println("Error al crear archivo XML");
-		}
+	public XMLWriter(Element element) {
+		filePath = "TestsReport.xml";
+		xmlOutput = new XMLOutputter();
+		Element rootElement = new Element("testsuites");
+		doc = new Document(rootElement);
+		doc.setRootElement(rootElement);
+		doc.getRootElement().addContent(element);
+		xmlOutput.setFormat(Format.getPrettyFormat());
+
 	}
 
-	public void closeSaveReportXML() {
+	public void produceResult() {
 		try {
-			writer.close();
+			xmlOutput.output(doc, new FileWriter(filePath));
+		} catch (IOException io) {
+			System.out.println("No se pudo crear "+filePath+", "+io.getMessage());
 		}
-		catch (Exception e2) {
-			e2.printStackTrace();
-		}
+
 	}
+
 }

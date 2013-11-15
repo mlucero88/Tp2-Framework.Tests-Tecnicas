@@ -20,6 +20,11 @@
       <artifactId>junit</artifactId>
       <version>4.11</version>
     </dependency>
+    <dependency>
+      <groupId>jdom</groupId>
+      <artifactId>jdom</artifactId>
+      <version>1.1</version>
+    </dependency>
   </dependencies>
   <description>Trabajo Práctico 2 - Tecnicas de Diseño - FIUBA</description>
 </project>
