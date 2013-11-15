@@ -21,3 +21,7 @@ target/
 # ignore all .project .classpath
 .project
 .classpath
+
+# other
+*.txt
+FrameworkTests/TestsReport.xml
