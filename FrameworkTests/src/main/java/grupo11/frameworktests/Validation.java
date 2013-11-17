@@ -6,7 +6,7 @@ public abstract class Validation {
 
 	public static void validateTrue(boolean condition) {
 		if (!condition) {
-			informFail(null);
+			informFail(generateFailedEqualsMessage(new Boolean(condition), new Boolean(!condition)));
 		}
 	}
 
