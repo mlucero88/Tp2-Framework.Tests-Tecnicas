@@ -43,6 +43,9 @@ public class PruebaCola {
 		UnitTest test28 = new TestLlenarYVaciarCola("TestLlenarYVaciarCola2");
 		tests2.add(test28);
 		
+		UnitTest test29 = new TestColaLlenaQueFalla("TestColaLlenaQueFalla");
+		tests2.add(test29);
+		
 		tests.add(tests2);
 		
 		UnitTest test7 = new TestRemoveConColaLlena("TestRemoveConColaLlena");
