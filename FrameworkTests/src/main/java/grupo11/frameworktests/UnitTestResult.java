@@ -1,7 +1,7 @@
 package grupo11.frameworktests;
 
-import java.util.ArrayList;
-import java.util.Collection;
+
+import grupo11.queue.tests.TestSize;
 
 import org.jdom.Attribute;
 import org.jdom.Element;
@@ -47,21 +47,17 @@ public class UnitTestResult extends TestResult {
 	
 	
 	@Override
-	public Collection<UnitTestResult> getTestsNoPass() {
+	public boolean remuveTestOK() {
 		// TODO ERIK
-		Collection<UnitTestResult> itemResult =  new ArrayList<UnitTestResult>();
-		if(!(resultType == ResultType.Ok)){
-			itemResult.add(this);
-		}
-		return itemResult;
+		return (resultType == ResultType.Ok);
 	}
-	
 
 	@Override
-	public TestCollectionResult getTestSuite(String name) {
-		// TODO Auto-generated method stub
-		return null;
+	public GenericTest generateTests() {
+		//System.out.println("armo al hijo: " + getTestName());
+		return new TestSize(getTestName());
 	}
+	
 	/*mod0568 end*/
 	
 	static UnitTestResult createUnitTestResult(Element e) {

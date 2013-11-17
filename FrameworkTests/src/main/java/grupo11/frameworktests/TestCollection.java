@@ -95,12 +95,9 @@ public class TestCollection extends GenericTest {
 	
 	/*mod0568 begin*/
 	public void addRunOld(TestCollectionResult runOld) {
-		//quiero obtejer todos los test fallidos de mi testsuite llamada name
-		Collection<GenericTest> testsOld;
-		TestCollectionResult myTest = runOld.getTestSuite(getName());
-		
-		Collection<UnitTestResult> lUnitTestOld = myTest.getTestsNoPass();
-		
+		runOld.remuveTestOK();
+		GenericTest testsOld = runOld.generateTests();
+		//falta codigo
 	}
 	/*mod0568 end*/
 }

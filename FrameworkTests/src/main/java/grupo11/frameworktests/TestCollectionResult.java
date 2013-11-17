@@ -50,26 +50,29 @@ public class TestCollectionResult extends TestResult {
 	
 	
 	@Override
-	public Collection<UnitTestResult> getTestsNoPass() {
+	public boolean remuveTestOK() {
 		// TODO ERIK
-		Collection<UnitTestResult> itemResult =  new ArrayList<UnitTestResult>();
+		Collection<TestResult> aux = new ArrayList<TestResult>();
 		for (TestResult testResult : testsResults) {
-			itemResult.addAll(testResult.getTestsNoPass());
+			if(testResult.remuveTestOK())
+				aux.add(testResult);
 		}
-		return itemResult;
+		for (TestResult item : aux) {
+			testsResults.remove(item);
+		}
+		return false;
 	}
-	
-	
 
 	@Override
-	public TestCollectionResult getTestSuite(String name) {
+	public GenericTest generateTests() {
+		//System.out.println("armo al padre: " + getTestName());
+		TestCollection tests = new TestCollection(getTestName());
 		for (TestResult testResult : testsResults) {
-			if(testResult.getTestName().equals(name)){
-				return this;
-			}
+			tests.add(testResult.generateTests());
 		}
-		return null;
+		return tests;
 	}
+
 	/*mod0568 end*/
 	
 	private void updateCounts(TestResult component) {
@@ -138,4 +141,6 @@ public class TestCollectionResult extends TestResult {
 	public Integer countFailures() {
 		return countFailures;
 	}
+
+
 }

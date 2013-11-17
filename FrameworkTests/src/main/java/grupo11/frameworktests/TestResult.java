@@ -1,6 +1,6 @@
 package grupo11.frameworktests;
 
-import java.util.Collection;
+
 
 import org.jdom.Element;
 
@@ -41,7 +41,7 @@ public abstract class TestResult {
 	public abstract Integer countFailures();
 	
 	/*mod0568 begin*/
-	public abstract Collection<UnitTestResult> getTestsNoPass();
-	public abstract TestCollectionResult getTestSuite(String name);
+	public abstract boolean remuveTestOK();
+	public abstract GenericTest generateTests();
 	/*mod0568 end*/
 }
