@@ -10,23 +10,24 @@ import org.jdom.output.XMLOutputter;
 
 public class XMLWriter {
 
-	XMLOutputter xmlOutput;
-	String filePath;
+	XMLOutputter xmlOutput = new XMLOutputter();
+	String filePath = new String("TestsReport.xml");
 	Document doc;
 
 	public XMLWriter(Element element) {
-		filePath = "TestsReport.xml";
-		xmlOutput = new XMLOutputter();
 		Element rootElement = new Element("testsuites");
 		doc = new Document(rootElement);
 		doc.setRootElement(rootElement);
+		addElement(element);
+	}
+	
+	public void addElement(Element element) {
 		doc.getRootElement().addContent(element);
-		xmlOutput.setFormat(Format.getPrettyFormat());
-
 	}
 
 	public void produceResult() {
 		try {
+			xmlOutput.setFormat(Format.getPrettyFormat());
 			xmlOutput.output(doc, new FileWriter(filePath));
 		} catch (IOException io) {
 			System.out.println("No se pudo crear "+filePath+", "+io.getMessage());
