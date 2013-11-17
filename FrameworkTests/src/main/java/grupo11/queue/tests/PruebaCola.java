@@ -4,6 +4,7 @@ import grupo11.frameworktests.TestCollection;
 import grupo11.frameworktests.TestCollectionResult;
 import grupo11.frameworktests.TestReport;
 import grupo11.frameworktests.UnitTest;
+import grupo11.frameworktests.UnitTestResult;
 import grupo11.frameworktests.XMLWriter;
 
 public class PruebaCola {
@@ -48,7 +49,34 @@ public class PruebaCola {
 		tests.add(test7);
 		UnitTest test8 = new TestLlenarYVaciarCola("TestLlenarYVaciarCola");
 		tests.add(test8);
-
+		
+		/*mod0568 begin*/
+		TestCollectionResult Raiz = new TestCollectionResult("TestDeCola2");
+		UnitTestResult item1 = UnitTestResult.createSuccessfulResult("1");
+		Raiz.add(item1);
+		UnitTestResult item2 = UnitTestResult.createFailedResult("2", "fatal fail");
+		Raiz.add(item2);
+		UnitTestResult item3 = UnitTestResult.createSuccessfulResult("3");
+		Raiz.add(item3);
+		
+		TestCollectionResult padreInz = new TestCollectionResult("TestDeCola1");
+		
+		UnitTestResult item4 = UnitTestResult.createSuccessfulResult("1_1");
+		padreInz.add(item4);
+		UnitTestResult item5 = UnitTestResult.createFailedResult("1_2", "fatal fail");
+		padreInz.add(item5);
+		UnitTestResult item6 = UnitTestResult.createErrorResult("1_3","fatal error");
+		padreInz.add(item6);
+		
+		Raiz.add(padreInz);
+		
+		
+		tests.addRunOld(Raiz);
+		
+		
+		
+		/*mod0568 end*/
+		
 		TestCollectionResult results = (TestCollectionResult) tests.run();
 		XMLWriter xmlWriter = new XMLWriter(results.toXMLElement());
 		xmlWriter.produceResult();

@@ -36,8 +36,10 @@ public class TestCollectionResult extends TestResult {
 		testsResults = new ArrayList<TestResult>();
 	}
 
+	
+	/*mod0568 begin*/
 	@Override
-	protected boolean add(TestResult testResult) {
+	public boolean add(TestResult testResult) {
 		if (testResult != null) {
 			testsResults.add(testResult);
 			updateCounts(testResult);
@@ -45,6 +47,30 @@ public class TestCollectionResult extends TestResult {
 		}
 		return false;
 	}
+	
+	
+	@Override
+	public Collection<UnitTestResult> getTestsNoPass() {
+		// TODO ERIK
+		Collection<UnitTestResult> itemResult =  new ArrayList<UnitTestResult>();
+		for (TestResult testResult : testsResults) {
+			itemResult.addAll(testResult.getTestsNoPass());
+		}
+		return itemResult;
+	}
+	
+	
+
+	@Override
+	public TestCollectionResult getTestSuite(String name) {
+		for (TestResult testResult : testsResults) {
+			if(testResult.getTestName().equals(name)){
+				return this;
+			}
+		}
+		return null;
+	}
+	/*mod0568 end*/
 	
 	private void updateCounts(TestResult component) {
 		countTests += component.countTests();

@@ -1,5 +1,8 @@
 package grupo11.frameworktests;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 import org.jdom.Attribute;
 import org.jdom.Element;
 
@@ -19,25 +22,47 @@ public class UnitTestResult extends TestResult {
 		this.resultType = resultType;
 	}
 
-	static UnitTestResult createSuccessfulResult(String testName) {
+	
+	/*mod0568 begin*/
+	public static UnitTestResult createSuccessfulResult(String testName) {
 		UnitTestResult ut = new UnitTestResult(testName);
 		ut.setResultType(ResultType.Ok);
 		return ut;
 	}
 
-	static UnitTestResult createFailedResult(String testName, String failureMessage) {
+	public static UnitTestResult createFailedResult(String testName, String failureMessage) {
 		UnitTestResult ut = new UnitTestResult(testName);
 		ut.setResultType(ResultType.Fail);
 		ut.setErrorMsg(failureMessage);
 		return ut;
 	}
 
-	static UnitTestResult createErrorResult(String testName, String errorMessage) {
+	public static UnitTestResult createErrorResult(String testName, String errorMessage) {
 		UnitTestResult ut = new UnitTestResult(testName);
 		ut.setResultType(ResultType.Error);
 		ut.setErrorMsg(errorMessage);
 		return ut;
 	}
+	
+	
+	
+	@Override
+	public Collection<UnitTestResult> getTestsNoPass() {
+		// TODO ERIK
+		Collection<UnitTestResult> itemResult =  new ArrayList<UnitTestResult>();
+		if(!(resultType == ResultType.Ok)){
+			itemResult.add(this);
+		}
+		return itemResult;
+	}
+	
+
+	@Override
+	public TestCollectionResult getTestSuite(String name) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	/*mod0568 end*/
 	
 	static UnitTestResult createUnitTestResult(Element e) {
 		UnitTestResult ut = new UnitTestResult(e.getAttributeValue("name"));
@@ -119,4 +144,7 @@ public class UnitTestResult extends TestResult {
 	public Integer countFailures() {
 		return (resultType == ResultType.Fail) ? 1 : 0;
 	}
+
+
+	
 }
