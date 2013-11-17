@@ -74,7 +74,7 @@ public class TestCollectionResult extends TestResult {
 	}
 
 	@Override
-	protected boolean add(TestResult testResult) {
+	public boolean add(TestResult testResult) {
 		if (testResult != null) {
 			testsResults.add(testResult);
 			return true;
