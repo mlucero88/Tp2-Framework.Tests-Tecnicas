@@ -7,42 +7,63 @@ import org.jdom.Element;
 
 public class UnitTestResult extends TestResult {
 
-	private String result;
+	private String errorMsg = new String("");
 
 	public enum ResultType {
 		Ok, Fail, Error
 	}
 
-	private static ResultType resultType;
+	private ResultType resultType;
+
+	public void setResultType(ResultType resultType) {
+		this.resultType = resultType;
+	}
 
 	static UnitTestResult createSuccessfulResult(String testName) {
-		resultType = (ResultType.Ok);
-		return new UnitTestResult(testName, "");
+		UnitTestResult ut = new UnitTestResult(testName);
+		ut.setResultType(ResultType.Ok);
+		return ut;
 	}
 
-	static UnitTestResult createFailedResult(String testName,
-			String failureMessage) {
-		resultType = (ResultType.Fail);
-		return new UnitTestResult(testName, failureMessage);
+	static UnitTestResult createFailedResult(String testName, String failureMessage) {
+		UnitTestResult ut = new UnitTestResult(testName);
+		ut.setResultType(ResultType.Fail);
+		ut.setErrorMsg(failureMessage);
+		return ut;
 	}
 
-	static UnitTestResult
-			createErrorResult(String testName, String errorMessage) {
-		resultType = (ResultType.Error);
-		return new UnitTestResult(testName, errorMessage);
+	static UnitTestResult createErrorResult(String testName, String errorMessage) {
+		UnitTestResult ut = new UnitTestResult(testName);
+		ut.setResultType(ResultType.Error);
+		ut.setErrorMsg(errorMessage);
+		return ut;
+	}
+	
+	static UnitTestResult createUnitTestResult(Element e) {
+		UnitTestResult ut = new UnitTestResult(e.getAttributeValue("name"));
+		String status = e.getAttributeValue("status");
+		ut.setResultType(ResultType.valueOf(status));
+		//ut.setResultType(status.equals("OK")?ResultType.Ok:(status.equals("OK")?ResultType.Error:ResultType.Fail));
+		if (ut.getResultType() != ResultType.Ok ) {
+			ut.setErrorMsg(e.getAttributeValue("message"));
+		}
+		return ut;
 	}
 
 	public String getMessage() {
-		return result;
+		return "[" + resultType + "] " + testName + ": " + errorMsg + " (" + tiempoEjecucion + " ms)";
 	}
 
 	public ResultType getResultType() {
 		return resultType;
 	}
 
-	protected UnitTestResult(String testName, String resultMessage) {
+	protected UnitTestResult(String testName) {
 		super(testName);
-		result = "[" + resultType + "] " + testName + ": " + resultMessage;
+	}
+
+	public void setErrorMsg(String errorMsg) {
+		this.errorMsg = errorMsg;
 	}
 
 	@Override
@@ -53,17 +74,17 @@ public class UnitTestResult extends TestResult {
 	@Override
 	public void setTiempoEjecucion(double tiempo) {
 		tiempoEjecucion = tiempo;
-		result = result + " (" + tiempoEjecucion + " ms)";
 	}
 
-	public void setCollectionResultCadenaDeNombres(String contenedora) {}
+	public void setCollectionResultCadenaDeNombres(String contenedora) {
+	}
 
 	public String getCollectionResultCadenaDeNombres() {
 		return null;
 	}
 
 	public void registrarResultadoEnReporte(TestReport report) {
-		report.registrarUnitTestResult(resultType, result);
+		report.registrarUnitTestResult(resultType, errorMsg);
 	}
 
 	@Override
@@ -72,25 +93,17 @@ public class UnitTestResult extends TestResult {
 		element.setAttribute("name", testName);
 		element.setAttribute("status", status());
 		element.setAttribute("time", String.valueOf(tiempoEjecucion));
-		if (resultType == ResultType.Error) {
-			Element error = new Element("error");
-			error.setAttribute(new Attribute("message", getMessage()));
-			element.addContent(error);
-
-		} else if (resultType != ResultType.Ok) {
-			Element failure = new Element("failure");
-			failure.setAttribute(new Attribute("message", getMessage()));
-			element.addContent(failure);
-
+		if (resultType != ResultType.Ok) {
+			element.setAttribute(new Attribute("message", errorMsg));
 		}
-		
+
 		return element;
 	}
 
 	private String status() {
-		return (resultType == ResultType.Ok)?"OK":(resultType == ResultType.Fail)?"Fail":"Error";
+		return resultType.name();
+		//return (resultType == ResultType.Ok) ? "OK" : (resultType == ResultType.Fail) ? "Fail" : "Error";
 	}
-
 
 	@Override
 	public Integer countTests() {
