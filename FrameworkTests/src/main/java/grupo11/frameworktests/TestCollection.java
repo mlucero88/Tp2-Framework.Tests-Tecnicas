@@ -56,6 +56,7 @@ public class TestCollection extends GenericTest {
 				results.add(result);
 			}
 		}
+		results.update();
 		tearDown();
 		double timeTotal = (System.currentTimeMillis() - timeStartTest);
 		/* TODO: Como agregarlo a resultado */
