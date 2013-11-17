@@ -43,7 +43,6 @@ public class UnitTestResult extends TestResult {
 		UnitTestResult ut = new UnitTestResult(e.getAttributeValue("name"));
 		String status = e.getAttributeValue("status");
 		ut.setResultType(ResultType.valueOf(status));
-		//ut.setResultType(status.equals("OK")?ResultType.Ok:(status.equals("OK")?ResultType.Error:ResultType.Fail));
 		if (ut.getResultType() != ResultType.Ok ) {
 			ut.setErrorMsg(e.getAttributeValue("message"));
 		}
@@ -91,18 +90,13 @@ public class UnitTestResult extends TestResult {
 	public Element toXMLElement() {
 		Element element = new Element("testcase");
 		element.setAttribute("name", testName);
-		element.setAttribute("status", status());
+		element.setAttribute("status", resultType.name());
 		element.setAttribute("time", String.valueOf(tiempoEjecucion));
 		if (resultType != ResultType.Ok) {
 			element.setAttribute(new Attribute("message", errorMsg));
 		}
 
 		return element;
-	}
-
-	private String status() {
-		return resultType.name();
-		//return (resultType == ResultType.Ok) ? "OK" : (resultType == ResultType.Fail) ? "Fail" : "Error";
 	}
 
 	@Override
