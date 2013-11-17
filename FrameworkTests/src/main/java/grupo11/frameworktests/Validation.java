@@ -59,7 +59,7 @@ public abstract class Validation {
 	private static String generateFailedEqualsMessage(Object expected,
 			Object actual) {
 		String message =
-				"expected:<" + expected + "> - actual:<" + actual + ">";
+				"expected: [" + expected + "] - actual: [" + actual + "]";
 		return message;
 	}
 
