@@ -1,5 +1,7 @@
 package grupo11.frameworktests;
 
+
+
 import org.jdom.Element;
 
 /* Clase que almacena el resultado de un test generico */
@@ -37,4 +39,9 @@ public abstract class TestResult {
 	public abstract Integer countErrors();
 	
 	public abstract Integer countFailures();
+	
+	/*mod0568 begin*/
+	public abstract boolean remuveTestOK();
+	public abstract GenericTest generateTests();
+	/*mod0568 end*/
 }
