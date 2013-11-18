@@ -10,6 +10,7 @@ public class TestCollection extends GenericTest {
 	private Collection<GenericTest> tests;
 	private RunTemplate runMethod;
 	private String nombreContenedora;
+	private TestCollectionResult previousRun;
 
 	public TestCollection(String name) {
 		super(name);
@@ -94,11 +95,15 @@ public class TestCollection extends GenericTest {
 		return nombreContenedora;
 	}
 	
-	/*mod0568 begin*/
 	public void addRunOld(TestCollectionResult runOld) {
 		runOld.remuveTestOK();
 		GenericTest testsOld = runOld.generateTests();
+		
+		//no entiendo como.. pero acá usas el atributo previousRun que ya tiene todo lo que necesitas
 		//falta codigo
 	}
-	/*mod0568 end*/
+
+	public void setPreviousRun(TestCollectionResult results) {
+		previousRun = results;	
+	}
 }
