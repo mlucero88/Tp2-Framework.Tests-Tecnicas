@@ -25,3 +25,4 @@ target/
 # other
 *.txt
 FrameworkTests/TestsReport.xml
+FrameworkTests/Test*.xml

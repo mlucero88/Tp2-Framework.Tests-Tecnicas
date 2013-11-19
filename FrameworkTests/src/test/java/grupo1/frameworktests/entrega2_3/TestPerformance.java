@@ -1,21 +1,14 @@
 package grupo1.frameworktests.entrega2_3;
 
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import grupo11.frameworktests.Fixture;
 import grupo11.frameworktests.GenericTest;
-import grupo11.frameworktests.GenericTest.TagType;
 import grupo11.frameworktests.NameRegister;
-import grupo11.frameworktests.RunTags;
-import grupo11.frameworktests.RunTemplate;
 import grupo11.frameworktests.TestCollection;
 import grupo11.frameworktests.TestCollectionResult;
-import grupo11.frameworktests.entrega2.T1;
 import grupo11.frameworktests.entrega2.T2;
 import grupo11.frameworktests.entrega2.T3;
 import grupo11.frameworktests.entrega2.TS1;
-
-
 
 import org.junit.After;
 import org.junit.Before;
