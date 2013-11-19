@@ -18,7 +18,7 @@ public class TestCollection extends GenericTest {
 	String storeTo = null;
 	double timeTotal;
 	int countTests, countError, countFailures;
-	
+
 	public static TestCollection createTestCollection(Element e) {
 		TestCollection temp = new TestCollection(e.getAttributeValue("name"));
 		temp.setTestCollectionContenedora(e.getAttributeValue("package"));
@@ -87,6 +87,7 @@ public class TestCollection extends GenericTest {
 	 */
 	final public TestCollectionResult run() {
 		double timeStartTest = System.currentTimeMillis();
+		recoverTestsFromStore();
 		setUp();
 		String contenedoraYCollectionActual;
 		if (nombreContenedora == null) {
@@ -111,6 +112,7 @@ public class TestCollection extends GenericTest {
 		}
 		results.update();
 		tearDown();
+		store();
 		timeTotal = System.currentTimeMillis() - timeStartTest;
 		/* TODO: Como agregarlo a resultado */
 		results.setTiempoEjecucion(timeTotal);
@@ -120,6 +122,18 @@ public class TestCollection extends GenericTest {
 		System.out.println(" ");
 		results.setCollectionResultCadenaDeNombres(contenedoraYCollectionActual);
 		return results;
+	}
+
+	private void recoverTestsFromStore() {
+		if (storeTo != null) {
+			
+		}
+	}
+	
+	private void store() {
+		if (storeTo != null) {
+			
+		}
 	}
 
 	/*
