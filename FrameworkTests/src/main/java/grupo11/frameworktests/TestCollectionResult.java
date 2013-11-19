@@ -124,6 +124,10 @@ public class TestCollectionResult extends TestResult {
 		return message;
 	}
 	
+	public double getTiempoEjecucion(){
+		return tiempoEjecucion;
+	}
+	
 	public void update(){
 		countTests = countError = countFailures = 0;
 		for (TestResult testResult : testsResults) {
