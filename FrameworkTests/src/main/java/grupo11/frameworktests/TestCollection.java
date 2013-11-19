@@ -94,14 +94,6 @@ public class TestCollection extends GenericTest {
 	public String getTestCollectionContenedora() {
 		return nombreContenedora;
 	}
-	
-	public void addRunOld(TestCollectionResult runOld) {
-		runOld.remuveTestOK();
-		GenericTest testsOld = runOld.generateTests();
-		
-		//no entiendo como.. pero acá usas el atributo previousRun que ya tiene todo lo que necesitas
-		//falta codigo
-	}
 
 	public void setPreviousRun(TestCollectionResult results) {
 		previousRun = results;	

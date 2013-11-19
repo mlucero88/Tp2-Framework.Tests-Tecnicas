@@ -53,7 +53,6 @@ public class TestCollectionResult extends TestResult {
 	}
 
 	
-	/*mod0568 begin*/
 	@Override
 	public Element toXMLElement() {
 		update();
@@ -81,33 +80,6 @@ public class TestCollectionResult extends TestResult {
 		}
 		return false;
 	}
-
-	
-	@Override
-	public boolean remuveTestOK() {
-		// TODO ERIK
-		Collection<TestResult> aux = new ArrayList<TestResult>();
-		for (TestResult testResult : testsResults) {
-			if(testResult.remuveTestOK())
-				aux.add(testResult);
-		}
-		for (TestResult item : aux) {
-			testsResults.remove(item);
-		}
-		return false;
-	}
-
-	@Override
-	public GenericTest generateTests() {
-		//System.out.println("armo al padre: " + getTestName());
-		TestCollection tests = new TestCollection(getTestName());
-		for (TestResult testResult : testsResults) {
-			tests.add(testResult.generateTests());
-		}
-		return tests;
-	}
-
-	/*mod0568 end*/
 	
 	private void updateCounts(TestResult component) {
 		countTests += component.countTests();

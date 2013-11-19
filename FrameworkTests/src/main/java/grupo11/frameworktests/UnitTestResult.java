@@ -23,7 +23,6 @@ public class UnitTestResult extends TestResult {
 	}
 
 	
-	/*mod0568 begin*/
 	public static UnitTestResult createSuccessfulResult(String testName) {
 		UnitTestResult ut = new UnitTestResult(testName);
 		ut.setResultType(ResultType.Ok);
@@ -44,21 +43,6 @@ public class UnitTestResult extends TestResult {
 		return ut;
 	}
 	
-	
-	
-	@Override
-	public boolean remuveTestOK() {
-		// TODO ERIK
-		return (resultType == ResultType.Ok);
-	}
-
-	@Override
-	public GenericTest generateTests() {
-		//System.out.println("armo al hijo: " + getTestName());
-		return new TestSize(getTestName());
-	}
-	
-	/*mod0568 end*/
 	
 	static UnitTestResult createUnitTestResult(Element e) {
 		UnitTestResult ut = new UnitTestResult(e.getAttributeValue("name"));

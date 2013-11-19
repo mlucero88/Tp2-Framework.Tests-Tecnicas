@@ -40,8 +40,4 @@ public abstract class TestResult {
 	
 	public abstract Integer countFailures();
 	
-	/*mod0568 begin*/
-	public abstract boolean remuveTestOK();
-	public abstract GenericTest generateTests();
-	/*mod0568 end*/
 }
