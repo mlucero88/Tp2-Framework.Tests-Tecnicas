@@ -102,17 +102,17 @@ public abstract class UnitTest extends GenericTest {
 	}
 	
 	@Override
-	public Integer countTests() {
+	public int countTests() {
 		return 1;
 	}
 
 	@Override
-	public Integer countErrors() {
+	public int countErrors() {
 		return (resultType == ResultType.Error) ? 1 : 0;
 	}
 
 	@Override
-	public Integer countFailures() {
+	public int countFailures() {
 		return (resultType == ResultType.Fail) ? 1 : 0;
 	}
 }

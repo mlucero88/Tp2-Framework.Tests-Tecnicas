@@ -3,6 +3,8 @@ package grupo11.frameworktests;
 import java.util.Collection;
 import java.util.TreeSet;
 
+import org.jdom.Element;
+
 /* Test generico. Es el "componente" del patron Composite */
 public abstract class GenericTest {
 	public enum TagType {
@@ -56,4 +58,12 @@ public abstract class GenericTest {
 	protected abstract void setUp();
 
 	protected abstract void tearDown();
+	
+	public abstract Element toXMLElement();
+	
+	public abstract int countTests();
+	
+	public abstract int countErrors();
+	
+	public abstract int countFailures();
 }

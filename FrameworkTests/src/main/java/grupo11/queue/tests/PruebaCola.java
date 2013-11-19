@@ -53,32 +53,7 @@ public class PruebaCola {
 		UnitTest test8 = new TestLlenarYVaciarCola("TestLlenarYVaciarCola");
 		tests.add(test8);
 		
-		// esto lo saco porque no sirve
-//		TestCollectionResult Raiz = new TestCollectionResult("TestDeCola2");
-//		UnitTestResult item1 = UnitTestResult.createSuccessfulResult("1");
-//		Raiz.add(item1);
-//		UnitTestResult item2 = UnitTestResult.createFailedResult("2", "fatal fail");
-//		Raiz.add(item2);
-//		UnitTestResult item3 = UnitTestResult.createSuccessfulResult("3");
-//		Raiz.add(item3);
-//		
-//		TestCollectionResult padreInz = new TestCollectionResult("TestDeCola1");
-//		
-//		UnitTestResult item4 = UnitTestResult.createSuccessfulResult("1_1");
-//		padreInz.add(item4);
-//		UnitTestResult item5 = UnitTestResult.createFailedResult("1_2", "fatal fail");
-//		padreInz.add(item5);
-//		UnitTestResult item6 = UnitTestResult.createErrorResult("1_3","fatal error");
-//		padreInz.add(item6);
-//		
-//		Raiz.add(padreInz);
 		
-		
-		//tests.addRunOld(Raiz);
-		
-		
-		
-		/*mod0568 end*/
 		
 		TestCollectionResult results = (TestCollectionResult) tests.run();
 		
@@ -90,28 +65,22 @@ public class PruebaCola {
 		
 		// ---------- apartir de aca se testea lo tuyo Erik
 		
-		TestCollection testsDeNuevo = new TestCollection("TestDeCola1");
+//		TestCollection testsDeNuevo = new TestCollection("TestDeCola1");
+//		
+//		UnitTest testQueNotieneQueCorrer = new TestLlenarYVaciarCola("TestLlenarYVaciarCola2");
+//		testsDeNuevo.add(testQueNotieneQueCorrer);
+//		
+//		UnitTest testQuetieneQueCorrer = new TestColaLlenaQueFalla("TestColaLlenaQueFalla");
+//		testsDeNuevo.add(testQuetieneQueCorrer);
 		
-		UnitTest testQueNotieneQueCorrer = new TestLlenarYVaciarCola("TestLlenarYVaciarCola2");
-		testsDeNuevo.add(testQueNotieneQueCorrer);
 		
-		UnitTest testQuetieneQueCorrer = new TestColaLlenaQueFalla("TestColaLlenaQueFalla");
-		testsDeNuevo.add(testQuetieneQueCorrer);
 		
-		// ---------- Erik aca te seteo por parametro el objeto que necesitas.. es un TestCollectionResult
-		
-		//tests.addRunOld(Raiz); esto lo cambié por un setter y te puse un ejemplo a continuacion
-		//lo que tenes q hacer es .. dentro del run te fijas si tiene un run previo y ahi haces eso
-		// de filtrar cual ejecutar 
-		
-		testsDeNuevo.setPreviousRun(results);
-		
-		TestCollectionResult results2 = (TestCollectionResult) tests.run();
-		
-		XMLWriter xmlWriter2 = new XMLWriter(results2.toXMLElement());
-		xmlWriter2.produceResult();
-		report = new TestReport(results);
-		report.generarReporteEnArchivo();
-		report.mostrarEstadisticasPorPantalla();
+//		TestCollectionResult results2 = (TestCollectionResult) testsDeNuevo.run();
+//		
+//		XMLWriter xmlWriter2 = new XMLWriter(results2.toXMLElement());
+//		xmlWriter2.produceResult();
+//		report = new TestReport(results);
+//		report.generarReporteEnArchivo();
+//		report.mostrarEstadisticasPorPantalla();
 	}
 }

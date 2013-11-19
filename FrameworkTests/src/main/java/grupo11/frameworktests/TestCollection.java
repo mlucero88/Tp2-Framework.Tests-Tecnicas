@@ -2,6 +2,7 @@ package grupo11.frameworktests;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import org.jdom.Element;
 
 /* Clase contenedora de UnitTest, encargada de ejecutar cada test unitario y
  * generar el reporte con el resultado de la corrida */
@@ -10,7 +11,8 @@ public class TestCollection extends GenericTest {
 	private Collection<GenericTest> tests;
 	private RunTemplate runMethod;
 	private String nombreContenedora;
-	private TestCollectionResult previousRun;
+	double timeTotal;
+	int countTests, countError, countFailures;
 
 	public TestCollection(String name) {
 		super(name);
@@ -75,12 +77,13 @@ public class TestCollection extends GenericTest {
 			if (!test.isSkippable()) {
 				test.setTestCollectionContenedora(contenedoraYCollectionActual);
 				TestResult result = runMethod.run(test);
+				//updateCounts(result);
 				results.add(result);
 			}
 		}
 		results.update();
 		tearDown();
-		double timeTotal = (System.currentTimeMillis() - timeStartTest);
+		timeTotal = (System.currentTimeMillis() - timeStartTest);
 		/* TODO: Como agregarlo a resultado */
 		results.setTiempoEjecucion(timeTotal);
 		System.out
@@ -116,7 +119,42 @@ public class TestCollection extends GenericTest {
 		return nombreContenedora;
 	}
 
-	public void setPreviousRun(TestCollectionResult results) {
-		previousRun = results;	
+
+	@Override
+	public Element toXMLElement() {
+//		update();
+		Element element = new Element("testsuite");
+		element.setAttribute("name", getName());
+		element.setAttribute("package", nombreContenedora);
+		element.setAttribute("tests", String.valueOf(tests.size()));
+		element.setAttribute("failures", String.valueOf(countFailures()));
+		element.setAttribute("errors", String.valueOf(countErrors()));
+		element.setAttribute("time", String.valueOf(timeTotal));
+		
+		for (GenericTest test : tests) {
+			element.addContent(test.toXMLElement());
+		}
+		return element;
+	}
+	
+	@Override
+	public int countTests() {
+		return countTests;
+	}
+
+	@Override
+	public int countErrors() {
+		return countError;
+	}
+
+	@Override
+	public int countFailures() {
+		return countFailures;
+	}
+	
+	private void updateCounts(TestResult component) {
+		countTests += component.countTests();
+		countError += component.countErrors();
+		countFailures += component.countFailures();
 	}
 }

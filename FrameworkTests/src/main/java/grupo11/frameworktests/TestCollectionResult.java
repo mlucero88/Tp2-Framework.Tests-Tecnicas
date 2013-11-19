@@ -59,9 +59,9 @@ public class TestCollectionResult extends TestResult {
 		Element element = new Element("testsuite");
 		element.setAttribute("name", testName);
 		element.setAttribute("package", getCollectionResultCadenaDeNombres());
-		element.setAttribute("tests", countTests().toString());
-		element.setAttribute("failures", countFailures().toString());
-		element.setAttribute("errors", countErrors().toString());
+		element.setAttribute("tests", String.valueOf(countTests()));
+		element.setAttribute("failures", String.valueOf(countFailures()));
+		element.setAttribute("errors", String.valueOf(countErrors()));
 		element.setAttribute("time", String.valueOf(tiempoEjecucion));
 		Iterator<TestResult> keySetIterator = testsResults.iterator();
 		while (keySetIterator.hasNext()) {
@@ -124,17 +124,17 @@ public class TestCollectionResult extends TestResult {
 	}
 
 	@Override
-	public Integer countTests() {
+	public int countTests() {
 		return countTests;
 	}
 
 	@Override
-	public Integer countErrors() {
+	public int countErrors() {
 		return countError;
 	}
 
 	@Override
-	public Integer countFailures() {
+	public int countFailures() {
 		return countFailures;
 	}
 

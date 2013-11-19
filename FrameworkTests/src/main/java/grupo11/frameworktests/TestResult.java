@@ -34,10 +34,10 @@ public abstract class TestResult {
 
 	public abstract Element toXMLElement();
 	
-	public abstract Integer countTests();
+	public abstract int countTests();
 	
-	public abstract Integer countErrors();
+	public abstract int countErrors();
 	
-	public abstract Integer countFailures();
+	public abstract int countFailures();
 	
 }
