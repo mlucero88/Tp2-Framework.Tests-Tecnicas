@@ -138,7 +138,9 @@ public class TestCollection extends GenericTest {
 
 	private void recoverTestsFromStore() {
 		if ((storeTo != null) && recoverMode) {
-
+			XMLWriter writer = new XMLWriter();
+			writer.setFilePath(storeTo);
+			List<Element> storedSuites = writer.getElements();
 		}
 	}
 

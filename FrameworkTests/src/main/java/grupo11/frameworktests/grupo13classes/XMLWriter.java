@@ -28,6 +28,13 @@ public class XMLWriter {
 	}
 
 	Document doc;
+	
+
+	public XMLWriter() {
+		Element rootElement = new Element("testsuites");
+		doc = new Document(rootElement);
+		doc.setRootElement(rootElement);
+	}
 
 	public XMLWriter(Element element) {
 		Element rootElement = new Element("testsuites");

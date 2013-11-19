@@ -19,10 +19,12 @@ public class TestPersistence {
 		UnitTest test2 = new TestColaLlena("TestColaLlena");
 		tests.add(test2);
 		tests.setStore("unStoreCualquiera");
+		tests.storeMode();
 		tests.run();
 		NameRegister.getInstance().clear();
 		TestCollection tests2 = new TestCollection("TestDeCola1");
 		tests2.setStore("unStoreCualquiera");
+		tests2.recoverMode();
 		tests2.run();
 		Assert.assertEquals(tests.countTests(), tests2.countTests());
 
@@ -36,10 +38,12 @@ public class TestPersistence {
 		UnitTest test2 = new TestColaLlena("TestColaLlena");
 		tests.add(test2);
 		tests.setStore("unStoreCualquiera");
+		tests.storeMode();
 		tests.run();
 		NameRegister.getInstance().clear();
 		TestCollection tests2 = new TestCollection("TestDeCola1");
 		tests2.setStore("unStoreCualquiera");
+		tests2.recoverMode();
 		tests2.run();
 		Assert.assertEquals(tests.countFailures(), tests2.countFailures());
 
@@ -58,8 +62,8 @@ public class TestPersistence {
 		NameRegister.getInstance().clear();
 		TestCollection tests2 = new TestCollection("TestDeCola1");
 		tests2.setStore("unStoreCualquiera");
-		tests2.run();
 		tests2.recoverMode();
+		tests2.run();
 		Assert.assertEquals(tests.countErrors(), tests2.countErrors());
 
 	}
