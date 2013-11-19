@@ -126,7 +126,6 @@ public class TestCollection extends GenericTest {
 		tearDown();
 		store();
 		timeTotal = System.currentTimeMillis() - timeStartTest;
-		/* TODO: Como agregarlo a resultado */
 		results.setTiempoEjecucion(timeTotal);
 		System.out
 				.println("------------------------------------------------------------------------------------------------");
