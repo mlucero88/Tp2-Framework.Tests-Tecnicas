@@ -1,7 +1,6 @@
 package grupo11.frameworktests;
 
 
-import grupo11.queue.tests.TestSize;
 
 import org.jdom.Attribute;
 import org.jdom.Element;

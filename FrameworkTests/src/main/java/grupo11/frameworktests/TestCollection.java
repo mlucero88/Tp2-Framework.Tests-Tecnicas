@@ -25,12 +25,33 @@ public class TestCollection extends GenericTest {
 
 	@Override
 	final public boolean add(GenericTest test) {
+		UnitTest testOld;
 		if (NameRegister.getInstance().registerName(test.getName())) {
 			tests.add(test);
 			return true;
 		}
-		return false;
+		else{
+			testOld = (UnitTest) getTest(test.getName());
+			if(testOld.isOK()){
+				testOld.setSkippable();
+			}
+			else{
+				tests.remove(testOld);
+				tests.add(test);
+			}
+			return false;
+		}
 	}
+	
+	private GenericTest getTest(String nameTest){
+		for(GenericTest test : tests){
+			if(test.getName().equals(nameTest)){
+				return test;
+			}
+		}
+		return null;
+	}
+	
 
 	@Override
 	/* Utiliza el patron Template Method para las distintas formas de correr

@@ -6,6 +6,18 @@ package grupo11.frameworktests;
 
 public abstract class UnitTest extends GenericTest {
 
+	// MOD0568 - BEGIN
+	public enum ResultType {
+		Ok, Fail, Error
+	}
+
+	private ResultType resultType;
+
+	public boolean isOK() {
+		return (resultType == ResultType.Ok) ? true : false;
+	}
+	// MOD0568 - END
+	
 	public UnitTest(String testName) {
 		super(testName);
 	}
