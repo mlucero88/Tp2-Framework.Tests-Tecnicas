@@ -1,5 +1,7 @@
 package grupo11.frameworktests;
 
+import grupo11.frameworktests.grupo13classes.XMLWriter;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;

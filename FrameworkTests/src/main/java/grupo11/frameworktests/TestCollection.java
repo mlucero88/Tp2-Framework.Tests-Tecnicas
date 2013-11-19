@@ -1,7 +1,10 @@
 package grupo11.frameworktests;
 
+import grupo11.frameworktests.grupo13classes.XMLWriter;
+
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import org.jdom.Element;
 
@@ -12,8 +15,32 @@ public class TestCollection extends GenericTest {
 	private Collection<GenericTest> tests;
 	private RunTemplate runMethod;
 	private String nombreContenedora;
+	String storeTo = null;
 	double timeTotal;
 	int countTests, countError, countFailures;
+	
+	public static TestCollection createTestCollection(Element e) {
+		TestCollection temp = new TestCollection(e.getAttributeValue("name"));
+		temp.setTestCollectionContenedora(e.getAttributeValue("package"));
+		temp.setTimeTotal(Double.parseDouble(e.getAttributeValue("time")));
+		temp.setCountTests(Integer.parseInt(e.getAttributeValue("tests")));
+		temp.setCountFailures(Integer.parseInt(e.getAttributeValue("failures")));
+		temp.setCountError(Integer.parseInt(e.getAttributeValue("errors")));
+		List<Element> list = XMLWriter.castList(Element.class, e.getChildren("testsuite"));
+		for (Element e2 : list) {
+			temp.add(TestCollection.createTestCollection(e2));
+		}
+		list = XMLWriter.castList(Element.class, e.getChildren("testcase"));
+		for (Element e2 : list) {
+			temp.add(UnitTest.createUnitTest(e2));
+		}
+
+		return temp;
+	}
+
+	public void setCountTests(int countTests) {
+		this.countTests = countTests;
+	}
 
 	public TestCollection(String name) {
 		super(name);
@@ -32,41 +59,39 @@ public class TestCollection extends GenericTest {
 		if (NameRegister.getInstance().registerName(test.getName())) {
 			tests.add(test);
 			return true;
-		}
-		else{
+		} else {
 			testOld = (UnitTest) getTest(test.getName());
-			if(testOld.isOK()){
+			if (testOld.isOK()) {
 				testOld.setSkippable();
-			}
-			else{
+			} else {
 				tests.remove(testOld);
 				tests.add(test);
 			}
 			return false;
 		}
 	}
-	
-	private GenericTest getTest(String nameTest){
-		for(GenericTest test : tests){
-			if(test.getName().equals(nameTest)){
+
+	private GenericTest getTest(String nameTest) {
+		for (GenericTest test : tests) {
+			if (test.getName().equals(nameTest)) {
 				return test;
 			}
 		}
 		return null;
 	}
-	
 
 	@Override
-	/* Utiliza el patron Template Method para las distintas formas de correr
-	 * los tests */
+	/*
+	 * Utiliza el patron Template Method para las distintas formas de correr los
+	 * tests
+	 */
 	final public TestCollectionResult run() {
 		double timeStartTest = System.currentTimeMillis();
 		setUp();
 		String contenedoraYCollectionActual;
 		if (nombreContenedora == null) {
 			contenedoraYCollectionActual = getName();
-		}
-		else {
+		} else {
 			contenedoraYCollectionActual = nombreContenedora + "." + getName();
 		}
 		System.out.println(" ");
@@ -78,13 +103,15 @@ public class TestCollection extends GenericTest {
 			if (!test.isSkippable()) {
 				test.setTestCollectionContenedora(contenedoraYCollectionActual);
 				TestResult result = runMethod.run(test);
-				updateCounts(result);
-				results.add(result);
+				if (result != null) {
+					updateCounts(result);
+					results.add(result);
+				}
 			}
 		}
 		results.update();
 		tearDown();
-		timeTotal = (System.currentTimeMillis() - timeStartTest);
+		timeTotal = System.currentTimeMillis() - timeStartTest;
 		/* TODO: Como agregarlo a resultado */
 		results.setTiempoEjecucion(timeTotal);
 		System.out
@@ -95,8 +122,10 @@ public class TestCollection extends GenericTest {
 		return results;
 	}
 
-	/* Retorna la cantidad de tests. Tanto un UnitTest como una test collection
-	 * cuenta como un solo test */
+	/*
+	 * Retorna la cantidad de tests. Tanto un UnitTest como una test collection
+	 * cuenta como un solo test
+	 */
 	public int getTestsCount() {
 		return tests.size();
 	}
@@ -107,10 +136,12 @@ public class TestCollection extends GenericTest {
 
 	/* Metodos redefinibles por el usuario */
 	@Override
-	protected void setUp() {}
+	protected void setUp() {
+	}
 
 	@Override
-	protected void tearDown() {}
+	protected void tearDown() {
+	}
 
 	public void setTestCollectionContenedora(String nombreContenedora) {
 		this.nombreContenedora = nombreContenedora;
@@ -120,10 +151,8 @@ public class TestCollection extends GenericTest {
 		return nombreContenedora;
 	}
 
-
 	@Override
 	public Element toXMLElement() {
-//		update();
 		Element element = new Element("testsuite");
 		element.setAttribute("name", getName());
 		element.setAttribute("package", nombreContenedora);
@@ -131,13 +160,13 @@ public class TestCollection extends GenericTest {
 		element.setAttribute("failures", String.valueOf(countFailures()));
 		element.setAttribute("errors", String.valueOf(countErrors()));
 		element.setAttribute("time", String.valueOf(timeTotal));
-		
+
 		for (GenericTest test : tests) {
 			element.addContent(test.toXMLElement());
 		}
 		return element;
 	}
-	
+
 	@Override
 	public int countTests() {
 		return countTests;
@@ -152,17 +181,27 @@ public class TestCollection extends GenericTest {
 	public int countFailures() {
 		return countFailures;
 	}
-	
+
 	private void updateCounts(TestResult component) {
-		if (component == null)
-			return;
 		countTests += component.countTests();
 		countError += component.countErrors();
 		countFailures += component.countFailures();
 	}
 
-	public void persistInStore(String string) {
-		// TODO Auto-generated method stub
-		
+	public void setStore(String storeName) {
+		storeTo = storeName;
+
+	}
+
+	public void setTimeTotal(double timeTotal) {
+		this.timeTotal = timeTotal;
+	}
+
+	public void setCountError(int countError) {
+		this.countError = countError;
+	}
+
+	public void setCountFailures(int countFailures) {
+		this.countFailures = countFailures;
 	}
 }

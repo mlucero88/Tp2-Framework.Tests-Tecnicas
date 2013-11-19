@@ -1,4 +1,4 @@
-package grupo11.frameworktests;
+package grupo11.frameworktests.grupo13classes;
 
 import java.io.File;
 import java.io.FileWriter;

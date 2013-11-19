@@ -6,9 +6,8 @@ import grupo11.frameworktests.TestCollection;
 import grupo11.frameworktests.TestCollectionResult;
 import grupo11.frameworktests.TestReport;
 import grupo11.frameworktests.UnitTest;
-import grupo11.frameworktests.UnitTestResult;
-import grupo11.frameworktests.XMLWriter;
 import grupo11.frameworktests.GenericTest.TagType;
+import grupo11.frameworktests.grupo13classes.XMLWriter;
 
 public class PruebaCola {
 

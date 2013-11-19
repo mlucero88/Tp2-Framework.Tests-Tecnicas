@@ -1,5 +1,8 @@
 package grupo11.frameworktests;
 
+import grupo11.frameworktests.UnitTestResult.ResultType;
+import grupo11.frameworktests.grupo13classes.AlreadyRunnedUnitTest;
+
 import org.jdom.Attribute;
 import org.jdom.Element;
 
@@ -20,9 +23,21 @@ public abstract class UnitTest extends GenericTest {
 	public boolean isOK() {
 		return (resultType == ResultType.Ok);
 	}
-	
+
 	public UnitTest(String testName) {
 		super(testName);
+	}
+
+	public void setResultType(ResultType resultType) {
+		this.resultType = resultType;
+	}
+
+	public void setTimeTotal(double timeTotal) {
+		this.timeTotal = timeTotal;
+	}
+
+	public void setErrorMsg(String errorMsg) {
+		this.errorMsg = errorMsg;
 	}
 
 	/* Metodo que tiene el comportamiento a testear. Es llamado por "run" */
@@ -30,10 +45,12 @@ public abstract class UnitTest extends GenericTest {
 
 	/* Redefinibles por el usuario si se le desea dar comportamiento */
 	@Override
-	protected void setUp() {}
+	protected void setUp() {
+	}
 
 	@Override
-	protected void tearDown() {}
+	protected void tearDown() {
+	}
 
 	/* Sin comportamiento. Falencia de diseño en el patron Composite */
 	@Override
@@ -51,29 +68,23 @@ public abstract class UnitTest extends GenericTest {
 				test();
 			}
 			tearDown();
-			timeTotal = (System.currentTimeMillis() - timeStart);
-		}
-		catch (ValidationFailure failure) {
-			timeTotal = (System.currentTimeMillis() - timeStart);
+			timeTotal = System.currentTimeMillis() - timeStart;
+		} catch (ValidationFailure failure) {
+			timeTotal = System.currentTimeMillis() - timeStart;
 			errorMsg = failure.getMessage();
-			result =
-					UnitTestResult.createFailedResult(getName(),
-							errorMsg);
+			result = UnitTestResult.createFailedResult(getName(), errorMsg);
 			result.setTiempoEjecucion(timeTotal);
 			System.out.println(result.getMessage());
 			return result;
-		}
-		catch (RuntimeException exception) {
-			timeTotal = (System.currentTimeMillis() - timeStart);
+		} catch (RuntimeException exception) {
+			timeTotal = System.currentTimeMillis() - timeStart;
 			errorMsg = "RuntimeException";
-			result =
-					UnitTestResult.createErrorResult(getName(),
-							errorMsg);
+			result = UnitTestResult.createErrorResult(getName(), errorMsg);
 			result.setTiempoEjecucion(timeTotal);
 			System.out.println(result.getMessage());
 			return result;
 		}
-		timeTotal = (System.currentTimeMillis() - timeStart);
+		timeTotal = System.currentTimeMillis() - timeStart;
 		result = UnitTestResult.createSuccessfulResult(getName());
 		result.setTiempoEjecucion(timeTotal);
 		System.out.println(result.getMessage());
@@ -87,20 +98,20 @@ public abstract class UnitTest extends GenericTest {
 	public String getTestCollectionContenedora() {
 		return null;
 	}
-	
+
 	@Override
 	public Element toXMLElement() {
 		Element element = new Element("testcase");
 		element.setAttribute("name", getName());
 		element.setAttribute("status", resultType.name());
 		element.setAttribute("time", String.valueOf(timeTotal));
-		if (resultType != ResultType.Ok) {
+		if (!isOK()) {
 			element.setAttribute(new Attribute("message", errorMsg));
 		}
 
 		return element;
 	}
-	
+
 	@Override
 	public int countTests() {
 		return 1;
@@ -114,5 +125,15 @@ public abstract class UnitTest extends GenericTest {
 	@Override
 	public int countFailures() {
 		return (resultType == ResultType.Fail) ? 1 : 0;
+	}
+
+	public static GenericTest createUnitTest(Element e2) {
+		UnitTest ut = new AlreadyRunnedUnitTest(e2.getAttributeValue("name"));
+		String status = e2.getAttributeValue("status");
+		ut.setResultType(ResultType.valueOf(status));
+		if (!ut.isOK() ) {
+			ut.setErrorMsg(e2.getAttributeValue("message"));
+		}
+		return ut;
 	}
 }
