@@ -53,11 +53,13 @@ public class TestPersistence {
 		UnitTest test2 = new TestColaLlena("TestColaLlena");
 		tests.add(test2);
 		tests.setStore("unStoreCualquiera");
+		tests.storeMode();
 		tests.run();
 		NameRegister.getInstance().clear();
 		TestCollection tests2 = new TestCollection("TestDeCola1");
 		tests2.setStore("unStoreCualquiera");
 		tests2.run();
+		tests2.recoverMode();
 		Assert.assertEquals(tests.countErrors(), tests2.countErrors());
 
 	}

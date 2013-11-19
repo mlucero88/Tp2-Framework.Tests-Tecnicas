@@ -17,7 +17,16 @@ import org.jdom.output.XMLOutputter;
 public class XMLWriter {
 
 	XMLOutputter xmlOutput = new XMLOutputter();
-	String filePath = new String("TestsReport.xml");
+	String filePath;
+	
+	public String getFilePath() {
+		return filePath;
+	}
+
+	public void setFilePath(String filePath) {
+		this.filePath = "TestResult" + filePath + ".xml";
+	}
+
 	Document doc;
 
 	public XMLWriter(Element element) {
@@ -34,9 +43,9 @@ public class XMLWriter {
 	public void produceResult() {
 		try {
 			xmlOutput.setFormat(Format.getPrettyFormat());
-			xmlOutput.output(doc, new FileWriter(filePath));
+			xmlOutput.output(doc, new FileWriter(getFilePath()));
 		} catch (IOException io) {
-			System.out.println("No se pudo crear " + filePath + ", " + io.getMessage());
+			System.out.println("No se pudo crear " + getFilePath() + ", " + io.getMessage());
 		}
 
 	}
@@ -50,7 +59,7 @@ public class XMLWriter {
 	private void loadDoc() {
 		SAXBuilder saxBuilder = new SAXBuilder();
 		try {
-			doc = saxBuilder.build(new File(filePath));
+			doc = saxBuilder.build(new File(getFilePath()));
 		} catch (JDOMException e) {
 			e.printStackTrace();
 		} catch (IOException e) {

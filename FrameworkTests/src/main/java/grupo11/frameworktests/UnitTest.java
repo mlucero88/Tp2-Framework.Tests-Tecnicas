@@ -72,6 +72,7 @@ public abstract class UnitTest extends GenericTest {
 		} catch (ValidationFailure failure) {
 			timeTotal = System.currentTimeMillis() - timeStart;
 			errorMsg = failure.getMessage();
+			resultType = ResultType.Fail;
 			result = UnitTestResult.createFailedResult(getName(), errorMsg);
 			result.setTiempoEjecucion(timeTotal);
 			System.out.println(result.getMessage());
@@ -79,11 +80,13 @@ public abstract class UnitTest extends GenericTest {
 		} catch (RuntimeException exception) {
 			timeTotal = System.currentTimeMillis() - timeStart;
 			errorMsg = "RuntimeException";
+			resultType = ResultType.Error;
 			result = UnitTestResult.createErrorResult(getName(), errorMsg);
 			result.setTiempoEjecucion(timeTotal);
 			System.out.println(result.getMessage());
 			return result;
 		}
+		resultType = ResultType.Ok;
 		timeTotal = System.currentTimeMillis() - timeStart;
 		result = UnitTestResult.createSuccessfulResult(getName());
 		result.setTiempoEjecucion(timeTotal);
@@ -102,8 +105,12 @@ public abstract class UnitTest extends GenericTest {
 	@Override
 	public Element toXMLElement() {
 		Element element = new Element("testcase");
-		element.setAttribute("name", getName());
-		element.setAttribute("status", resultType.name());
+		if (getName() != null) {
+			element.setAttribute("name", getName());
+		}
+		if (resultType != null) {
+			element.setAttribute("status", resultType.name());
+		}
 		element.setAttribute("time", String.valueOf(timeTotal));
 		if (!isOK()) {
 			element.setAttribute(new Attribute("message", errorMsg));
@@ -131,7 +138,7 @@ public abstract class UnitTest extends GenericTest {
 		UnitTest ut = new AlreadyRunnedUnitTest(e2.getAttributeValue("name"));
 		String status = e2.getAttributeValue("status");
 		ut.setResultType(ResultType.valueOf(status));
-		if (!ut.isOK() ) {
+		if (!ut.isOK()) {
 			ut.setErrorMsg(e2.getAttributeValue("message"));
 		}
 		return ut;

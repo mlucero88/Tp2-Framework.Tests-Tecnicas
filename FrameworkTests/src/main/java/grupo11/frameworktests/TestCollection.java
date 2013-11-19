@@ -15,7 +15,18 @@ public class TestCollection extends GenericTest {
 	private Collection<GenericTest> tests;
 	private RunTemplate runMethod;
 	private String nombreContenedora;
-	String storeTo = null;
+	private String storeTo = null;
+	private boolean storeMode = false;
+	private boolean recoverMode = false;
+
+	public void storeMode() {
+		this.storeMode = true;
+	}
+
+	public void recoverMode() {
+		this.recoverMode = true;
+	}
+
 	double timeTotal;
 	int countTests, countError, countFailures;
 
@@ -110,6 +121,7 @@ public class TestCollection extends GenericTest {
 				}
 			}
 		}
+
 		results.update();
 		tearDown();
 		store();
@@ -125,14 +137,16 @@ public class TestCollection extends GenericTest {
 	}
 
 	private void recoverTestsFromStore() {
-		if (storeTo != null) {
-			
+		if ((storeTo != null) && recoverMode) {
+
 		}
 	}
-	
+
 	private void store() {
-		if (storeTo != null) {
-			
+		if ((storeTo != null) && storeMode) {
+			XMLWriter writer = new XMLWriter(toXMLElement());
+			writer.setFilePath(storeTo);
+			writer.produceResult();
 		}
 	}
 
@@ -168,15 +182,29 @@ public class TestCollection extends GenericTest {
 	@Override
 	public Element toXMLElement() {
 		Element element = new Element("testsuite");
-		element.setAttribute("name", getName());
-		element.setAttribute("package", nombreContenedora);
-		element.setAttribute("tests", String.valueOf(tests.size()));
+		if (getName() != null) {
+			element.setAttribute("name", getName());
+		}
+		if (nombreContenedora != null) {
+			element.setAttribute("package", nombreContenedora);
+		}
+		if (tests != null) {
+			element.setAttribute("tests", String.valueOf(tests.size()));
+		}
 		element.setAttribute("failures", String.valueOf(countFailures()));
 		element.setAttribute("errors", String.valueOf(countErrors()));
 		element.setAttribute("time", String.valueOf(timeTotal));
 
 		for (GenericTest test : tests) {
-			element.addContent(test.toXMLElement());
+			if (test != null) {
+
+				Element e = test.toXMLElement();
+				if (e != null) {
+					element.addContent(test.toXMLElement());
+				}
+			} else {
+				System.out.println("un test nulo");
+			}
 		}
 		return element;
 	}

@@ -63,13 +63,15 @@ public class PruebaCola {
 
 		RunTemplate runMethod = new RunTags(TagType.SLOW);
 		tests.setRunMethod(runMethod);
+		tests.setStore("Hola");
+		tests.storeMode();
 		
 		
 		
 		TestCollectionResult results = (TestCollectionResult) tests.run();
 		
-		XMLWriter xmlWriter = new XMLWriter(results.toXMLElement());
-		xmlWriter.produceResult();
+//		XMLWriter xmlWriter = new XMLWriter(results.toXMLElement());
+//		xmlWriter.produceResult();
 		TestReport report = new TestReport(results);
 		report.generarReporteEnArchivo();
 		report.mostrarEstadisticasPorPantalla();
