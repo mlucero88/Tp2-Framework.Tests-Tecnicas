@@ -2,6 +2,7 @@ package grupo11.frameworktests;
 
 import java.util.ArrayList;
 import java.util.Collection;
+
 import org.jdom.Element;
 
 /* Clase contenedora de UnitTest, encargada de ejecutar cada test unitario y
@@ -77,7 +78,7 @@ public class TestCollection extends GenericTest {
 			if (!test.isSkippable()) {
 				test.setTestCollectionContenedora(contenedoraYCollectionActual);
 				TestResult result = runMethod.run(test);
-				//updateCounts(result);
+				updateCounts(result);
 				results.add(result);
 			}
 		}
@@ -153,8 +154,15 @@ public class TestCollection extends GenericTest {
 	}
 	
 	private void updateCounts(TestResult component) {
+		if (component == null)
+			return;
 		countTests += component.countTests();
 		countError += component.countErrors();
 		countFailures += component.countFailures();
+	}
+
+	public void persistInStore(String string) {
+		// TODO Auto-generated method stub
+		
 	}
 }

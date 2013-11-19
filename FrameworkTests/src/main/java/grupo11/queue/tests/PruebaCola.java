@@ -1,11 +1,14 @@
 package grupo11.queue.tests;
 
+import grupo11.frameworktests.RunTags;
+import grupo11.frameworktests.RunTemplate;
 import grupo11.frameworktests.TestCollection;
 import grupo11.frameworktests.TestCollectionResult;
 import grupo11.frameworktests.TestReport;
 import grupo11.frameworktests.UnitTest;
 import grupo11.frameworktests.UnitTestResult;
 import grupo11.frameworktests.XMLWriter;
+import grupo11.frameworktests.GenericTest.TagType;
 
 public class PruebaCola {
 
@@ -24,6 +27,8 @@ public class PruebaCola {
 		tests.add(test5);
 		UnitTest test6 = new TestRemoveConColaVacia("TestRemoveConColaVacia");
 		tests.add(test6);
+		
+
 		
 		TestCollection tests2 = new TestCollection("TestDeCola2");
 		UnitTest test21 = new TestColaVacia("TestColaVacia2");
@@ -52,6 +57,13 @@ public class PruebaCola {
 		tests.add(test7);
 		UnitTest test8 = new TestLlenarYVaciarCola("TestLlenarYVaciarCola");
 		tests.add(test8);
+		
+		// Agrego TAGS
+		test1.addTag(TagType.SLOW);
+		test3.addTag(TagType.SLOW);
+
+		RunTemplate runMethod = new RunTags(TagType.SLOW);
+		tests.setRunMethod(runMethod);
 		
 		
 		
