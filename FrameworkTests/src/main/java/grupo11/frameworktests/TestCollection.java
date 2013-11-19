@@ -81,6 +81,11 @@ public class TestCollection extends GenericTest {
 		results.update();
 		tearDown();
 		double timeTotal = (System.currentTimeMillis() - timeStartTest);
+//		if (getMaxTime() > 0 && timeTotal > getMaxTime()) {
+////			throw new PerformanceException("El test tardo mas de lo esperado");
+//		}
+//		
+		
 		/* TODO: Como agregarlo a resultado */
 		results.setTiempoEjecucion(timeTotal);
 		System.out

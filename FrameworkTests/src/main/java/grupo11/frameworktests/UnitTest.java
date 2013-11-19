@@ -50,6 +50,14 @@ public abstract class UnitTest extends GenericTest {
 			}
 			tearDown();
 			timeTotal = (System.currentTimeMillis() - timeStart);
+			if (getMaxTime() >0 && timeTotal >= getMaxTime()) {
+				result =
+						UnitTestResult.createErrorResult(getName(),
+								"El tiempo de ejecucion es mayor al tiempo esperado");
+				result.setTiempoEjecucion(timeTotal);
+				System.out.println(result.getMessage());
+				return result;
+			}
 		}
 		catch (ValidationFailure failure) {
 			timeTotal = (System.currentTimeMillis() - timeStart);
