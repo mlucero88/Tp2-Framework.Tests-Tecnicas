@@ -113,5 +113,32 @@ public class TestPersistenceAndStores {
 		Assert.assertEquals(initialTestCollection1.countTests(), testCollection1RecoveredFromStore.countTests());
 		Assert.assertEquals(initialTestCollection2.countTests(), testCollection2RecoveredFromStore.countTests());
 	}
+	
+	@Test
+	public void recoveredTestWasCorrectedThenHasOneFailureLess() {
+		TestCollection tc1 = new TestCollection("TestDeCola1");
+		UnitTest test1 = new TestColaVacia("TestColaVacia");
+		tc1.add(test1);
+		UnitTest test2 = new TestColaLlena("TestColaLlena");
+		tc1.add(test2);
+		UnitTest test3 = new TestColaLlenaQueFalla("TestColaLlenaQueFalla");
+		tc1.add(test3);
+		tc1.setStore("unStoreDePrueba");
+		tc1.storeMode();
+		tc1.run();
+		
+		//Levanto los tests haciendo que el test que fallo ahora pase
+		
+		NameRegister.getInstance().clear();
+		TestCollection tc2 = new TestCollection("TestDeCola1");
+		//fuerzo que TestColaLlenaQueFalla pase instanciando otro UnitTest
+		UnitTest failedTestThatWasCorrected = new TestColaLlena("TestColaLlenaQueFalla");
+		tc2.add(failedTestThatWasCorrected);
+		tc2.setStore("unStoreDePrueba");
+		tc2.recoverMode();
+		tc2.run();
+		
+		Assert.assertEquals(tc1.countFailures() - 1, tc2.countFailures());
+	}
 
 }
