@@ -26,7 +26,10 @@ public abstract class GenericTest {
 		this.maxTime = maxTime;
 	}
 
-
+	protected GenericTest() {
+		skip = false;
+		tags = new TreeSet<TagType>();
+	}
 
 	protected GenericTest(String name) {
 		this.name = name;
@@ -36,6 +39,10 @@ public abstract class GenericTest {
 
 	public String getName() {
 		return name;
+	}
+	
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public Collection<TagType> getTags() {
@@ -79,4 +86,9 @@ public abstract class GenericTest {
 	public abstract int countErrors();
 	
 	public abstract int countFailures();
+
+	public boolean runnable() {
+		// TODO Auto-generated method stub
+		return true;
+	}
 }

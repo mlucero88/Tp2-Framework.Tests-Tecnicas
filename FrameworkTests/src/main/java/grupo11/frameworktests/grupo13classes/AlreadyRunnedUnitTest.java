@@ -12,5 +12,9 @@ public class AlreadyRunnedUnitTest extends UnitTest {
 	protected void test() {
 
 	}
+	
+	public boolean runnable() {
+		return false;
+	}
 
 }

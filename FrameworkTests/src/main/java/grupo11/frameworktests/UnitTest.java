@@ -4,6 +4,7 @@ import grupo11.frameworktests.UnitTestResult.ResultType;
 import grupo11.frameworktests.grupo13classes.AlreadyRunnedUnitTest;
 
 import org.jdom.Attribute;
+import org.jdom.DataConversionException;
 import org.jdom.Element;
 
 /* Clase abstracta de la cual el cliente hereda para crear su test unitario. El
@@ -135,12 +136,26 @@ public abstract class UnitTest extends GenericTest {
 	}
 
 	public static GenericTest createUnitTest(Element e2) {
+		
 		UnitTest ut = new AlreadyRunnedUnitTest(e2.getAttributeValue("name"));
 		String status = e2.getAttributeValue("status");
 		ut.setResultType(ResultType.valueOf(status));
-		if (!ut.isOK()) {
-			ut.setErrorMsg(e2.getAttributeValue("message"));
+		Attribute attrTime = e2.getAttribute("time");
+		if (attrTime != null) {
+			try {
+				ut.setTimeTotal(attrTime.getDoubleValue());
+			} catch (DataConversionException e) {
+				e.printStackTrace();
+			}
+		}
+		Attribute attrMessage = e2.getAttribute("message");
+		if (attrMessage != null) {
+			ut.setErrorMsg(attrMessage.getValue());
 		}
 		return ut;
+	}
+	
+	public boolean runnable() {
+		return !isSkippable();
 	}
 }

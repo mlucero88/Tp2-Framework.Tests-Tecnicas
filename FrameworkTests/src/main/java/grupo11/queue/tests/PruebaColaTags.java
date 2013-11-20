@@ -1,5 +1,6 @@
 package grupo11.queue.tests;
 
+import grupo11.frameworktests.NameRegister;
 import grupo11.frameworktests.RunTags;
 import grupo11.frameworktests.RunTemplate;
 import grupo11.frameworktests.TestCollection;
@@ -31,9 +32,14 @@ public class PruebaColaTags {
 		
 		
 		TestCollectionResult results = (TestCollectionResult) tests.run();
-		
-		XMLWriter xmlWriter = new XMLWriter(results.toXMLElement());
-		xmlWriter.produceResult();
+		//nulpointer
+		NameRegister.getInstance().clear();
+		TestCollection tests2 = new TestCollection("TestDeCola1");
+		tests2.setStore("unStoreCualquiera");
+		tests2.recoverMode();
+		tests2.run();
+//		XMLWriter xmlWriter = new XMLWriter(results.toXMLElement());
+//		xmlWriter.produceResult();
 		TestReport report = new TestReport(results);
 		report.generarReporteEnArchivo();
 		report.mostrarEstadisticasPorPantalla();

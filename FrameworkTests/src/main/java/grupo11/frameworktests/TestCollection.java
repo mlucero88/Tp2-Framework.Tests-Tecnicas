@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import org.jdom.Attribute;
 import org.jdom.Element;
 
 /* Clase contenedora de UnitTest, encargada de ejecutar cada test unitario y
@@ -19,46 +20,56 @@ public class TestCollection extends GenericTest {
 	private boolean storeMode = false;
 	private boolean recoverMode = false;
 
-	public void storeMode() {
-		this.storeMode = true;
-	}
-
-	public void recoverMode() {
-		this.recoverMode = true;
-	}
 
 	double timeTotal;
 	int countTests, countError, countFailures;
 
 	public static TestCollection createTestCollection(Element e) {
-		TestCollection temp = new TestCollection(e.getAttributeValue("name"));
-		temp.setTestCollectionContenedora(e.getAttributeValue("package"));
-		temp.setTimeTotal(Double.parseDouble(e.getAttributeValue("time")));
-		temp.setCountTests(Integer.parseInt(e.getAttributeValue("tests")));
-		temp.setCountFailures(Integer.parseInt(e.getAttributeValue("failures")));
-		temp.setCountError(Integer.parseInt(e.getAttributeValue("errors")));
+		TestCollection temp = new TestCollection();
+		temp.fromXmlElement(e);
+		return temp;
+	}
+	
+	private void fromXmlElement(Element e) {
+		setName(e.getAttributeValue("name"));
+		Attribute attrPackageName = e.getAttribute("package");
+		if (attrPackageName != null) {
+			setTestCollectionContenedora(attrPackageName.getValue());
+		}
+		
+		setTimeTotal(Double.parseDouble(e.getAttributeValue("time")));
+		setCountTests(Integer.parseInt(e.getAttributeValue("tests")));
+		setCountFailures(Integer.parseInt(e.getAttributeValue("failures")));
+		setCountError(Integer.parseInt(e.getAttributeValue("errors")));
 		List<Element> list = XMLWriter.castList(Element.class, e.getChildren("testsuite"));
 		for (Element e2 : list) {
-			temp.add(TestCollection.createTestCollection(e2));
+			add(TestCollection.createTestCollection(e2));
 		}
 		list = XMLWriter.castList(Element.class, e.getChildren("testcase"));
 		for (Element e2 : list) {
-			temp.add(UnitTest.createUnitTest(e2));
+			if (e2 == null) {
+				System.out.println("hay nulos");
+				continue;
+			}
+			tests.add(UnitTest.createUnitTest(e2));
 		}
-
-		return temp;
 	}
 
 	public void setCountTests(int countTests) {
 		this.countTests = countTests;
 	}
+	
+	public TestCollection() {
+		super();
+		tests = new ArrayList<GenericTest>();
+		runMethod = new RunAll();
+	}
 
 	public TestCollection(String name) {
 		super(name);
 		tests = new ArrayList<GenericTest>();
-		// Construye con un template "RunAll" por defecto
 		runMethod = new RunAll();
-	};
+	}
 
 	public void setRunMethod(RunTemplate runMethod) {
 		this.runMethod = runMethod;
@@ -112,7 +123,7 @@ public class TestCollection extends GenericTest {
 				.println("------------------------------------------------------------------------------------------------");
 		TestCollectionResult results = new TestCollectionResult(getName());
 		for (GenericTest test : tests) {
-			if (!test.isSkippable()) {
+			if (test.runnable()) {
 				test.setTestCollectionContenedora(contenedoraYCollectionActual);
 				TestResult result = runMethod.run(test);
 				if (result != null) {
@@ -140,7 +151,23 @@ public class TestCollection extends GenericTest {
 			XMLWriter writer = new XMLWriter();
 			writer.setFilePath(storeTo);
 			List<Element> storedSuites = writer.getElements();
+			for (Element e : storedSuites) {
+				TestCollection temp = createTestCollection(e);
+				if (temp.getName().equals(getName())) {
+					System.out.println("Entro aca ");
+					fromXmlElement(e);
+				}
+				
+			}
 		}
+	}
+	
+	public void storeMode() {
+		this.storeMode = true;
+	}
+
+	public void recoverMode() {
+		this.recoverMode = true;
 	}
 
 	private void store() {
@@ -183,23 +210,16 @@ public class TestCollection extends GenericTest {
 	@Override
 	public Element toXMLElement() {
 		Element element = new Element("testsuite");
-		if (getName() != null) {
-			element.setAttribute("name", getName());
-		}
+		element.setAttribute("name", getName());
 		if (nombreContenedora != null) {
 			element.setAttribute("package", nombreContenedora);
 		}
-		if (tests != null) {
-			element.setAttribute("tests", String.valueOf(tests.size()));
-		}
+		element.setAttribute("tests", String.valueOf(tests.size()));
 		element.setAttribute("failures", String.valueOf(countFailures()));
 		element.setAttribute("errors", String.valueOf(countErrors()));
 		element.setAttribute("time", String.valueOf(timeTotal));
-
 		for (GenericTest test : tests) {
-
-					element.addContent(test.toXMLElement());
-
+			element.addContent(test.toXMLElement());
 		}
 		return element;
 	}
