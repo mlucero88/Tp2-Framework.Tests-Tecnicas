@@ -13,14 +13,13 @@ import org.jdom.Element;
  * generar el reporte con el resultado de la corrida */
 
 public class TestCollection extends GenericTest {
-	//private List<GenericTest> tests;
+	// private List<GenericTest> tests;
 	private HashMap<String, GenericTest> tests = new HashMap<String, GenericTest>();
 	private RunTemplate runMethod;
 	private String nombreContenedora;
 	private String storeTo = null;
 	private boolean storeMode = false;
 	private boolean recoverMode = false;
-
 
 	double timeTotal;
 	int countTests, countError, countFailures;
@@ -30,14 +29,14 @@ public class TestCollection extends GenericTest {
 		temp.fromXmlElement(e);
 		return temp;
 	}
-	
+
 	private void fromXmlElement(Element e) {
 		setName(e.getAttributeValue("name"));
 		Attribute attrPackageName = e.getAttribute("package");
 		if (attrPackageName != null) {
 			setTestCollectionContenedora(attrPackageName.getValue());
 		}
-		
+
 		setTimeTotal(Double.parseDouble(e.getAttributeValue("time")));
 		setCountTests(Integer.parseInt(e.getAttributeValue("tests")));
 		setCountFailures(Integer.parseInt(e.getAttributeValue("failures")));
@@ -60,16 +59,14 @@ public class TestCollection extends GenericTest {
 	public void setCountTests(int countTests) {
 		this.countTests = countTests;
 	}
-	
+
 	public TestCollection() {
 		super();
-		//tests = new ArrayList<GenericTest>();
 		runMethod = new RunAll();
 	}
 
 	public TestCollection(String name) {
 		super(name);
-		//tests = new ArrayList<GenericTest>();
 		runMethod = new RunAll();
 	}
 
@@ -79,34 +76,27 @@ public class TestCollection extends GenericTest {
 
 	@Override
 	final public boolean add(GenericTest test) {
-		
+
 		if (NameRegister.getInstance().registerName(test.getName())) {
 			if (!tests.containsKey(test.getName())) {
 				tests.put(test.getName(), test);
-				
+
 			} else {
 				GenericTest testOld = getTest(test.getName());
-				if (testOld.isUnitTest()) {
-					if (((UnitTest)testOld).isOK()) {
-						testOld.setSkippable();
-					} else {
-						tests.remove(testOld);
-						tests.put(test.getName(), test);
-					}
+				if (testOld.isUnitTest() && !testOld.isSkippable()) {
+					tests.remove(testOld);
+					tests.put(test.getName(), test);
 				}
 			}
 			return true;
-			
-		} //else {
-
-			return false;
-	//	}
+		} 
+		return false;
 	}
-	
+
 	private GenericTest getTest(String nameTest) {
 		if (tests.containsKey(nameTest)) {
 			return tests.get(nameTest);
-		} 
+		}
 		return null;
 	}
 
@@ -142,16 +132,6 @@ public class TestCollection extends GenericTest {
 				}
 			}
 		}
-//		for (GenericTest test : tests) {
-//			if (test.runnable()) {
-//				test.setTestCollectionContenedora(contenedoraYCollectionActual);
-//				TestResult result = runMethod.run(test);
-//				if (result != null) {
-//					updateCounts(result);
-//					results.add(result);
-//				}
-//			}
-//		}
 
 		results.update();
 		tearDown();
@@ -165,15 +145,6 @@ public class TestCollection extends GenericTest {
 		results.setCollectionResultCadenaDeNombres(contenedoraYCollectionActual);
 		return results;
 	}
-//	
-//
-//	private String testSuitesToString() {
-//		Iterator<String> keySetIterator = tests.keySet().iterator();
-//		while (keySetIterator.hasNext()) {
-//			GenericTest test = tests.get(keySetIterator.next());
-//		}
-//	}
-
 
 	private void recoverTestsFromStore() {
 		if ((storeTo != null) && recoverMode) {
@@ -185,11 +156,11 @@ public class TestCollection extends GenericTest {
 				if (temp.getName().equals(getName())) {
 					fromXmlElement(e);
 				}
-				
+
 			}
 		}
 	}
-	
+
 	public void storeMode() {
 		this.storeMode = true;
 	}

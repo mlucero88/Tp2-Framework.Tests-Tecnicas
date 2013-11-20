@@ -75,7 +75,7 @@ public class TestWithTagInCollection {
 	 test3.addTag(TagType.SLOW);
 	
 	 // Skips
-	 test1.setSkippable();
+	 test1.setSkippable(true);
 	
 	 RunTemplate runMethod = new RunTags(TagType.SLOW);
 	 testSuite1.setRunMethod(runMethod);

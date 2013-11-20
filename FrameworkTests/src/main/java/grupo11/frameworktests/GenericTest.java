@@ -55,8 +55,8 @@ public abstract class GenericTest {
 		return skip;
 	}
 
-	public void setSkippable() {
-		skip = true;
+	public void setSkippable(boolean skippable) {
+		skip = skippable;
 	}
 
 	public void setNotSkippable() {

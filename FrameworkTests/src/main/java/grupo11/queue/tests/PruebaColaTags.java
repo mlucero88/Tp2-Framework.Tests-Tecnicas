@@ -8,7 +8,6 @@ import grupo11.frameworktests.TestCollectionResult;
 import grupo11.frameworktests.TestReport;
 import grupo11.frameworktests.UnitTest;
 import grupo11.frameworktests.GenericTest.TagType;
-import grupo11.frameworktests.grupo13classes.XMLWriter;
 
 public class PruebaColaTags {
 
@@ -38,8 +37,12 @@ public class PruebaColaTags {
 		tests2.setStore("unStoreCualquiera");
 		tests2.recoverMode();
 		tests2.run();
-//		XMLWriter xmlWriter = new XMLWriter(results.toXMLElement());
-//		xmlWriter.produceResult();
+		
+		UnitTest unitTest = (UnitTest)tests2.getTests().get("TestColaVacia");
+
+		if(unitTest.isSkippable()){
+			System.out.println("si es skipable");
+		}
 		TestReport report = new TestReport(results);
 		report.generarReporteEnArchivo();
 		report.mostrarEstadisticasPorPantalla();

@@ -1,6 +1,5 @@
 package grupo11.frameworktests;
 
-import grupo11.frameworktests.UnitTestResult.ResultType;
 import grupo11.frameworktests.grupo13classes.AlreadyRunnedUnitTest;
 
 import org.jdom.Attribute;
@@ -140,6 +139,12 @@ public abstract class UnitTest extends GenericTest {
 		UnitTest ut = new AlreadyRunnedUnitTest(e2.getAttributeValue("name"));
 		String status = e2.getAttributeValue("status");
 		ut.setResultType(ResultType.valueOf(status));
+		if (ut.isOK()) {
+			ut.setSkippable(true);
+		} else {
+			ut.setSkippable(false);
+
+		}
 		Attribute attrTime = e2.getAttribute("time");
 		if (attrTime != null) {
 			try {

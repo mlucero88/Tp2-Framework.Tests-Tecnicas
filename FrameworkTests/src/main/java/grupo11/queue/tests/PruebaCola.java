@@ -1,18 +1,17 @@
 package grupo11.queue.tests;
 
-import grupo11.frameworktests.RunTags;
-import grupo11.frameworktests.RunTemplate;
 import grupo11.frameworktests.TestCollection;
 import grupo11.frameworktests.TestCollectionResult;
 import grupo11.frameworktests.TestReport;
 import grupo11.frameworktests.UnitTest;
-import grupo11.frameworktests.GenericTest.TagType;
-import grupo11.frameworktests.grupo13classes.XMLWriter;
 
 public class PruebaCola {
 
 	public static void main(String[] args) {
 		TestCollection tests = new TestCollection("TestDeCola1");
+		
+		UnitTest test0 = new TestColaLlenaQueFalla("TestColaLlenaQueFalla");
+		tests.add(test0);
 
 		UnitTest test1 = new TestColaVacia("TestColaVacia");
 		tests.add(test1);
@@ -57,43 +56,19 @@ public class PruebaCola {
 		UnitTest test8 = new TestLlenarYVaciarCola("TestLlenarYVaciarCola");
 		tests.add(test8);
 		
-		// Agrego TAGS
-		test1.addTag(TagType.SLOW);
-		test3.addTag(TagType.SLOW);
-
-		RunTemplate runMethod = new RunTags(TagType.SLOW);
-		tests.setRunMethod(runMethod);
 		tests.setStore("Hola");
 		tests.storeMode();
 		
 		
 		
 		TestCollectionResult results = (TestCollectionResult) tests.run();
+		if (test0.isOK()) {
+			System.out.println("aldsfhads");
+		}
 		
-//		XMLWriter xmlWriter = new XMLWriter(results.toXMLElement());
-//		xmlWriter.produceResult();
 		TestReport report = new TestReport(results);
 		report.generarReporteEnArchivo();
 		report.mostrarEstadisticasPorPantalla();
 		
-		// ---------- apartir de aca se testea lo tuyo Erik
-		
-//		TestCollection testsDeNuevo = new TestCollection("TestDeCola1");
-//		
-//		UnitTest testQueNotieneQueCorrer = new TestLlenarYVaciarCola("TestLlenarYVaciarCola2");
-//		testsDeNuevo.add(testQueNotieneQueCorrer);
-//		
-//		UnitTest testQuetieneQueCorrer = new TestColaLlenaQueFalla("TestColaLlenaQueFalla");
-//		testsDeNuevo.add(testQuetieneQueCorrer);
-		
-		
-		
-//		TestCollectionResult results2 = (TestCollectionResult) testsDeNuevo.run();
-//		
-//		XMLWriter xmlWriter2 = new XMLWriter(results2.toXMLElement());
-//		xmlWriter2.produceResult();
-//		report = new TestReport(results);
-//		report.generarReporteEnArchivo();
-//		report.mostrarEstadisticasPorPantalla();
 	}
 }
