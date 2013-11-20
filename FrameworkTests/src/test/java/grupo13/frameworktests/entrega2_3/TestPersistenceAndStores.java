@@ -15,9 +15,9 @@ public class TestPersistenceAndStores {
 	
 	TestCollection initialTestCollection1;
 	TestCollection initialTestCollection2;
-	TestCollection testCollectionRecoveredFromStore1;
+	TestCollection testCollection1RecoveredFromStore;
 	UnitTest failingUnitTest;
-	TestCollection testCollectionRecoveredFromStore2;
+	TestCollection testCollection2RecoveredFromStore;
 	
 	@Before
 	public void setup() {
@@ -43,51 +43,52 @@ public class TestPersistenceAndStores {
 		initialTestCollection2.setStore("unStoreCualquiera10");
 		initialTestCollection2.storeMode();
 		initialTestCollection2.run();
-		NameRegister.getInstance().clear();
-		testCollectionRecoveredFromStore1 = new TestCollection("TestDeCola1");
-		testCollectionRecoveredFromStore1.setStore("unStoreCualquiera10");
-		testCollectionRecoveredFromStore1.recoverMode();
-		testCollectionRecoveredFromStore1.run();
 		
 		NameRegister.getInstance().clear();
-		testCollectionRecoveredFromStore2 = new TestCollection("TestDeCola1");
-		testCollectionRecoveredFromStore2.setStore("unStoreCualquiera10");
-		testCollectionRecoveredFromStore2.recoverMode();
-		testCollectionRecoveredFromStore2.run();
+		testCollection1RecoveredFromStore = new TestCollection("TestDeCola1");
+		testCollection1RecoveredFromStore.setStore("unStoreCualquiera10");
+		testCollection1RecoveredFromStore.recoverMode();
+		testCollection1RecoveredFromStore.run();
+		
+		NameRegister.getInstance().clear();
+		testCollection2RecoveredFromStore = new TestCollection("TestDeCola1");
+		testCollection2RecoveredFromStore.setStore("unStoreCualquiera10");
+		testCollection2RecoveredFromStore.recoverMode();
+		testCollection2RecoveredFromStore.run();
 	}
 
 	@Test
 	public void recoveredFromXmlTestHasSameCountTestsThatBefore() {
 
-		Assert.assertEquals(initialTestCollection1.countTests(), testCollectionRecoveredFromStore1.countTests());
+		Assert.assertEquals(initialTestCollection1.countTests(), testCollection1RecoveredFromStore.countTests());
 
 	}
 	
 	@Test
 	public void recoveredFromXmlTestHasSameCountFailuresThatBefore() {
 
-		Assert.assertEquals(initialTestCollection1.countFailures(), testCollectionRecoveredFromStore1.countFailures());
+		Assert.assertEquals(initialTestCollection1.countFailures(), testCollection1RecoveredFromStore.countFailures());
 
 	}
 	
 	@Test
 	public void recoveredFromXmlTestHasSameCountErrorsThatBefore() {
 
-		Assert.assertEquals(initialTestCollection1.countErrors(), testCollectionRecoveredFromStore1.countErrors());
+		Assert.assertEquals(initialTestCollection1.countErrors(), testCollection1RecoveredFromStore.countErrors());
 
 	}
 	
 	@Test
 	public void runningRecoveredFromXmlContainsTestAlreadyExecuted() {
 
-		Assert.assertTrue(testCollectionRecoveredFromStore1.getTests().containsKey("TestColaVacia"));
+		Assert.assertTrue(testCollection1RecoveredFromStore.getTests().containsKey("TestColaVacia"));
 
 	}
 	
 	@Test
 	public void recoveredFromXmlTestIsSkippedWhenPassedBefore() {
 		
-		UnitTest unitTest = (UnitTest)testCollectionRecoveredFromStore1.getTests().get("TestColaVacia");
+		UnitTest unitTest = (UnitTest)testCollection1RecoveredFromStore.getTests().get("TestColaVacia");
 		Assert.assertTrue(unitTest.isSkippable());
 
 	}
@@ -95,9 +96,8 @@ public class TestPersistenceAndStores {
 	@Test
 	public void recoveredFromXmlTestIsntSkippedWhenFailedBefore() {
 		
-		UnitTest unitTest = (UnitTest)testCollectionRecoveredFromStore1.getTests().get("TestColaLlenaQueFalla");
+		UnitTest unitTest = (UnitTest)testCollection1RecoveredFromStore.getTests().get("TestColaLlenaQueFalla");
 		Assert.assertFalse(unitTest.isSkippable());
-
 	}
 	
 	
@@ -105,15 +105,13 @@ public class TestPersistenceAndStores {
 	public void testsFailAAsExpected() {
 		
 		Assert.assertFalse(failingUnitTest.isOK());
-
 	}
 	
 	@Test
-	public void twoCollectionsCanBesavedAndRecoveredFromTheSameStore() {
+	public void twoCollectionsCanBeSavedToAndRecoveredFromTheSameStore() {
 		
-		Assert.assertEquals(initialTestCollection1.countTests(), testCollectionRecoveredFromStore1.countTests());
-		Assert.assertEquals(initialTestCollection2.countTests(), testCollectionRecoveredFromStore2.countTests());
-
+		Assert.assertEquals(initialTestCollection1.countTests(), testCollection1RecoveredFromStore.countTests());
+		Assert.assertEquals(initialTestCollection2.countTests(), testCollection2RecoveredFromStore.countTests());
 	}
 
 }
