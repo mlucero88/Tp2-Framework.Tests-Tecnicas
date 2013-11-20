@@ -1,4 +1,4 @@
-package grupo1.frameworktests.entrega2_3;
+package grupo13.frameworktests.entrega2_3;
 
 import grupo11.frameworktests.Fixture;
 import grupo11.frameworktests.UnitTest;

@@ -197,15 +197,9 @@ public class TestCollection extends GenericTest {
 		element.setAttribute("time", String.valueOf(timeTotal));
 
 		for (GenericTest test : tests) {
-			if (test != null) {
 
-				Element e = test.toXMLElement();
-				if (e != null) {
 					element.addContent(test.toXMLElement());
-				}
-			} else {
-				System.out.println("un test nulo");
-			}
+
 		}
 		return element;
 	}
