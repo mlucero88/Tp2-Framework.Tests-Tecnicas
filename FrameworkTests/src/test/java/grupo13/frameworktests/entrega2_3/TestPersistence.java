@@ -67,5 +67,23 @@ public class TestPersistence {
 		Assert.assertEquals(tests.countErrors(), tests2.countErrors());
 
 	}
+	
+	@Test
+	public void runningRecoveredFromXmlSkipsTestsAlreadyPassed() {
+		TestCollection tests = new TestCollection("TestDeCola1");
+		UnitTest test1 = new TestColaVacia("TestColaVacia");
+		tests.add(test1);
+		tests.setStore("unStoreCualquiera");
+		tests.storeMode();
+		tests.run();
+		NameRegister.getInstance().clear();
+		TestCollection tests2 = new TestCollection("TestDeCola1");
+		tests2.setStore("unStoreCualquiera");
+		tests2.recoverMode();
+		tests2.run();
+		UnitTest recoveredTest = (UnitTest) tests2.getTests().get(0);
+		Assert.assertTrue(recoveredTest.isSkippable());
+
+	}
 
 }

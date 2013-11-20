@@ -4,6 +4,8 @@ import grupo11.frameworktests.grupo13classes.XMLWriter;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 
 import org.jdom.Attribute;
@@ -13,7 +15,8 @@ import org.jdom.Element;
  * generar el reporte con el resultado de la corrida */
 
 public class TestCollection extends GenericTest {
-	private Collection<GenericTest> tests;
+	//private List<GenericTest> tests;
+	private HashMap<String, GenericTest> tests = new HashMap<String, GenericTest>();
 	private RunTemplate runMethod;
 	private String nombreContenedora;
 	private String storeTo = null;
@@ -51,7 +54,8 @@ public class TestCollection extends GenericTest {
 				System.out.println("hay nulos");
 				continue;
 			}
-			tests.add(UnitTest.createUnitTest(e2));
+			GenericTest unitTest = UnitTest.createUnitTest(e2);
+			tests.put(unitTest.getName(), unitTest);
 		}
 	}
 
@@ -61,13 +65,13 @@ public class TestCollection extends GenericTest {
 	
 	public TestCollection() {
 		super();
-		tests = new ArrayList<GenericTest>();
+		//tests = new ArrayList<GenericTest>();
 		runMethod = new RunAll();
 	}
 
 	public TestCollection(String name) {
 		super(name);
-		tests = new ArrayList<GenericTest>();
+		//tests = new ArrayList<GenericTest>();
 		runMethod = new RunAll();
 	}
 
@@ -79,7 +83,7 @@ public class TestCollection extends GenericTest {
 	final public boolean add(GenericTest test) {
 		UnitTest testOld;
 		if (NameRegister.getInstance().registerName(test.getName())) {
-			tests.add(test);
+			tests.put(test.getName(), test);
 			return true;
 		} else {
 			testOld = (UnitTest) getTest(test.getName());
@@ -87,18 +91,16 @@ public class TestCollection extends GenericTest {
 				testOld.setSkippable();
 			} else {
 				tests.remove(testOld);
-				tests.add(test);
+				tests.put(test.getName(), test);
 			}
 			return false;
 		}
 	}
-
+	
 	private GenericTest getTest(String nameTest) {
-		for (GenericTest test : tests) {
-			if (test.getName().equals(nameTest)) {
-				return test;
-			}
-		}
+		if (tests.containsKey(nameTest)) {
+			return tests.get(nameTest);
+		} 
 		return null;
 	}
 
@@ -122,7 +124,9 @@ public class TestCollection extends GenericTest {
 		System.out
 				.println("------------------------------------------------------------------------------------------------");
 		TestCollectionResult results = new TestCollectionResult(getName());
-		for (GenericTest test : tests) {
+		Iterator<String> keySetIterator = tests.keySet().iterator();
+		while (keySetIterator.hasNext()) {
+			GenericTest test = tests.get(keySetIterator.next());
 			if (test.runnable()) {
 				test.setTestCollectionContenedora(contenedoraYCollectionActual);
 				TestResult result = runMethod.run(test);
@@ -132,6 +136,16 @@ public class TestCollection extends GenericTest {
 				}
 			}
 		}
+//		for (GenericTest test : tests) {
+//			if (test.runnable()) {
+//				test.setTestCollectionContenedora(contenedoraYCollectionActual);
+//				TestResult result = runMethod.run(test);
+//				if (result != null) {
+//					updateCounts(result);
+//					results.add(result);
+//				}
+//			}
+//		}
 
 		results.update();
 		tearDown();
@@ -145,6 +159,15 @@ public class TestCollection extends GenericTest {
 		results.setCollectionResultCadenaDeNombres(contenedoraYCollectionActual);
 		return results;
 	}
+//	
+//
+//	private String testSuitesToString() {
+//		Iterator<String> keySetIterator = tests.keySet().iterator();
+//		while (keySetIterator.hasNext()) {
+//			GenericTest test = tests.get(keySetIterator.next());
+//		}
+//	}
+
 
 	private void recoverTestsFromStore() {
 		if ((storeTo != null) && recoverMode) {
@@ -154,7 +177,6 @@ public class TestCollection extends GenericTest {
 			for (Element e : storedSuites) {
 				TestCollection temp = createTestCollection(e);
 				if (temp.getName().equals(getName())) {
-					System.out.println("Entro aca ");
 					fromXmlElement(e);
 				}
 				
@@ -186,7 +208,7 @@ public class TestCollection extends GenericTest {
 		return tests.size();
 	}
 
-	public Collection<GenericTest> getTests() {
+	public HashMap<String, GenericTest> getTests() {
 		return tests;
 	}
 
@@ -218,7 +240,9 @@ public class TestCollection extends GenericTest {
 		element.setAttribute("failures", String.valueOf(countFailures()));
 		element.setAttribute("errors", String.valueOf(countErrors()));
 		element.setAttribute("time", String.valueOf(timeTotal));
-		for (GenericTest test : tests) {
+		Iterator<String> keySetIterator = tests.keySet().iterator();
+		while (keySetIterator.hasNext()) {
+			GenericTest test = tests.get(keySetIterator.next());
 			element.addContent(test.toXMLElement());
 		}
 		return element;
