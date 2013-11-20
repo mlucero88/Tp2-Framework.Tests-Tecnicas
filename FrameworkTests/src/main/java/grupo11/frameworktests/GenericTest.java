@@ -16,8 +16,6 @@ public abstract class GenericTest {
 	private boolean skip;
 	private double maxTime;
 	
-	
-
 	public double getMaxTime() {
 		return maxTime;
 	}
@@ -88,7 +86,10 @@ public abstract class GenericTest {
 	public abstract int countFailures();
 
 	public boolean runnable() {
-		// TODO Auto-generated method stub
 		return true;
+	}
+
+	public boolean isUnitTest() {
+		return false;
 	}
 }

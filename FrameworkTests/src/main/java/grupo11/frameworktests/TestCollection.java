@@ -2,8 +2,6 @@ package grupo11.frameworktests;
 
 import grupo11.frameworktests.grupo13classes.XMLWriter;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -81,20 +79,28 @@ public class TestCollection extends GenericTest {
 
 	@Override
 	final public boolean add(GenericTest test) {
-		UnitTest testOld;
+		
 		if (NameRegister.getInstance().registerName(test.getName())) {
-			tests.put(test.getName(), test);
-			return true;
-		} else {
-			testOld = (UnitTest) getTest(test.getName());
-			if (testOld.isOK()) {
-				testOld.setSkippable();
-			} else {
-				tests.remove(testOld);
+			if (!tests.containsKey(test.getName())) {
 				tests.put(test.getName(), test);
+				
+			} else {
+				GenericTest testOld = getTest(test.getName());
+				if (testOld.isUnitTest()) {
+					if (((UnitTest)testOld).isOK()) {
+						testOld.setSkippable();
+					} else {
+						tests.remove(testOld);
+						tests.put(test.getName(), test);
+					}
+				}
 			}
+			return true;
+			
+		} //else {
+
 			return false;
-		}
+	//	}
 	}
 	
 	private GenericTest getTest(String nameTest) {

@@ -158,4 +158,9 @@ public abstract class UnitTest extends GenericTest {
 	public boolean runnable() {
 		return !isSkippable();
 	}
+	
+
+	public boolean isUnitTest() {
+		return true;
+	}
 }
