@@ -47,10 +47,6 @@ public class TestCollection extends GenericTest {
 		}
 		list = XMLWriter.castList(Element.class, e.getChildren("testcase"));
 		for (Element e2 : list) {
-			if (e2 == null) {
-				System.out.println("hay nulos");
-				continue;
-			}
 			GenericTest unitTest = UnitTest.createUnitTest(e2);
 			tests.put(unitTest.getName(), unitTest);
 		}
@@ -89,7 +85,7 @@ public class TestCollection extends GenericTest {
 				}
 			}
 			return true;
-		} 
+		}
 		return false;
 	}
 
@@ -115,10 +111,12 @@ public class TestCollection extends GenericTest {
 		} else {
 			contenedoraYCollectionActual = nombreContenedora + "." + getName();
 		}
+
 		System.out.println(" ");
 		System.out.println(contenedoraYCollectionActual);
 		System.out
 				.println("------------------------------------------------------------------------------------------------");
+
 		TestCollectionResult results = new TestCollectionResult(getName());
 		Iterator<String> keySetIterator = tests.keySet().iterator();
 		while (keySetIterator.hasNext()) {
@@ -150,16 +148,30 @@ public class TestCollection extends GenericTest {
 		if ((storeTo != null) && recoverMode) {
 			XMLWriter writer = new XMLWriter();
 			writer.setFilePath(storeTo);
-			List<Element> storedSuites = writer.getElements();
-			for (Element e : storedSuites) {
-				TestCollection temp = createTestCollection(e);
-				if (temp.getName().equals(getName())) {
-					fromXmlElement(e);
+			if (writer.open()) {
+				List<Element> storedSuites = writer.getElements();
+				Element element = searchSuite(storedSuites);
+				if (element != null) {
+					fromXmlElement(element);
+					return;
 				}
-
+				System.out.println("El store indicado no contiene informacion sobre: " + getName());
 			}
+
 		}
 	}
+	
+	
+
+	private Element searchSuite(List<Element> suiteList) {
+		for (Element e : suiteList) {
+			TestCollection temp = createTestCollection(e);
+			if (temp.getName().equals(getName())) {
+				return e;
+			}
+		}
+		return null;
+}
 
 	public void storeMode() {
 		this.storeMode = true;
@@ -171,9 +183,16 @@ public class TestCollection extends GenericTest {
 
 	private void store() {
 		if ((storeTo != null) && storeMode) {
-			XMLWriter writer = new XMLWriter(toXMLElement());
+			XMLWriter writer = new XMLWriter();
 			writer.setFilePath(storeTo);
-			writer.produceResult();
+			writer.createStore();
+			List<Element> storedSuites = writer.getElements();
+			Element element = searchSuite(storedSuites);
+			if (element != null) {
+				writer.remove(element);
+			}
+			writer.addElement(toXMLElement());
+			writer.save();
 		}
 	}
 

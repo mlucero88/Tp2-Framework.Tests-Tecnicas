@@ -18,7 +18,7 @@ public class XMLWriter {
 
 	XMLOutputter xmlOutput = new XMLOutputter();
 	String filePath;
-	
+
 	public String getFilePath() {
 		return filePath;
 	}
@@ -28,26 +28,25 @@ public class XMLWriter {
 	}
 
 	Document doc;
-	
 
 	public XMLWriter() {
-		Element rootElement = new Element("testsuites");
-		doc = new Document(rootElement);
-		doc.setRootElement(rootElement);
+//		Element rootElement = new Element("testsuites");
+//		doc = new Document(rootElement);
+//		doc.setRootElement(rootElement);
 	}
 
-	public XMLWriter(Element element) {
-		Element rootElement = new Element("testsuites");
-		doc = new Document(rootElement);
-		doc.setRootElement(rootElement);
-		addElement(element);
-	}
+//	public XMLWriter(Element element) {
+//		Element rootElement = new Element("testsuites");
+//		doc = new Document(rootElement);
+//		doc.setRootElement(rootElement);
+//		addElement(element);
+//	}
 
 	public void addElement(Element element) {
 		doc.getRootElement().addContent(element);
 	}
 
-	public void produceResult() {
+	public void save() {
 		try {
 			xmlOutput.setFormat(Format.getPrettyFormat());
 			xmlOutput.output(doc, new FileWriter(getFilePath()));
@@ -58,21 +57,34 @@ public class XMLWriter {
 	}
 
 	public List<Element> getElements() {
-		loadDoc();
 		Element rootNode = doc.getRootElement();
 		return castList(Element.class, rootNode.getChildren("testsuite"));
 	}
+	
+	public void remove(Element element) {
+		element.getParent().removeContent(element);
+	}
 
-	private void loadDoc() {
-		SAXBuilder saxBuilder = new SAXBuilder();
+	public boolean open() {
 		try {
-			doc = saxBuilder.build(new File(getFilePath()));
-		} catch (JDOMException e) {
-			e.printStackTrace();
+			return openXmlDocument();
 		} catch (IOException e) {
-			e.printStackTrace();
+			System.out.println(" Error: ha intentado abrir un store inexistente. ");
 		}
+		return false;
 
+	}
+
+	private boolean openXmlDocument() throws IOException {
+		try {
+			SAXBuilder saxBuilder = new SAXBuilder();
+			doc = saxBuilder.build(new File(getFilePath()));
+			return true;
+		} catch (JDOMException e) {
+			System.out.println(" El store tiene un estado invalido: " + e.getMessage());
+			System.out.println(" JDOMException: " + e.getMessage());
+			return false;
+		}
 	}
 
 	public static <T> List<T> castList(Class<? extends T> clazz, Collection<?> c) {
@@ -80,6 +92,17 @@ public class XMLWriter {
 		for (Object o : c)
 			r.add(clazz.cast(o));
 		return r;
+	}
+
+	public void createStore() {
+		try {
+			openXmlDocument();
+		} catch (IOException e) {
+			Element rootElement = new Element("testsuites");
+			doc = new Document(rootElement);
+			doc.setRootElement(rootElement);
+		}
+
 	}
 
 }

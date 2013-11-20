@@ -27,25 +27,22 @@ public class PruebaColaTags {
 
 		RunTemplate runMethod = new RunTags(TagType.SLOW);
 		tests.setRunMethod(runMethod);
-		
+		tests.setStore("unStoreCualquiera10");
+		tests.storeMode();
 		
 		
 		TestCollectionResult results = (TestCollectionResult) tests.run();
-		//nulpointer
 		NameRegister.getInstance().clear();
 		TestCollection tests2 = new TestCollection("TestDeCola1");
 		tests2.setStore("unStoreCualquiera");
 		tests2.recoverMode();
 		tests2.run();
 		
-		UnitTest unitTest = (UnitTest)tests2.getTests().get("TestColaVacia");
-
-		if(unitTest.isSkippable()){
-			System.out.println("si es skipable");
-		}
-		TestReport report = new TestReport(results);
-		report.generarReporteEnArchivo();
-		report.mostrarEstadisticasPorPantalla();
+//		UnitTest unitTest = (UnitTest)tests2.getTests().get("TestColaVacia");
+//
+//		TestReport report = new TestReport(results);
+//		report.generarReporteEnArchivo();
+//		report.mostrarEstadisticasPorPantalla();
 		
 
 	}

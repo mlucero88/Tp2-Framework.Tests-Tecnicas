@@ -28,7 +28,7 @@ public class TestPersistenceAndStores {
 		initialTestCollection1.add(test2);
 		failingUnitTest = new TestColaLlenaQueFalla("TestColaLlenaQueFalla");
 		initialTestCollection1.add(failingUnitTest);
-		initialTestCollection1.setStore("unStoreCualquiera");
+		initialTestCollection1.setStore("unStoreCualquiera10");
 		initialTestCollection1.storeMode();
 		initialTestCollection1.run();
 		
@@ -40,18 +40,18 @@ public class TestPersistenceAndStores {
 		initialTestCollection2.add(test22);
 		UnitTest failingUnitTest2 = new TestColaLlenaQueFalla("TestColaLlenaQueFalla");
 		initialTestCollection2.add(failingUnitTest2);
-		initialTestCollection2.setStore("unStoreCualquiera");
+		initialTestCollection2.setStore("unStoreCualquiera10");
 		initialTestCollection2.storeMode();
 		initialTestCollection2.run();
 		NameRegister.getInstance().clear();
 		testCollectionRecoveredFromStore1 = new TestCollection("TestDeCola1");
-		testCollectionRecoveredFromStore1.setStore("unStoreCualquiera");
+		testCollectionRecoveredFromStore1.setStore("unStoreCualquiera10");
 		testCollectionRecoveredFromStore1.recoverMode();
 		testCollectionRecoveredFromStore1.run();
-
+		
 		NameRegister.getInstance().clear();
 		testCollectionRecoveredFromStore2 = new TestCollection("TestDeCola1");
-		testCollectionRecoveredFromStore2.setStore("unStoreCualquiera");
+		testCollectionRecoveredFromStore2.setStore("unStoreCualquiera10");
 		testCollectionRecoveredFromStore2.recoverMode();
 		testCollectionRecoveredFromStore2.run();
 	}
