@@ -16,7 +16,7 @@ import org.junit.Test;
 
 
 public class TestPerformance {
-	public final static int TEST_PERFORMANCE_TIME_MS = 2 ;
+	public final static int TEST_PERFORMANCE_TIME_MS = 50 ;
 
 	
 	private double expectedTime;

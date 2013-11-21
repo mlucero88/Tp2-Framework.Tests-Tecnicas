@@ -17,10 +17,13 @@ public class SlowTest extends UnitTest {
 
 	@Override
 	protected void test() {
-		for (int i = 0; i < 1000000000; ++i) {}
-		for (int i = 0; i < 1000000000; ++i) {}
-		for (int i = 0; i < 1000000000; ++i) {}
+		try{
+			  Thread.currentThread();
+			  Thread.sleep(1000);
+			}
+			catch(InterruptedException ie){
 
+			}
 		Object variable = FIXTURE_TEST_VAR_VALUE;
 		Fixture.getInstance().addVariable(FIXTURE_TEST_VAR_NAME, variable);
 		/* Ciclo para que el test arroje resultados de tiempo mas notorios */
