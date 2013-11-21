@@ -175,4 +175,8 @@ public abstract class UnitTest extends GenericTest {
 	public boolean isUnitTest() {
 		return true;
 	}
+
+	public boolean executed() {
+		return (resultType != ResultType.notExecuted);
+	}
 }

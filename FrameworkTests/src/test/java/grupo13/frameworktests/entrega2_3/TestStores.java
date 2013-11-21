@@ -6,6 +6,7 @@ import grupo11.frameworktests.UnitTest;
 import grupo11.queue.tests.TestColaLlena;
 import grupo11.queue.tests.TestColaLlenaQueFalla;
 import grupo11.queue.tests.TestColaVacia;
+import grupo11.queue.tests.TestSize;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -36,11 +37,14 @@ public class TestStores {
 		testCollection1RecoveredFromStore = new TestCollection("TestDeCola1");
 		//fuerzo que TestColaLlenaQueFalla pase instanciando otro UnitTest con el mismo nombre
 		UnitTest failedTestThatWasCorrected = new TestColaLlena("TestColaLlenaQueFalla");
+		initialTestCollection1.add(test2);
+		UnitTest newTestAdded = new TestSize("NuevoTestSize");
 		
 		testCollection1RecoveredFromStore.setStore("unStoreDePrueba");
 		testCollection1RecoveredFromStore.recoverMode();
 		testCollection1RecoveredFromStore.recover();
 		testCollection1RecoveredFromStore.add(failedTestThatWasCorrected);
+		testCollection1RecoveredFromStore.add(newTestAdded);
 		testCollection1RecoveredFromStore.run();
 	}
 
@@ -57,6 +61,22 @@ public class TestStores {
 		UnitTest unitTest2 = (UnitTest)testCollection1RecoveredFromStore.getTests().get("TestColaLlenaQueFalla");
 		Assert.assertFalse(unitTest1.isOK());
 		Assert.assertTrue(unitTest2.isOK());
+	}
+	
+	@Test
+	public void wereExecutedNewTestsAndWhatFailedBefore() {
+		
+		UnitTest unitTest1 = (UnitTest)testCollection1RecoveredFromStore.getTests().get("TestColaLlenaQueFalla");
+		UnitTest unitTest2 = (UnitTest)testCollection1RecoveredFromStore.getTests().get("NuevoTestSize");
+		Assert.assertTrue(unitTest1.executed());
+		Assert.assertTrue(unitTest2.executed());
+	}
+	
+	@Test
+	public void wereSkippedTeststThatPassedBefore() {
+		
+		UnitTest unitTest1 = (UnitTest)testCollection1RecoveredFromStore.getTests().get("TestColaVacia");
+		Assert.assertTrue(unitTest1.isSkippable());
 	}
 
 }

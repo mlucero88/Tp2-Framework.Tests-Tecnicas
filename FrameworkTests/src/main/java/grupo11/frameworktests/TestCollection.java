@@ -85,7 +85,6 @@ public class TestCollection extends GenericTest {
 					countError -= testOld.countErrors();
 					countFailures -= testOld.countFailures();
 					tests.put(test.getName(), test);
-					//updateCounts((UnitTest)test);
 				}
 			}
 			return true;
