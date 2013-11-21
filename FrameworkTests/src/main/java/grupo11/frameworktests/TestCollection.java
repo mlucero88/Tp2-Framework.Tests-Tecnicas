@@ -81,7 +81,11 @@ public class TestCollection extends GenericTest {
 				GenericTest testOld = getTest(test.getName());
 				if (testOld.isUnitTest() && !testOld.isSkippable()) {
 					tests.remove(testOld);
+					countTests -= testOld.countTests();
+					countError -= testOld.countErrors();
+					countFailures -= testOld.countFailures();
 					tests.put(test.getName(), test);
+					//updateCounts((UnitTest)test);
 				}
 			}
 			return true;
@@ -103,7 +107,7 @@ public class TestCollection extends GenericTest {
 	 */
 	final public TestCollectionResult run() {
 		double timeStartTest = System.currentTimeMillis();
-		recoverTestsFromStore();
+		//recover();
 		setUp();
 		String contenedoraYCollectionActual;
 		if (nombreContenedora == null) {
@@ -124,8 +128,8 @@ public class TestCollection extends GenericTest {
 			if (test.runnable()) {
 				test.setTestCollectionContenedora(contenedoraYCollectionActual);
 				TestResult result = runMethod.run(test);
+				updateCounts(test);
 				if (result != null) {
-					updateCounts(result);
 					results.add(result);
 				}
 			}
@@ -144,7 +148,7 @@ public class TestCollection extends GenericTest {
 		return results;
 	}
 
-	private void recoverTestsFromStore() {
+	public void recover() {
 		if ((storeTo != null) && recoverMode) {
 			XMLWriter writer = new XMLWriter();
 			writer.setFilePath(storeTo);
@@ -182,7 +186,7 @@ public class TestCollection extends GenericTest {
 	}
 
 	private void store() {
-		if ((storeTo != null) && storeMode) {
+		if ((storeTo != null) && (storeMode || recoverMode)) {
 			XMLWriter writer = new XMLWriter();
 			writer.setFilePath(storeTo);
 			writer.createStore();
@@ -259,10 +263,10 @@ public class TestCollection extends GenericTest {
 		return countFailures;
 	}
 
-	private void updateCounts(TestResult component) {
-		countTests += component.countTests();
-		countError += component.countErrors();
-		countFailures += component.countFailures();
+	private void updateCounts(GenericTest test) {
+		countTests += test.countTests();
+		countError += test.countErrors();
+		countFailures += test.countFailures();
 	}
 
 	public void setStore(String storeName) {

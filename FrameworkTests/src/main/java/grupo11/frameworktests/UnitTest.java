@@ -13,10 +13,10 @@ import org.jdom.Element;
 public abstract class UnitTest extends GenericTest {
 
 	public enum ResultType {
-		Ok, Fail, Error
+		Ok, Fail, Error, notExecuted
 	}
 
-	private ResultType resultType;
+	private ResultType resultType = ResultType.notExecuted;
 	double timeTotal;
 	String errorMsg = new String("");
 
@@ -112,7 +112,7 @@ public abstract class UnitTest extends GenericTest {
 			element.setAttribute("status", resultType.name());
 		}
 		element.setAttribute("time", String.valueOf(timeTotal));
-		if (!isOK()) {
+		if (!isOK() && !(resultType == ResultType.notExecuted)) {
 			element.setAttribute(new Attribute("message", errorMsg));
 		}
 

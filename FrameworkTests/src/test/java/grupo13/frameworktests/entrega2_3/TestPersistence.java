@@ -11,16 +11,17 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-public class TestPersistenceAndStores {
+public class TestPersistence {
 	
-	TestCollection initialTestCollection1;
-	TestCollection initialTestCollection2;
-	TestCollection testCollection1RecoveredFromStore;
-	UnitTest failingUnitTest;
-	TestCollection testCollection2RecoveredFromStore;
+	private TestCollection initialTestCollection1;
+	private TestCollection initialTestCollection2;
+	private TestCollection testCollection1RecoveredFromStore;
+	private UnitTest failingUnitTest;
+	private TestCollection testCollection2RecoveredFromStore;
 	
 	@Before
 	public void setup() {
+		NameRegister.getInstance().clear();
 		initialTestCollection1 = new TestCollection("TestDeCola1");
 		UnitTest test1 = new TestColaVacia("TestColaVacia");
 		initialTestCollection1.add(test1);
@@ -48,12 +49,14 @@ public class TestPersistenceAndStores {
 		testCollection1RecoveredFromStore = new TestCollection("TestDeCola1");
 		testCollection1RecoveredFromStore.setStore("unStoreCualquiera10");
 		testCollection1RecoveredFromStore.recoverMode();
+		testCollection1RecoveredFromStore.recover();
 		testCollection1RecoveredFromStore.run();
 		
 		NameRegister.getInstance().clear();
 		testCollection2RecoveredFromStore = new TestCollection("TestDeCola1");
 		testCollection2RecoveredFromStore.setStore("unStoreCualquiera10");
 		testCollection2RecoveredFromStore.recoverMode();
+		testCollection2RecoveredFromStore.recover();
 		testCollection2RecoveredFromStore.run();
 	}
 
@@ -131,11 +134,13 @@ public class TestPersistenceAndStores {
 		
 		NameRegister.getInstance().clear();
 		TestCollection tc2 = new TestCollection("TestDeCola1");
-		//fuerzo que TestColaLlenaQueFalla pase instanciando otro UnitTest
+		//fuerzo que TestColaLlenaQueFalla pase instanciando otro UnitTest con el mismo nombre
 		UnitTest failedTestThatWasCorrected = new TestColaLlena("TestColaLlenaQueFalla");
-		tc2.add(failedTestThatWasCorrected);
+		
 		tc2.setStore("unStoreDePrueba");
 		tc2.recoverMode();
+		tc2.recover();
+		tc2.add(failedTestThatWasCorrected);
 		tc2.run();
 		
 		Assert.assertEquals(tc1.countFailures() - 1, tc2.countFailures());

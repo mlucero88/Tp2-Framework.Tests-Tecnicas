@@ -20,7 +20,6 @@ public class PruebaColaTags {
 		tests.add(test2);
 		UnitTest test3 = new TestSize("TestSize");
 		tests.add(test3);
-			
 		// Agrego TAGS
 		test1.addTag(TagType.SLOW);
 		test3.addTag(TagType.SLOW);
@@ -34,16 +33,14 @@ public class PruebaColaTags {
 		TestCollectionResult results = (TestCollectionResult) tests.run();
 		NameRegister.getInstance().clear();
 		TestCollection tests2 = new TestCollection("TestDeCola1");
-		tests2.setStore("unStoreCualquiera");
+		tests2.setStore("unStoreCualquiera10");
 		tests2.recoverMode();
+		tests2.recover();
 		tests2.run();
-		
-//		UnitTest unitTest = (UnitTest)tests2.getTests().get("TestColaVacia");
-//
-//		TestReport report = new TestReport(results);
-//		report.generarReporteEnArchivo();
-//		report.mostrarEstadisticasPorPantalla();
-		
+
+		TestReport report = new TestReport(results);
+		report.generarReporteEnArchivo();
+		report.mostrarEstadisticasPorPantalla();
 
 	}
 }
